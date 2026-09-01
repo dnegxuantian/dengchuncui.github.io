@@ -1,0 +1,56 @@
+blogger:
+  class: blogger
+  display: [desktop, mobile]
+  avatar: /images/avatar.svg
+  shape: rectangle
+  url: /about/
+  title: 邓纯粹
+  subtitle: Java · 数据系统 · 工程实践
+  jinrishici: false
+  social:
+    - icon: fab fa-github
+      url: https://github.com/dengchuncui
+    - icon: fa-solid fa-envelope
+      url: mailto:duncan_dengmr@163.com
+    - icon: fa-solid fa-rss
+      url: /atom.xml
+
+toc:
+  class: toc
+  display: [desktop, mobile]
+  sticky: true
+  header:
+    icon: fa-solid fa-list
+    title: 本文目录
+  list_number: false
+  min_depth: 2
+  max_depth: 5
+
+category:
+  class: category
+  display: [desktop]
+  header:
+    icon: fa-solid fa-folder-open
+    title: 文章分类
+    url: /categories/
+
+tagcloud:
+  class: tagcloud
+  display: [desktop]
+  header:
+    icon: fa-solid fa-tags
+    title: 热门标签
+    url: /tags/
+  min_font: 14
+  max_font: 22
+  color: false
+  start_color: '#7a8497'
+  end_color: '#3768d4'
+
+recent:
+  class: recent
+  display: [desktop, mobile]
+  header:
+    icon: fa-solid fa-clock
+    title: 最近更新
+  limit: 6

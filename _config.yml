@@ -60,7 +60,7 @@ updated_option: mtime
 per_page: 8
 pagination_dir: page
 
-theme: butterfly
+theme: volantis
 
 index_generator:
   path: ''

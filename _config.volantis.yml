@@ -1,0 +1,198 @@
+debug: false
+
+replace: []
+
+navbar:
+  visiable: auto
+  logo:
+    img:
+    icon: fa-solid fa-code
+    title: 纯粹博客
+  menu:
+    - name: 首页
+      icon: fa-solid fa-house
+      url: /
+    - name: 归档
+      icon: fa-solid fa-box-archive
+      url: /archives/
+    - name: 分类
+      icon: fa-solid fa-folder-open
+      url: /categories/
+    - name: 标签
+      icon: fa-solid fa-tags
+      url: /tags/
+    - name: 关于
+      icon: fa-solid fa-circle-info
+      url: /about/
+  search: 搜索文章
+
+cover:
+  height_scheme: full
+  layout_scheme: search
+  display:
+    home: true
+    archive: true
+    others: true
+  background: /images/hero.svg
+  logo:
+  title: 纯粹博客
+  subtitle: 代码、数据系统与工程实践
+  search: 搜索文章、技术与关键词
+  features:
+    - name: 首页
+      icon: fa-solid fa-house
+      url: /
+    - name: 归档
+      icon: fa-solid fa-box-archive
+      url: /archives/
+    - name: 分类
+      icon: fa-solid fa-folder-open
+      url: /categories/
+    - name: 标签
+      icon: fa-solid fa-tags
+      url: /tags/
+    - name: 关于
+      icon: fa-solid fa-circle-info
+      url: /about/
+
+article:
+  preview:
+    scheme: landscape
+    auto_title: true
+    auto_excerpt: true
+    hide_excerpt: false
+    line_style: solid
+    author: false
+    readmore: auto
+  body:
+    top_meta: [category, date]
+    bottom_meta: [updated, tags]
+    footer_widget:
+      recommended_article:
+        enable: false
+      related_posts:
+        enable: false
+      copyright:
+        enable: true
+        permalink: '本文永久链接：'
+        content:
+          - '文章采用 CC BY-NC-SA 4.0 协议。'
+          - permalink
+      donate:
+        enable: false
+    meta_library:
+      author:
+        avatar: /images/avatar.svg
+        name: 邓纯粹
+        url: /about/
+      date:
+        icon: fa-solid fa-calendar-days
+        title: '发布于：'
+        format: 'YYYY-MM-DD'
+      updated:
+        icon: fa-solid fa-pen-to-square
+        title: '更新于：'
+        format: 'YYYY-MM-DD'
+      category:
+        icon: fa-solid fa-folder-open
+      tags:
+        icon: fa-solid fa-hashtag
+      share: []
+
+comments:
+  service: false
+
+sidebar:
+  position: right
+  for:
+    home: [blogger, category, tagcloud, recent]
+    index_blog: [blogger, recent]
+    index_wiki: [recent]
+    notebooks: [recent]
+    notes: [recent]
+    post: [toc, recent]
+    wiki: [toc, recent]
+    note: [toc, recent]
+    page: [toc, recent]
+
+site_footer:
+  layout: [social, info, copyright]
+  social:
+    - icon: fab fa-github
+      url: https://github.com/dengchuncui
+    - icon: fa-solid fa-envelope
+      url: mailto:duncan_dengmr@163.com
+    - icon: fa-solid fa-rss
+      url: /atom.xml
+  source: https://github.com/dengchuncui/dengchuncui.github.io
+  analytics:
+  copyright: '[© 2020–2026 邓纯粹](/) · 保持好奇，持续记录。'
+
+plugins:
+  globalJquery: false
+  fontawesome: true
+  sitesjs:
+    enable: false
+  friendsjs:
+    enable: false
+  fpostsjs:
+    enable: false
+  contributorsjs:
+    enable: false
+  preload:
+    enable: true
+    service: instant_page
+  lazyload:
+    enable: true
+    onlypost: false
+    loadingImg:
+    blurIn: true
+  code_highlight: highlightjs
+  highlightjs:
+    copy_code: true
+  scrollreveal:
+    enable: false
+  wordcount:
+    enable: false
+  busuanzi:
+    enable: false
+  nodewaves:
+    enable: false
+  pjax:
+    enable: true
+  parallax:
+    enable: false
+
+search:
+  enable: true
+  service: hexo
+
+seo:
+  use_tags_as_keywords: true
+  use_excerpt_as_description: true
+  robots:
+    home_first_page: index,follow
+    home_other_pages: noindex,follow
+    archive: noindex,follow
+    category: noindex,follow
+    tag: noindex,follow
+
+open_graph:
+  image: /images/avatar.svg
+  twitter_card: summary
+
+structured_data:
+  enable: true
+  data:
+    person:
+      sns:
+        - https://github.com/dengchuncui
+    logo:
+      path: /images/avatar.svg
+      width: 512
+      height: 512
+
+default:
+  avatar: /images/avatar.svg
+  cover: /images/covers/default.svg
+  image: /images/legacy-missing.svg

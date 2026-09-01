@@ -46,14 +46,20 @@ def main() -> int:
             print(f"Unable to parse {page}: {exc}", file=sys.stderr)
             return 2
         relative_parts = page.relative_to(public_root).parts
+        is_site_page = bool(relative_parts) and relative_parts[0] not in {"css", "js"}
         if (
-            document.xpath('//*[@id="article-container"]')
+            document.xpath(
+                '//*[@id="article-container"] | '
+                '//article[@id="post" and '
+                'contains(concat(" ", normalize-space(@class), " "), '
+                '" article-type-post ")]'
+            )
             and relative_parts
             and relative_parts[0] in {"2020", "2021"}
         ):
             post_files.append(page)
         titles = document.xpath("//title/text()")
-        if not titles or not titles[0].strip():
+        if is_site_page and (not titles or not titles[0].strip()):
             missing_titles.append(page)
 
         for source in document.xpath("//img/@src | //script/@src | //link[@rel='stylesheet']/@href"):
