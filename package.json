@@ -9,7 +9,9 @@
     "dev": "hexo server",
     "deploy:github": "hexo clean && hexo deploy",
     "recover:legacy": "python3 tools/recover_posts.py",
-    "check": "python3 tools/check_site.py public"
+    "check": "python3 tools/check_site.py public && python3 tools/check_timeline.py",
+    "check:timeline": "python3 tools/check_timeline.py",
+    "generate:timeline": "python3 tools/generate_timeline_posts.py"
   },
   "engines": {
     "node": ">=20"

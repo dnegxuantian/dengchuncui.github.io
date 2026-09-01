@@ -111,7 +111,7 @@ comments:
 sidebar:
   position: right
   for:
-    home: [blogger, category, tagcloud, recent]
+    home: [blogger, category, recent]
     index_blog: [blogger, recent]
     index_wiki: [recent]
     notebooks: [recent]
