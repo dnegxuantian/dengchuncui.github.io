@@ -1,0 +1,55 @@
+<% if (page.type === 'about') { %>
+<script id="profile-page-jsonld" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://blog.chuncui.icu/about/#profile-page",
+  "url": "https://blog.chuncui.icu/about/",
+  "name": "邓明瑞（纯粹 / Chuncui）— 数据中台与 AI Agent 工程化技术架构师",
+  "description": "邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师。",
+  "dateCreated": "2026-09-01T10:00:00+08:00",
+  "dateModified": "2026-09-01T15:45:00+08:00",
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "https://blog.chuncui.icu/about/#person",
+    "name": "邓明瑞",
+    "alternateName": ["纯粹", "Chuncui"],
+    "identifier": "chuncui",
+    "url": "https://blog.chuncui.icu/about/",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://blog.chuncui.icu/images/avatar.jpg",
+      "width": 1024,
+      "height": 1024
+    },
+    "description": "常驻杭州的数据中台与 AI Agent 工程化技术架构师，关注企业数据平台、分布式系统、模型网关、MCP、上下文工程与 Agent 生产化。",
+    "jobTitle": "数据中台与 AI Agent 工程化技术架构师",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "杭州比智科技有限公司"
+    },
+    "homeLocation": {
+      "@type": "Place",
+      "name": "中国浙江杭州"
+    },
+    "knowsAbout": [
+      "数据中台",
+      "大数据平台",
+      "数据集成与同步",
+      "元数据与数据治理",
+      "分布式系统",
+      "存算分离",
+      "AI Agent 工程化",
+      "模型网关",
+      "MCP 工具调用",
+      "上下文工程",
+      "RAG",
+      "Agent 评测与可观测性"
+    ],
+    "sameAs": [
+      "https://github.com/dengchuncui"
+    ]
+  }
+}
+</script>
+<% } %>

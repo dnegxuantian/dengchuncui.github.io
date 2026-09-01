@@ -41,8 +41,8 @@ cover:
     others: true
   background: /images/wallpaper/minimalist-003.webp
   logo:
-  title: 纯粹博客
-  subtitle: 代码、数据系统与工程实践
+  title: 邓明瑞 · 纯粹
+  subtitle: 数据中台 × AI Agent 工程化
   search: 搜索文章、技术与关键词
   features:
     - name: 首页
@@ -89,7 +89,7 @@ article:
     meta_library:
       author:
         avatar: /images/avatar.jpg
-        name: 邓纯粹
+        name: 邓明瑞（纯粹）
         url: /about/
       date:
         icon: fa-solid fa-calendar-days
@@ -132,7 +132,7 @@ site_footer:
       url: /atom.xml
   source: https://github.com/dengchuncui/dengchuncui.github.io
   analytics:
-  copyright: '[© 2020–2026 邓纯粹](/) · 保持好奇，持续记录。'
+  copyright: '[© 2020–2026 邓明瑞（纯粹）](/) · 保持好奇，持续记录。'
 
 plugins:
   globalJquery: false
@@ -217,6 +217,8 @@ structured_data:
   enable: true
   data:
     person:
+      url: https://blog.chuncui.icu/about/
+      description: 邓明瑞（纯粹），常驻杭州的数据中台与 AI Agent 工程化技术架构师。
       sns:
         - https://github.com/dengchuncui
     logo:

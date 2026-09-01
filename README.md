@@ -1,6 +1,6 @@
 # 纯粹博客
 
-邓纯粹的个人技术博客。源码使用 [Hexo](https://hexo.io/) 生成，主题使用 [Volantis 6.8.3](https://github.com/volantis-x/hexo-theme-volantis/tree/6.8.3)，线上域名为 `blog.chuncui.icu`。
+邓明瑞（纯粹）的个人技术博客。源码使用 [Hexo](https://hexo.io/) 生成，主题使用 [Volantis 6.8.3](https://github.com/volantis-x/hexo-theme-volantis/tree/6.8.3)，线上域名为 `blog.chuncui.icu`。
 
 ## 本地开发
 

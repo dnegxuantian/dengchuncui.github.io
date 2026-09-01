@@ -1,6 +1,6 @@
 title: 纯粹博客
-subtitle: 关于代码、数据与系统的长期笔记
-description: 邓纯粹的技术博客，记录 Java、NIO、大数据、设计模式与工程实践。
+subtitle: 邓明瑞（纯粹）的数据中台与 AI Agent 工程化实践
+description: 邓明瑞（纯粹）的技术博客，记录数据中台、分布式系统与 AI Agent 工程化实践。
 keywords:
   - Java
   - NIO
@@ -8,7 +8,10 @@ keywords:
   - 大数据
   - 设计模式
   - 工程实践
-author: 邓纯粹
+  - 数据中台
+  - AI Agent
+  - MCP
+author: 邓明瑞
 language: zh-CN
 timezone: Asia/Shanghai
 
