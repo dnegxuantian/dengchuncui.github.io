@@ -1,0 +1,35 @@
+@startuml
+title Remote MCP 连接前的信任解析
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Server 请求\nregistry_id，不接收任意 URL" as req #E0F2FE
+rectangle "Trust Registry\nowner / domains / auth / scopes\nprotocol / capabilities / data class" as registry
+rectangle "连接解析\nDNS/TLS/redirect/version/capabilities" as connect #FEF3C7
+rectangle "运行策略\n用户同意 / tool allowlist / egress / limits" as policy
+rectangle "短时会话\nserver identity + capability snapshot" as session
+rectangle "调用审计\nresource/tool / subject / result / data flow" as audit #DCFCE7
+rectangle "撤销与隔离\nserver/tool/domain/certificate" as revoke #FEE2E2
+
+req --> registry
+registry --> connect
+connect --> policy
+policy --> session
+session --> audit
+registry --> revoke
+revoke --> session : 阻断新调用
+
+note right of registry
+  协议兼容只证明“能说 MCP”，
+  不证明 Server 值得信任
+end note
+@enduml

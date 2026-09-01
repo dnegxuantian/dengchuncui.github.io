@@ -1,0 +1,38 @@
+@startuml
+title Agent Loop 的可恢复状态机
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+
+state "READY\n构建上下文" as ready #E0F2FE
+state "MODEL_RUNNING\nattempt + stream" as model #FEF3C7
+state "VALIDATING\n输出与策略" as validating
+state "TOOL_RUNNING\noperation_id" as tool
+state "WAITING_USER\nplan-bound approval" as waiting
+state "FINALIZING\n证据与终态" as finalizing
+state "SUCCEEDED" as success #DCFCE7
+state "FAILED / INCOMPLETE" as failed #FEE2E2
+
+[*] --> ready
+ready --> model
+model --> validating
+validating --> tool : tool proposal 通过
+validating --> waiting : 需要确认
+waiting --> tool : 确认有效
+waiting --> failed : 拒绝或过期
+tool --> ready : 工具结果进入下一轮
+validating --> finalizing : final answer
+finalizing --> success
+model --> failed : 断流且无可信终态
+tool --> failed : 不可恢复错误
+ready --> failed : 步数、成本或 deadline 耗尽
+
+note right of ready
+  每次迁移先持久化事件与 artifact，
+  重启后从已提交状态恢复
+end note
+@enduml

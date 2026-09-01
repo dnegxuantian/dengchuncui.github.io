@@ -1,0 +1,35 @@
+@startuml
+title Catalog 多环境隔离：名称、控制面与凭证同时分开
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+
+package "DEV" #F8FAFC {
+  rectangle "dev_catalog\n独立 URI / warehouse" as devcat #E0F2FE
+  rectangle "dev writer identity\n仅 dev create / commit / drop" as devauth #DCFCE7
+  rectangle "dev.db.table" as devtable
+  devauth --> devcat
+  devcat --> devtable
+}
+
+package "PROD" #F8FAFC {
+  rectangle "prod_catalog\n独立 URI / warehouse" as prodcat #FEF3C7
+  rectangle "prod writer identity\n经发布系统临时授权" as prodauth #FEE2E2
+  rectangle "prod.db.table" as prodtable
+  prodauth --> prodcat
+  prodcat --> prodtable
+}
+
+rectangle "只读元数据聚合\n搜索、血缘、影响分析" as governance #DCFCE7
+devcat --> governance : read metadata
+prodcat --> governance : read metadata
+
+note bottom of governance
+  治理视图可以统一；
+  Catalog commit 权限不能因为“统一入口”而合并
+end note
+@enduml

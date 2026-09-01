@@ -1,0 +1,37 @@
+@startuml
+title Flink SQL 调优：从计划差异定位运行代价
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "SQL + Catalog + 配置" as sql #E0F2FE
+rectangle "抽象语法 / RelNode\n字段、过滤、Join 条件" as logical
+rectangle "Optimized Physical Plan\nJoin 策略、Exchange、两阶段聚合" as physical #FEF3C7
+rectangle "Changelog Mode\nI / UB / UA / D" as change #FEE2E2
+rectangle "Transformation / JobGraph\n并行度、状态、网络边" as graph #DCFCE7
+rectangle "运行证据\n反压、busy、state、checkpoint" as runtime #DCFCE7
+
+sql --> logical
+logical --> physical
+physical --> change
+change --> graph
+graph --> runtime
+
+note right of physical
+  先确认计划是否符合预期，
+  再调并行度和内存
+end note
+
+note right of runtime
+  计划解释“为什么会这样”，
+  指标证明“运行时是否如此”
+end note
+@enduml

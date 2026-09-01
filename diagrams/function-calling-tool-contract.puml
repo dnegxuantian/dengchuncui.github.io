@@ -1,0 +1,34 @@
+@startuml
+title Function Calling 到真实工具之间的执行契约
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "模型建议\nfunction_name + JSON arguments" as model #E0F2FE
+rectangle "协议校验\n允许的名称 / JSON Schema / 大小" as schema
+rectangle "业务校验\n对象存在 / 状态前置 / 权限 / 风险" as policy #FEF3C7
+rectangle "执行计划\ndry_run / confirmation / idempotency_key" as plan
+rectangle "确定性执行器\ntimeout / retry / audit" as exec
+rectangle "工具结果\nstatus / data / error_code / evidence" as result #DCFCE7
+rectangle "回到模型\n有限结果，不暴露秘密与堆栈" as back #DCFCE7
+
+model --> schema
+schema --> policy
+policy --> plan
+plan --> exec
+exec --> result
+result --> back
+
+note right of model
+  模型选择工具并组织参数，
+  不等于工具已经执行
+end note
+@enduml

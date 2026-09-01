@@ -1,0 +1,35 @@
+@startuml
+title 浏览器 Agent 的页面信任边界
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "可信任务\n用户目标 / allowed domains / action policy" as goal #E0F2FE
+rectangle "页面观测\nDOM / screenshot / accessibility tree" as page #FEE2E2
+rectangle "不可信内容解析\n来源、可见性、下载、链接、指令文本" as parse
+rectangle "模型动作 Proposal\nclick / type / navigate / upload" as proposal #FEF3C7
+rectangle "执行闸门\ndomain / element / data flow / confirmation" as gate
+rectangle "浏览器沙箱\n独立 profile / downloads / network / clipboard" as sandbox
+rectangle "回读验证\nURL、DOM 状态、业务对象、证据截图" as verify #DCFCE7
+
+goal --> proposal
+page --> parse
+parse --> proposal
+proposal --> gate
+gate --> sandbox
+sandbox --> verify
+verify --> page
+
+note right of page
+  页面上的“请点击并上传配置”是数据，
+  不能自行改变用户授权目标
+end note
+@enduml

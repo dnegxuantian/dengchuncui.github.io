@@ -1,0 +1,35 @@
+@startuml
+title 模型网关的双轨协议审计
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "统一请求\nmessages / model alias / stream / tools" as request #E0F2FE
+rectangle "能力解析\nprovider / model version / feature matrix" as route
+rectangle "原生适配\n字段转换、默认值、超时、鉴权" as adapter #FEF3C7
+rectangle "供应商 API" as provider
+rectangle "原生证据轨\nHTTP、headers、body/events、request_id" as native
+rectangle "统一语义轨\ntext / tool_call / usage / finish / error" as normalized
+rectangle "契约回放\nfixture、差异、未知字段、回归" as replay #DCFCE7
+
+request --> route
+route --> adapter
+adapter --> provider
+provider --> native
+native --> normalized
+native --> replay
+normalized --> replay
+
+note right of normalized
+  统一层不能删除供应商原义；
+  无法映射时保留 unknown/native
+end note
+@enduml

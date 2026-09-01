@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -28,7 +29,13 @@ def local_asset_path(public_root: Path, page: Path, source: str) -> Path | None:
 
 
 def main() -> int:
-    public_root = Path(sys.argv[1] if len(sys.argv) > 1 else "public").resolve()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("public_root", nargs="?", default="public")
+    parser.add_argument("--include-drafts", action="store_true")
+    args = parser.parse_args()
+
+    project_root = Path(__file__).resolve().parents[1]
+    public_root = Path(args.public_root).resolve()
     if not public_root.exists():
         print(f"Generated directory does not exist: {public_root}", file=sys.stderr)
         return 2
@@ -55,7 +62,8 @@ def main() -> int:
                 '" article-type-post ")]'
             )
             and relative_parts
-            and relative_parts[0] in {"2020", "2021"}
+            and len(relative_parts[0]) == 4
+            and relative_parts[0].isdigit()
         ):
             post_files.append(page)
         titles = document.xpath("//title/text()")
@@ -80,15 +88,19 @@ def main() -> int:
     for label, value in checks.items():
         print(f"{label}: {value}")
 
-    if len(post_files) != 30:
-        print(f"Expected 30 posts, found {len(post_files)}", file=sys.stderr)
+    expected_posts = len(list((project_root / "source" / "_posts").glob("*.md")))
+    if args.include_drafts:
+        expected_posts += len(list((project_root / "source" / "_drafts").glob("*.md")))
+
+    if len(post_files) != expected_posts:
+        print(f"Expected {expected_posts} posts, found {len(post_files)}", file=sys.stderr)
     for page, source in missing_assets[:20]:
         print(f"Missing asset: {page.relative_to(public_root)} -> {source}", file=sys.stderr)
     for page, source in deleted_hosts[:20]:
         print(f"Deleted image host: {page.relative_to(public_root)} -> {source}", file=sys.stderr)
 
     failed = (
-        len(post_files) != 30
+        len(post_files) != expected_posts
         or bool(missing_titles)
         or bool(missing_assets)
         or bool(deleted_hosts)

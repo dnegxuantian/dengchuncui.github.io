@@ -1,0 +1,33 @@
+@startuml
+title Agent Memory 的三层数据模型
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "事实 Facts\nsubject-predicate-value\nsource / valid time / confidence" as facts #E0F2FE
+rectangle "偏好 Preferences\nscope / strength / observed vs explicit\nexpiry / user control" as prefs #FEF3C7
+rectangle "运行状态 Runtime State\nrun/step/checkpoint/operation\nowner / deadline / version" as state
+rectangle "Memory Policy\nwrite gate / ACL / retention / conflict" as policy
+rectangle "Context Builder\n按任务、时间、权限选择" as context #DCFCE7
+rectangle "反馈与删除\n更正 / 忘记 / tombstone / audit" as feedback
+
+facts --> policy
+prefs --> policy
+state --> policy
+policy --> context
+context --> feedback
+feedback --> policy
+
+note right of state
+  运行状态不是长期记忆；
+  操作完成后按生命周期归档或删除
+end note
+@enduml

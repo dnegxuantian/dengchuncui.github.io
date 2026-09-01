@@ -1,0 +1,34 @@
+@startuml
+title Context 是有优先级的信息预算
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "总预算\nmodel limit - output reserve - tool reserve" as budget #E0F2FE
+rectangle "P0 不可丢\nsystem policy / user goal / current state" as p0 #FEE2E2
+rectangle "P1 完成任务所需\ntool schemas / core evidence / constraints" as p1 #FEF3C7
+rectangle "P2 辅助\nconversation history / examples / secondary evidence" as p2
+rectangle "压缩与选择\n结构化 state / claim-evidence / dedupe" as compact
+rectangle "Context Manifest\nselected / dropped / summarized / source versions" as manifest #DCFCE7
+
+budget --> p0
+budget --> p1
+budget --> p2
+p0 --> compact
+p1 --> compact
+p2 --> compact
+compact --> manifest
+
+note right of compact
+  压缩可以删除表达重复，
+  不能删除权限、未完成状态和证据限定
+end note
+@enduml

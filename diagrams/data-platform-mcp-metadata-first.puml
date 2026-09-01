@@ -1,0 +1,29 @@
+@startuml
+title 数据平台 MCP 的低风险起步路径
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "用户问题\n找表、字段、owner、血缘、函数" as q #E0F2FE
+rectangle "搜索工具\nsearch_entities(query, type, env)" as search
+rectangle "实体资源\ncatalog://entities/{guid}" as entity
+rectangle "关系工具\nget_lineage(guid, direction, depth)" as lineage
+rectangle "权限过滤与 Evidence\nqualifiedName / version / source / observed_at" as evidence #FEF3C7
+rectangle "只读答案\n候选、事实、缺口、引用" as answer #DCFCE7
+rectangle "后续能力\nSQL preview -> 任务 preview -> 受控执行" as later
+
+q --> search
+search --> entity
+entity --> lineage
+lineage --> evidence
+evidence --> answer
+answer --> later : 先验证只读链路后再逐项开放
+@enduml

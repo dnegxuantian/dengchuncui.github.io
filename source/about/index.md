@@ -145,7 +145,7 @@ keywords:
       <p>数据平台、AI Agent 工程化与相关技术合作，欢迎联系。</p>
     </div>
     <div class="brand-contact__links">
-      <a itemprop="sameAs" href="https://github.com/dengchuncui" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
+      <a itemprop="sameAs" href="https://github.com/dnegxuantian" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
       <a itemprop="email" href="mailto:duncan_dengmr@163.com">发送邮件 <span>→</span></a>
     </div>
   </section>

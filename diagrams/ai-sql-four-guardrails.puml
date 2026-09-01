@@ -1,0 +1,32 @@
+@startuml
+title AI SQL 的四道闸门
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "候选 SQL" as sql #E0F2FE
+rectangle "1. 语句闸门\nAST / 单语句 / 方言 / 函数" as statement
+rectangle "2. 数据闸门\n主体 / 表列行权限 / 脱敏" as data
+rectangle "3. 资源闸门\nEXPLAIN / 扫描 / 超时 / 并发" as resource #FEF3C7
+rectangle "4. 语义闸门\n口径 / 粒度 / 结果断言 / 引用" as semantic
+rectangle "可执行查询\n只读代理 + evidence" as run #DCFCE7
+
+sql --> statement
+statement --> data
+data --> resource
+resource --> semantic
+semantic --> run
+
+note right of semantic
+  前三道能防危险和错误对象，
+  最后一道才检查是否答对问题
+end note
+@enduml

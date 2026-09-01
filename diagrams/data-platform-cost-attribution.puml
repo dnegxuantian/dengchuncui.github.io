@@ -1,0 +1,37 @@
+@startuml
+title 数据平台成本归因链路
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "业务身份\nproject / owner / job / instance / attempt" as identity #E0F2FE
+rectangle "资源事实\nCPU-seconds / memory-seconds / bytes / requests" as usage
+rectangle "价格快照\n节点、存储、网络、外部服务单价" as price #FEF3C7
+rectangle "归因账本\nusage × price + shared allocation" as ledger #DCFCE7
+rectangle "三个视图\n计费、效率、优化机会" as views #DCFCE7
+rectangle "回到动作\nright-size / 限并发 / 改模型 / 下线" as action #FEE2E2
+
+identity --> usage : 关联执行资源
+usage --> price : 按运行时段匹配单价
+price --> ledger
+ledger --> views
+views --> action
+
+note right of usage
+  allocated 与 actual 分开；
+  失败 attempt 也要计入
+end note
+
+note right of views
+  成本高不等于浪费高，
+  成本低也不等于任务有效
+end note
+@enduml

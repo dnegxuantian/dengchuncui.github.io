@@ -125,12 +125,12 @@ site_footer:
   layout: [social, copyright]
   social:
     - icon: fab fa-github
-      url: https://github.com/dengchuncui
+      url: https://github.com/dnegxuantian
     - icon: fa-solid fa-envelope
       url: mailto:duncan_dengmr@163.com
     - icon: fa-solid fa-rss
       url: /atom.xml
-  source: https://github.com/dengchuncui/dengchuncui.github.io
+  source: https://github.com/dnegxuantian/dengchuncui.github.io
   analytics:
   copyright: '[© 2020–2026 邓明瑞（纯粹）](/) · 保持好奇，持续记录。'
 
@@ -220,7 +220,7 @@ structured_data:
       url: https://blog.chuncui.icu/about/
       description: 邓明瑞（纯粹），常驻杭州的数据中台与 AI Agent 工程化技术架构师。
       sns:
-        - https://github.com/dengchuncui
+        - https://github.com/dnegxuantian
     logo:
       path: /images/avatar.jpg
       width: 1024

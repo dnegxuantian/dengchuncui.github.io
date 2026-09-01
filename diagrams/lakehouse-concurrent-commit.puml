@@ -1,0 +1,29 @@
+@startuml
+title Iceberg 并发提交诊断路径
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Writer\n基于 Snapshot S 规划" as writer #E0F2FE
+rectangle "Data / Delete Files\n可复用的计算产物" as files
+rectangle "Validation\noperation + conflict filter" as validate #FEF3C7
+rectangle "Catalog CAS\n原子切换 metadata" as cas
+rectangle "Commit Result" as result
+rectangle "Refresh + Rebase\n可重试竞争" as retry #DCFCE7
+rectangle "Re-plan / Reject\n语义冲突" as conflict #FEE2E2
+rectangle "Reconcile\ncommit state unknown" as unknown
+writer --> files
+files --> validate
+validate --> cas
+cas --> result
+result --> retry : base moved, validation pass
+result --> conflict : validation conflict
+result --> unknown : timeout / no response
+retry --> validate
+@enduml

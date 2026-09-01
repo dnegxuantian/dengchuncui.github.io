@@ -1,0 +1,34 @@
+@startuml
+title MCP Server 从窄能力面开始
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "内部系统\n宽 API / 数据库 / 文件 / 命令" as internal #FEE2E2
+rectangle "Server Facade\n身份映射、对象解析、策略、限流" as facade #FEF3C7
+rectangle "Resources\n稳定 URI、只读、可分页/订阅" as resources
+rectangle "Tools\n窄动作、严格 schema、有限结果" as tools
+rectangle "Prompts\n用户可见模板，不是系统策略" as prompts
+rectangle "MCP Client / Host\n只暴露当前 Run 需要的能力" as host #DCFCE7
+
+internal --> facade
+facade --> resources
+facade --> tools
+facade --> prompts
+resources --> host
+tools --> host
+prompts --> host
+
+note right of facade
+  不直接暴露 shell、任意 SQL、
+  任意 URL 或通用 JSON Patch
+end note
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+title 检索与回答分开评测，失败才能归因
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "评测样本\nquestion + supporting spans + answer assertions" as set #E0F2FE
+rectangle "检索实验\n固定问题，变 index/retriever/reranker" as ret
+rectangle "检索指标\nRecall@k / MRR / nDCG\n充分证据、权限、噪声" as retm #FEF3C7
+rectangle "回答实验\n固定 evidence，变 prompt/model" as ans
+rectangle "回答指标\n正确性 / 引用支持 / 拒答 / 完整性" as ansm #FEF3C7
+rectangle "端到端实验\n真实链路、延迟、成本、失败类型" as e2e #DCFCE7
+
+set --> ret
+ret --> retm
+set --> ans
+ans --> ansm
+retm --> e2e
+ansm --> e2e
+
+note right of e2e
+  答错不自动等于模型差；
+  先定位证据是否到位
+end note
+@enduml

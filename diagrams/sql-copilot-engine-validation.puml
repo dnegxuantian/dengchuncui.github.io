@@ -1,0 +1,34 @@
+@startuml
+title SQL Copilot 的三段验证
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "模型候选 SQL\n目标引擎与对象版本" as sql #E0F2FE
+rectangle "方言解析\n真实 Parser / AST / 单语句" as parse
+rectangle "Catalog 解析\n表列、函数、类型、权限" as catalog
+rectangle "Planner 验证\nEXPLAIN / logical plan / cost signals" as plan #FEF3C7
+rectangle "受控执行\n固定快照、只读、超时、限行" as run
+rectangle "结果断言\n粒度、行数、空值、基准对照" as assert #DCFCE7
+rectangle "可交付结果\nSQL + plan + evidence + limitation" as result #DCFCE7
+
+sql --> parse
+parse --> catalog
+catalog --> plan
+plan --> run
+run --> assert
+assert --> result
+
+note right of parse
+  通用 SQL 看起来正确，
+  目标引擎仍可能无法解析
+end note
+@enduml

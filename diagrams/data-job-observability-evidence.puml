@@ -1,0 +1,51 @@
+@startuml
+title 数据任务一次 Attempt 的证据链
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "调度实例\nschedule_instance_id" as instance #E0F2FE
+rectangle "执行尝试\nattempt_id\n冻结 code / config version" as attempt #DBEAFE
+rectangle "引擎执行\nApplicationId / JobId" as engine #FEF3C7
+rectangle "运行单元\napp attempt / container / stage / subtask" as unit #FDE68A
+
+rectangle "状态事件\n提交、运行、重试、失败" as events #F8FAFC
+rectangle "日志与 Trace\nTraceId / SpanId / 原始上下文" as logs #F8FAFC
+rectangle "指标\nCPU、内存、吞吐、反压" as metrics #F8FAFC
+rectangle "数据边界\n输入 offset / snapshot\n输出 commit / partition" as data #F8FAFC
+
+rectangle "可复现诊断\n同一 attempt 下还原代码、配置、资源和数据" as diagnosis #DCFCE7
+
+instance -down-> attempt : 一次实例可多次尝试
+attempt -down-> engine : 提交返回后立即持久化映射
+engine -down-> unit
+
+attempt -down-> events
+unit -down-> logs
+unit -down-> metrics
+attempt -down-> data
+
+events -down-> diagnosis
+logs -down-> diagnosis
+metrics -down-> diagnosis
+data -down-> diagnosis
+
+note right of attempt
+  领域 ID 永久保留；
+  不受 trace 采样影响
+end note
+
+note right of diagnosis
+  摘要可以重算，
+  原始证据不能只留最后 100 行
+end note
+@enduml

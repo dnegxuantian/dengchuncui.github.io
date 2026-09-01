@@ -1,0 +1,36 @@
+@startuml
+title DataX 数据源检查的五个层次
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "1. JDBC 建连\n地址、端口、驱动、认证" as connect #E0F2FE
+rectangle "2. Reader dryRun\nquerySql 解析、首条真实查询、splitPk 检查" as reader #DBEAFE
+rectangle "3. Writer dryRun\npreSql / postSql 解析、零行 INSERT / DELETE" as writer #DBEAFE
+rectangle "4. 受控样本\n真实字段值经过转换、批量写与提交" as sample #FEF3C7
+rectangle "5. 生产运行\n长连接、峰值吞吐、锁、超时与网络设备" as production #DCFCE7
+
+connect -down-> reader : 完整任务配置
+reader -down-> writer
+writer -down-> sample : 小范围、可回滚
+sample -down-> production : 容量验证后发布
+
+note right of connect
+  “测试连接成功”
+  通常只证明到这里
+end note
+
+note right of writer
+  能挡住确定性配置错误
+  不能证明整批数据可写
+end note
+@enduml

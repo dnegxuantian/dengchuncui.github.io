@@ -1,0 +1,35 @@
+@startuml
+title 模型路由优化的是每次验证成功的成本
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "路由 Attempt\nmodel / tokens / latency / price" as attempt #E0F2FE
+rectangle "失败路径\nretry / fallback / invalid output / wasted tools" as failure #FEE2E2
+rectangle "验证链\nschema / tool / engine / evidence / user outcome" as verify #FEF3C7
+rectangle "成功样本\nverified_success=true" as success #DCFCE7
+rectangle "全路径成本\nmodel + tools + infra + failure + human" as total
+rectangle "分桶指标\nCost per Verified Success\n任务 × 风险 × 模型版本" as metric #DCFCE7
+
+attempt --> verify
+attempt --> failure
+failure --> attempt : 新 attempt
+verify --> success
+attempt --> total
+failure --> total
+success --> metric
+total --> metric
+
+note right of metric
+  单次 token 便宜但反复失败，
+  可能是更贵的路由选择
+end note
+@enduml

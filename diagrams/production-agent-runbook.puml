@@ -1,0 +1,25 @@
+@startuml
+title 生产 Agent 故障运行手册分流
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "用户症状\n时间、租户、run_id" as symptom #E0F2FE
+rectangle "影响与风险\n是否有错误副作用" as impact #FEE2E2
+rectangle "止损\n暂停写工具 / 回退版本 / 限流" as contain #FEF3C7
+rectangle "证据链\nRun -> Step -> Attempt -> Operation" as evidence
+rectangle "安全恢复条件\n幂等核对 / canary / 终态完整" as recover #DCFCE7
+rectangle "复盘改进\n自动诊断 / 演练 / 更新手册" as learn
+symptom --> impact
+impact --> contain : 高风险
+impact --> evidence : 低风险只读排查
+contain --> evidence
+evidence --> recover
+recover --> learn
+@enduml

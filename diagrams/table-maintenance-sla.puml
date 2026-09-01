@@ -1,0 +1,25 @@
+@startuml
+title 湖仓表维护 SLA 闭环
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Table Profile\n写入、查询、保留、风险" as profile #E0F2FE
+rectangle "SLI\n小文件、Manifest、Snapshot、Orphan" as sli
+rectangle "Data-driven Trigger\n增量 + 时间 + 资源预算" as trigger #FEF3C7
+rectangle "Maintenance\nRewrite / Expire / Sweep" as run
+rectangle "Safety Gates\n引用、在途 Writer、路径规范" as safety #FEE2E2
+rectangle "Before / After\n性能、空间、正确性、成本" as verify #DCFCE7
+profile --> sli
+sli --> trigger
+trigger --> safety
+safety --> run
+run --> verify
+verify --> profile : 调整阈值与窗口
+@enduml

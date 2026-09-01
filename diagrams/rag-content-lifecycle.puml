@@ -1,0 +1,35 @@
+@startuml
+title RAG 内容从源版本到索引发布
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "源事件\ncreate / update / delete / ACL change" as event #E0F2FE
+rectangle "抓取快照\nsource_id / source_version / content_hash" as snapshot
+rectangle "解析与切块\nparser/chunker version" as parse
+rectangle "校验区\n完整性、权限、数量、抽样" as staging #FEF3C7
+rectangle "索引版本\nvector / keyword / structured" as index
+rectangle "Alias 原子切换\ncurrent -> index_v42" as publish #DCFCE7
+rectangle "Tombstone\n查询立即不可见，后台物理清理" as tomb #FEE2E2
+
+event --> snapshot : create / update
+snapshot --> parse
+parse --> staging
+staging --> index
+index --> publish
+event --> tomb : delete / revoke
+tomb --> publish
+
+note right of staging
+  新索引未验证前，
+  旧版本继续服务
+end note
+@enduml

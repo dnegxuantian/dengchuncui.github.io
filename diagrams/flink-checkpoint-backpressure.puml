@@ -1,0 +1,43 @@
+@startuml
+title Flink 背压下的一轮 Checkpoint
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "JobManager 触发\n创建 checkpoint barrier" as trigger #E0F2FE
+rectangle "Start Delay\nbarrier 穿过数据队列与网络缓冲" as start #DBEAFE
+rectangle "Alignment Duration\n多输入算子等待各 channel barrier 到齐" as alignment #FEF3C7
+rectangle "Sync Duration\n主线程快照 operator state\n正常处理暂时阻塞" as sync #FDE68A
+rectangle "Async Duration\n状态异步写入 checkpoint 存储" as async #DCFCE7
+rectangle "最后一个 subtask ACK\nEnd-to-End Duration 结束" as ack #DCFCE7
+
+trigger -down-> start
+start -down-> alignment
+alignment -down-> sync
+sync -down-> async
+async -down-> ack
+
+note right of start
+  高：barrier 还没到算子
+  先查数据路径上的背压
+end note
+
+note right of alignment
+  高：各输入到达速度不一致
+  沿慢 channel 向上游追
+end note
+
+note right of async
+  高：再查状态大小、存储与网络
+  不要先用加 timeout 代替定位
+end note
+@enduml

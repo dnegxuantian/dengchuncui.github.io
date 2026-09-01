@@ -1,0 +1,39 @@
+@startuml
+title Agent 失败路径成本树
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Run" as run #E0F2FE
+rectangle "模型 Attempts\n输入、输出、缓存、断流浪费" as model
+rectangle "检索与上下文\nembedding、rerank、重复 token" as context
+rectangle "工具与沙箱\nAPI、浏览器、计算、失败操作" as tools
+rectangle "等待与基础设施\n连接、队列、状态存储" as infra
+rectangle "人工成本\n确认、纠错、接管、事故处理" as human #FEF3C7
+rectangle "Failure Waste\n无结果 attempts / 重复工具 / 循环 / 超时残留" as waste #FEE2E2
+rectangle "Cost Ledger\nrun -> step -> attempt/operation" as ledger #DCFCE7
+
+run --> model
+run --> context
+run --> tools
+run --> infra
+run --> human
+model --> waste
+context --> waste
+tools --> waste
+infra --> waste
+model --> ledger
+context --> ledger
+tools --> ledger
+infra --> ledger
+human --> ledger
+waste --> ledger
+@enduml

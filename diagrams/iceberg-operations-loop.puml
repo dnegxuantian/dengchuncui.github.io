@@ -1,0 +1,37 @@
+@startuml
+title Iceberg 表的日常运维闭环
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Metadata Tables\nhistory / snapshots / files / manifests" as metadata #E0F2FE
+rectangle "健康指标\n提交频率、文件债务、快照年龄、规划成本" as health
+rectangle "表级策略\n保留期、目标文件、维护预算、窗口" as policy #FEF3C7
+rectangle "受控动作\nrewrite / expire / orphan dry-run" as action #FEE2E2
+rectangle "提交与删除证据\nsnapshot ID、候选文件、实际结果" as evidence #DCFCE7
+rectangle "读写验收\n查询计划、结果校验、冲突率、成本" as verify #DCFCE7
+
+metadata --> health
+health --> policy
+policy --> action
+action --> evidence
+evidence --> verify
+
+note right of policy
+  不用一套全局 cron；
+  每张表按负载和 time-travel 需求治理
+end note
+
+note right of evidence
+  删除动作先 dry-run，
+  保留输入、输出和失败清单
+end note
+@enduml

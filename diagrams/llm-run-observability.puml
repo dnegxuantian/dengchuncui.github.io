@@ -1,0 +1,38 @@
+@startuml
+title 一次 LLM Run 的证据树
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Run\nrun_id / user / bundle / final_status" as run #E0F2FE
+rectangle "Input\nmessages / auth / deadline" as input
+rectangle "Retrieval\nquery / candidates / evidence" as retrieval
+rectangle "Model Attempt\nprovider / snapshot / raw events / usage" as model #FEF3C7
+rectangle "Tool Call\nproposal / policy / operation / result" as tool
+rectangle "Finalization\nclaims / citations / output status" as final
+rectangle "Evidence Store\nspan events + immutable artifacts" as store #DCFCE7
+
+run --> input
+run --> retrieval
+run --> model
+run --> tool
+run --> final
+input --> store
+retrieval --> store
+model --> store
+tool --> store
+final --> store
+
+note right of run
+  一个 HTTP request 可以包含
+  多个模型 attempt 和工具操作
+end note
+@enduml

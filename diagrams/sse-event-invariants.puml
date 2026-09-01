@@ -1,0 +1,27 @@
+@startuml
+title SSE 事件不变量检查链
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Provider Bytes\n任意传输切片" as bytes #E0F2FE
+rectangle "SSE Parser\nframe boundary / id / data" as parser
+rectangle "Protocol Adapter\n规范事件 + sequence" as adapter
+rectangle "Event Log\n持久 offset / replay" as log #DCFCE7
+rectangle "Invariant Checker\n顺序、组装、唯一终态" as check #FEF3C7
+rectangle "Client Projection\nsnapshot + cursor" as client
+rectangle "Run Outcome\ncompleted / failed / unknown" as outcome
+bytes --> parser
+parser --> adapter
+adapter --> log
+log --> check
+log --> client
+check --> outcome
+client --> log : reconnect cursor
+@enduml

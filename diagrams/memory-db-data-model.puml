@@ -1,0 +1,29 @@
+@startuml
+title Agent Memory 的分层数据模型
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+database "Event Store\n消息、工具、反馈、来源" as event #E0F2FE
+rectangle "Memory Writer\n抽取、分级、冲突判断" as writer
+database "Semantic\n事实 / 偏好 / 有效期" as semantic #DCFCE7
+database "Episodic\n任务经历 / 结果" as episodic
+database "Procedural\n流程 / 前置条件 / 验收" as procedural
+rectangle "Projections\n向量、关键词、关系、时间" as index #FEF3C7
+rectangle "Retriever\n权限 + 时效 + 任务相关性" as retrieve
+event --> writer
+writer --> semantic
+writer --> episodic
+writer --> procedural
+semantic --> index
+episodic --> index
+procedural --> index
+index --> retrieve
+retrieve --> semantic : 回源验证
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+title 只读数据助手的执行隔离
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "用户身份与问题" as user #E0F2FE
+rectangle "授权上下文\n允许库表列、行级范围、脱敏规则" as auth
+rectangle "SQL 候选\n模型没有数据库凭据" as sql #FEF3C7
+rectangle "策略闸门\nAST 白名单 / Catalog / EXPLAIN" as gate
+rectangle "查询代理\n只读角色、事务只读、超时、限行" as proxy
+rectangle "隔离数据源\n只读副本 / 查询集群" as db
+rectangle "审计结果\nSQL、参数、扫描量、错误、request_id" as audit #DCFCE7
+
+user --> auth
+auth --> sql
+sql --> gate
+gate --> proxy : 通过
+proxy --> db
+db --> audit
+
+note right of gate
+  只检查 SQL 前缀不够；
+  必须解析语句与对象引用
+end note
+
+note right of proxy
+  数据库只读权限是最终边界，
+  Prompt 不是权限系统
+end note
+@enduml

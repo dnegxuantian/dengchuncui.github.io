@@ -1,0 +1,35 @@
+@startuml
+title 多模型路由从请求约束出发
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "请求约束\ntools / context / latency / data policy / budget" as req #E0F2FE
+rectangle "硬过滤\n能力、区域、版本、健康度" as hard
+rectangle "候选评分\n任务成功率、延迟、成本" as score #FEF3C7
+rectangle "确定路由\nmodel snapshot + route_reason" as route
+rectangle "执行与验证\n真实结果，不只看 HTTP 200" as exec
+rectangle "分桶反馈\n任务类型 × 模型 × 失败原因" as feedback #DCFCE7
+rectangle "回退策略\n同能力模型 / 降级 / 明确失败" as fallback #FEE2E2
+
+req --> hard
+hard --> score
+score --> route
+route --> exec
+exec --> feedback
+exec --> fallback : 可判定的失败
+feedback --> score : 更新离线权重
+
+note right of fallback
+  fallback 不能丢失工具、权限
+  或数据地域等硬约束
+end note
+@enduml

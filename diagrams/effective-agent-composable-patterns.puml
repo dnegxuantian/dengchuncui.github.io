@@ -1,0 +1,36 @@
+@startuml
+title 用小模式组合 Agent，而不是先上复杂框架
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "任务画像\n路径是否已知？能否并行？是否需要验证？" as task #E0F2FE
+rectangle "Prompt Chaining\n分步 + gate" as chain
+rectangle "Routing\n按类别/约束选择专用路径" as routing
+rectangle "Parallelization\n独立子任务并行 + 聚合" as parallel
+rectangle "Orchestrator-Workers\n动态拆分但显式交接" as workers #FEF3C7
+rectangle "Evaluator-Optimizer\n生成、检查、有限迭代" as eval
+rectangle "Autonomous Agent\n开放探索 + 工具 + 停止条件" as agent
+rectangle "统一运行底座\n状态、证据、预算、权限、回放" as runtime #DCFCE7
+
+task --> chain
+task --> routing
+task --> parallel
+task --> workers
+task --> eval
+task --> agent
+chain --> runtime
+routing --> runtime
+parallel --> runtime
+workers --> runtime
+eval --> runtime
+agent --> runtime
+@enduml

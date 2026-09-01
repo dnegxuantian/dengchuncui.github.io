@@ -1,0 +1,43 @@
+@startuml
+title DataX TaskGroupContainer 的失败重试路径
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam state {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+  StartColor #334155
+  EndColor #334155
+}
+
+state "TaskExecutor 运行\nReader + Writer" as running #E0F2FE
+state "检查重试条件\nWriter.supportFailOver()\nattemptCount < maxRetryTimes" as gate #FEF3C7
+state "停止旧 Executor\nreset Communication\n配置放回 taskQueue" as shutdown
+state "固定间隔等待\nretryIntervalInMsec" as wait
+state "新建 TaskExecutor\nattemptCount + 1" as restart #E0F2FE
+state "TaskGroup 失败" as failed #FEE2E2
+state "WAIT_TIME_EXCEED" as timeout #FEE2E2
+state "Task 成功" as succeeded #DCFCE7
+
+[*] --> running : attemptCount = 1
+running --> succeeded : SUCCEEDED
+succeeded --> [*]
+
+running --> gate : FAILED
+gate --> failed : Writer 不支持\n或尝试次数已满
+failed --> [*]
+
+gate --> shutdown : 允许重试
+shutdown --> wait
+wait --> restart : 旧 Executor 已退出
+restart --> running
+
+wait --> shutdown : 仍在运行\n且未超过 maxWaitInMsec
+wait --> timeout : 仍在运行\n且超过 maxWaitInMsec
+timeout --> [*]
+@enduml

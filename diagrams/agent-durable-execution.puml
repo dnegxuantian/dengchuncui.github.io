@@ -1,0 +1,31 @@
+@startuml
+title Agent 持久执行与恢复路径
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Client\n提交 / 断线重连" as client #E0F2FE
+database "Event History\n决定、序号、版本、引用" as history #DCFCE7
+rectangle "Workflow State Machine\n由历史恢复下一状态" as workflow
+queue "Durable Queue\nTimer / Activity / Callback" as queue
+rectangle "Worker\n可随时替换" as worker
+rectangle "Tool Operation\noperation_id 幂等" as tool #FEF3C7
+rectangle "Approval\n绑定计划与版本" as approval
+
+client --> history : create run / resume cursor
+history --> workflow : replay
+workflow --> queue : schedule next step
+queue --> worker
+worker --> tool : execute
+tool --> history : operation confirmed
+workflow --> approval : wait without worker
+approval --> history : immutable decision
+history --> client : durable events
+@enduml

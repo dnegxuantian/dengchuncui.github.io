@@ -1,0 +1,25 @@
+@startuml
+title Agent Sandbox Manifest 执行链
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Task Capability Request" as request #E0F2FE
+rectangle "Policy Compiler\n用户、任务、组织策略" as policy
+rectangle "Signed Manifest\n镜像 + FS + 网络 + 进程 + 工具" as manifest #FEF3C7
+rectangle "Sandbox Runtime\nnamespace / cgroup / seccomp" as runtime
+rectangle "Tool Gateway\n对象级授权与限额" as tools
+database "Evidence\nmanifest digest / operation / artifact" as evidence #DCFCE7
+request --> policy
+policy --> manifest
+manifest --> runtime
+manifest --> tools
+runtime --> evidence
+tools --> evidence
+@enduml

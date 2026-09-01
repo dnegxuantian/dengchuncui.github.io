@@ -1,0 +1,32 @@
+@startuml
+title Agent 诊断证据链
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "用户结果\n页面、时间、run_id" as user #E0F2FE
+rectangle "Run / Step\nBundle、状态、预算" as run
+rectangle "Context\n检索候选与实际注入" as context
+rectangle "Model Attempt\n原始响应与 adapter 版本" as model
+rectangle "Tool Operation\n参数变换、权限、业务结果" as tool
+rectangle "Stream\n事件序列、terminal、客户端接收" as stream
+database "Persistence\n结果版本、hash、事务" as store #DCFCE7
+rectangle "Invariant Checks\n完整、唯一、顺序、一致" as invariant #FEF3C7
+user --> run
+run --> context
+context --> model
+model --> tool
+tool --> stream
+stream --> store
+run --> invariant
+model --> invariant
+tool --> invariant
+stream --> invariant
+store --> invariant
+@enduml

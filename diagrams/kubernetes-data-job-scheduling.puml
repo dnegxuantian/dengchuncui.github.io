@@ -1,0 +1,43 @@
+@startuml
+title 数据平台调度与 Kubernetes Job 的职责边界
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "数据调度实例\n业务日期 / 依赖 / 补数 / 重跑策略" as instance #E0F2FE
+rectangle "提交适配层\ninstance_id -> Job UID\n资源、镜像、参数快照" as adapter #FEF3C7
+rectangle "Kubernetes Job Controller\nPod 创建、失败退避、完成计数" as job #DCFCE7
+rectangle "Scheduler\n按 requests、约束与优先级选 Node" as scheduler
+rectangle "Pod / Container Attempt\n一次真实执行" as pod #FEE2E2
+rectangle "结果回收\nexit code + Job condition + 业务提交证据" as result #DCFCE7
+
+instance --> adapter
+adapter --> job
+job --> scheduler
+scheduler --> pod
+pod --> result : 采集执行状态与输出证据
+
+note left of pod
+  Job Controller 必要时重建 Pod；
+  平台按 UID 记录每个 attempt
+end note
+
+note right of job
+  Job 完成不等于业务 exactly-once；
+  同一 Pod 或不同 Pod 都可能重试
+end note
+
+note right of result
+  不只看 Pod phase，
+  还要确认输出是否提交，
+  再映射为平台实例状态
+end note
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+title Deep Research 的证据收敛循环
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "研究问题\n范围、时间、定义、交付标准" as q #E0F2FE
+rectangle "可核查 Claims\n主张 + 所需证据类型" as claims
+rectangle "搜索计划\n查询、来源优先级、覆盖缺口" as plan
+rectangle "证据账本\nsource/version/span\nsupports/contradicts/uncertain" as ledger #FEF3C7
+rectangle "收敛检查\n核心 claim 覆盖？冲突解释？边际收益？" as converge
+rectangle "补充搜索" as search
+rectangle "报告\n结论、引用、异议、限制、检索截止" as report #DCFCE7
+
+q --> claims
+claims --> plan
+plan --> ledger
+ledger --> converge
+converge --> search : 关键缺口未闭合
+search --> ledger
+converge --> report : 达到停止条件
+
+note right of converge
+  搜得更多不是完成标准；
+  核心主张被独立证据覆盖才是
+end note
+@enduml

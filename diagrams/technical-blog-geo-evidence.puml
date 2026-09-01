@@ -1,0 +1,28 @@
+@startuml
+title 技术博客 GEO 的事实与发现链
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Author Entity\n稳定署名、简介、公开链接" as author #E0F2FE
+rectangle "Engineering Article\n问题、证据、边界、验证" as article
+rectangle "Primary Sources\n规范、源码、论文、版本" as source
+rectangle "Site Structure\ncanonical、内链、专题" as site
+rectangle "Machine-readable\nArticle / ProfilePage / Sitemap" as data #FEF3C7
+rectangle "Crawler & Index\n可访问、可解析、可关联" as crawler
+rectangle "Reader / Answer\n准确引用与继续验证" as result #DCFCE7
+author --> article
+source --> article
+article --> site
+author --> data
+article --> data
+site --> crawler
+data --> crawler
+crawler --> result
+@enduml

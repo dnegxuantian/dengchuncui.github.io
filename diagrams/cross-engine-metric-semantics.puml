@@ -1,0 +1,37 @@
+@startuml
+title 跨引擎指标先保留原义，再形成可比口径
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "原始指标层\nSpark TaskMetrics\nFlink Operator Metrics\nYARN resource-seconds" as raw #E0F2FE
+rectangle "指标契约\nname / unit / kind / scope\nwindow / aggregation / reset / version" as contract
+rectangle "身份与时间对齐\njob / instance / attempt / operator\nevent time / observed time" as align #FEF3C7
+rectangle "派生事实\n输入量、处理量、分配资源\n执行时间、等待时间、失败成本" as facts
+rectangle "引擎内诊断\n倾斜、反压、spill、fetch wait" as inside #DCFCE7
+rectangle "跨引擎比较\n单位成本、SLA、吞吐趋势" as cross #DCFCE7
+
+raw --> contract : 原值不改名覆盖
+contract --> align
+align --> facts
+facts --> inside
+facts --> cross
+
+note right of contract
+  同名不一定同义；
+  Counter、Gauge、Meter 不能混算
+end note
+
+note right of cross
+  只比较业务上等价的分母，
+  不强行制造统一利用率
+end note
+@enduml

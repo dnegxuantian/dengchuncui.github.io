@@ -1,0 +1,39 @@
+@startuml
+title OLAP 选型前的查询画像
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "真实 SQL / BI 日志\n不是功能清单" as workload #E0F2FE
+rectangle "过滤与扫描\n时间范围、维度、命中比例" as scan
+rectangle "聚合与 Join\n基数、明细/汇总、Join 形状" as compute
+rectangle "并发与 SLA\n峰值 QPS、p95、排队预算" as sla #FEF3C7
+rectangle "写入与新鲜度\n批次、实时、更新、迟到数据" as ingest
+rectangle "运维与成本\n副本、扩容、compaction、恢复" as ops
+rectangle "可复现 Benchmark\n结果正确 + 延迟分布 + 资源成本" as benchmark #DCFCE7
+
+workload --> scan
+scan --> compute
+compute --> sla
+sla --> ingest
+ingest --> ops
+ops --> benchmark
+
+note right of scan
+  记录 scanned rows / selected partitions，
+  不用“SQL 很复杂”代替数据
+end note
+
+note right of benchmark
+  结论按查询族给出，
+  不宣布一个引擎全面胜出
+end note
+@enduml

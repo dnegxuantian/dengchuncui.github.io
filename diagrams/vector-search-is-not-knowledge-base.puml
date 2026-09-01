@@ -1,0 +1,35 @@
+@startuml
+title 向量召回只是知识问答链路的一段
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "原始知识\n文档、表定义、制度、代码" as source #E0F2FE
+rectangle "摄取治理\n解析、切块、版本、权限、有效期" as ingest
+rectangle "多路索引\n向量 + 关键词 + 结构化字段" as index
+rectangle "查询理解\n对象、时间、意图、访问身份" as query #FEF3C7
+rectangle "召回与重排\n候选片段 + score + source version" as retrieve
+rectangle "答案约束\n引用、冲突、缺失、拒答" as answer #DCFCE7
+rectangle "反馈闭环\n命中、引用、人工纠错、回归集" as feedback
+
+source --> ingest
+ingest --> index
+query --> retrieve
+index --> retrieve
+retrieve --> answer
+answer --> feedback
+feedback --> ingest : 修复知识与索引
+
+note right of index
+  最近邻只能回答“像不像”，
+  不能回答“对不对、能不能看”
+end note
+@enduml

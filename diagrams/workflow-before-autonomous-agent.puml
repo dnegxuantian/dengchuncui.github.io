@@ -1,0 +1,35 @@
+@startuml
+title 先把确定性骨架搭好，再开放 Agent 决策
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "用户目标" as goal #E0F2FE
+rectangle "确定性 Workflow\n固定阶段、状态、超时、补偿" as workflow
+rectangle "有限决策点\n分类 / 选择候选 / 生成参数" as decision #FEF3C7
+rectangle "工具契约\n校验、权限、幂等、证据" as tools
+rectangle "检查点\n机器断言 / 人工确认" as check
+rectangle "发布结果\n可回放状态与产物" as result #DCFCE7
+rectangle "开放式 Agent Loop\n仅用于无法预先枚举的子任务" as agent
+
+goal --> workflow
+workflow --> decision
+decision --> tools
+tools --> check
+check --> result
+decision --> agent : 任务确需探索
+agent --> tools
+
+note right of workflow
+  自由度只放在真正需要判断的地方，
+  其余步骤由运行时控制
+end note
+@enduml

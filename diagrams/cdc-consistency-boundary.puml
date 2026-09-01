@@ -1,0 +1,52 @@
+@startuml
+title Debezium MySQL 初始快照的一致性边界
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam sequence {
+  ArrowColor #475569
+  LifeLineBorderColor #64748B
+  LifeLineBackgroundColor #F8FAFC
+  ParticipantBorderColor #334155
+  ParticipantBackgroundColor #E0F2FE
+}
+
+participant "业务客户端" as app
+participant "MySQL" as mysql
+participant "Debezium" as dbz
+participant "Offset 存储" as offset
+participant "下游" as sink
+
+dbz -> mysql : 获取 global read lock
+dbz -> mysql : 开启 repeatable read 事务
+dbz -> mysql : SHOW MASTER STATUS
+mysql --> dbz : Binlog 位点 P / GTID
+dbz -> mysql : 读取捕获表的 schema
+dbz -> mysql : 释放 global read lock
+
+app -> mysql : P 之后继续提交写入
+mysql -> mysql : 记录到 Binlog
+
+dbz -> mysql : 在一致性事务中扫描表
+mysql --> dbz : P 时刻的行快照
+dbz -> sink : snapshot read events
+dbz -> offset : 标记 snapshot 完成，保存 P
+
+dbz -> mysql : 从 P 开始读取 Binlog
+mysql --> dbz : P 之后的 INSERT / UPDATE / DELETE / DDL
+dbz -> sink : change events
+
+note over mysql,offset
+  P 是全量与增量的衔接点；
+  不是“全量扫描结束”的墙上时间
+end note
+
+note over dbz,sink
+  故障恢复可能从旧 offset 重放；
+  下游必须按变更语义实现幂等
+end note
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+title 湖仓行级 UPDATE 的两条执行路径
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "命中 1 行\n位于 512 MB Data File" as input #E0F2FE
+
+package "Copy-on-Write" #F8FAFC {
+  rectangle "读取原 Data File" as cowread
+  rectangle "过滤旧行并写入新值\n重写其余未变化行" as cowwrite #FEF3C7
+  rectangle "提交新 Data File\n移除旧 Data File" as cowcommit #DCFCE7
+}
+
+package "Merge-on-Read" #F8FAFC {
+  rectangle "写 Position / Equality Delete" as mordelete #FEE2E2
+  rectangle "写新值到新 Data File" as morinsert #FEF3C7
+  rectangle "读时合并 Data + Delete\n后续维护再重写" as morread #DCFCE7
+}
+
+input --> cowread
+cowread --> cowwrite
+cowwrite --> cowcommit
+
+input --> mordelete
+mordelete --> morinsert
+morinsert --> morread
+
+note bottom of cowwrite
+  写放大由命中的文件决定，
+  不是由修改的行数决定
+end note
+
+note bottom of morread
+  写入更轻，但扫描规划、
+  读合并与维护成本会上升
+end note
+@enduml

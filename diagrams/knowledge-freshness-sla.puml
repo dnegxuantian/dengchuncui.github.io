@@ -1,0 +1,32 @@
+@startuml
+title 知识新鲜度预算拆解
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "源系统变更\nsource_event_time" as source #E0F2FE
+rectangle "事件发现\ndiscovered_at\n发现延迟" as discover
+rectangle "抓取解析\nparsed_at\n处理延迟" as parse
+rectangle "索引发布\nindexed_at\n索引延迟" as index #FEF3C7
+rectangle "查询可见\nserved_at\n缓存与复制延迟" as serve
+rectangle "Freshness 判定\nserved_at - source_event_time" as fresh #DCFCE7
+
+source --> discover
+discover --> parse
+parse --> index
+index --> serve
+serve --> fresh
+
+note right of fresh
+  没有 source_event_time 时，
+  只能报告观测新鲜度，不能冒充真实新鲜度
+end note
+@enduml

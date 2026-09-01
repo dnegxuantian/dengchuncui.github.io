@@ -1,0 +1,56 @@
+@startuml
+title DataX 脏数据的采集、计数与失败判定
+
+top to bottom direction
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "Reader / Transformer 错误" as read_error #FEE2E2
+rectangle "Writer 单条写入错误" as write_error #FEE2E2
+rectangle "TaskPluginCollector\ncollectDirtyRecord()" as collector #DBEAFE
+
+rectangle "Communication Counter" as counter #E0F2FE {
+  rectangle "readFailedRecords" as read_count
+  rectangle "writeFailedRecords" as write_count
+}
+
+rectangle "StdoutPluginCollector" as stdout #FEF3C7
+rectangle "日志样本\nmaxDirtyNumber 只限制打印" as log
+
+rectangle "运行中：Scheduler" as scheduler #DCFCE7
+rectangle "record 阈值\n超过后尽快失败" as record_limit
+
+rectangle "结束后：JobContainer" as job #DCFCE7
+rectangle "percentage 阈值\n按最终比例判断" as percent_limit
+
+read_error --> collector
+write_error --> collector
+collector --> read_count : Reader 侧
+collector --> write_count : Writer 侧
+collector --> stdout
+stdout --> log
+
+counter --> scheduler : totalErrorRecords
+scheduler --> record_limit
+counter --> job : error / totalReadRecords
+job --> percent_limit
+
+note right of record_limit
+  配置 record 后
+  percentage 会被清空
+end note
+
+note right of log
+  不再打印时
+  Counter 仍继续增加
+end note
+@enduml

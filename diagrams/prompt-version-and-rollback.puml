@@ -1,0 +1,32 @@
+@startuml
+title Prompt 变更按软件版本发布
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "变更集\nsystem prompt / template / tool schemas\nretrieval policy / model snapshot" as change #E0F2FE
+rectangle "不可变 Bundle\ncontent hash + version + owner" as bundle
+rectangle "离线回归\n能力、拒答、安全、成本" as offline
+rectangle "影子与灰度\n固定分流 + 旧新双记录" as canary #FEF3C7
+rectangle "版本别名\nprod -> bundle_v18" as alias #DCFCE7
+rectangle "回滚\nprod -> bundle_v17" as rollback #FEE2E2
+
+change --> bundle
+bundle --> offline
+offline --> canary
+canary --> alias : 达标
+alias --> rollback : 线上守门指标退化
+
+note right of bundle
+  Prompt 不是唯一变量；
+  运行时组合必须一起冻结
+end note
+@enduml

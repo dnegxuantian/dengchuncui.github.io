@@ -1,0 +1,42 @@
+@startuml
+title 批流一致性对账的四层边界
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "1. 输入边界\nKafka 每分区 end offset\n或可对应的 source snapshot" as input #E0F2FE
+rectangle "2. 时间语义\nevent time、时区、窗口边界\nwatermark 与迟到策略" as time #DBEAFE
+rectangle "3. 变更语义\nINSERT / UPDATE / DELETE\nappend / retract / upsert" as change #FEF3C7
+rectangle "4. 物化规则\n主键、顺序、故障重放与幂等" as materialize #FDE68A
+
+rectangle "流任务\n处理到指定 offset 并完成 checkpoint" as stream #F8FAFC
+rectangle "批任务\n读取同一输入与维表版本" as batch #F8FAFC
+rectangle "可复算结果\n按 key 下钻并回放差异事件" as result #DCFCE7
+
+input -down-> time
+time -down-> change
+change -down-> materialize
+materialize -down-> stream
+materialize -down-> batch
+stream -down-> result
+batch -down-> result
+
+note right of input
+  墙上时间不是可靠边界；
+  必须能枚举、保存和重放
+end note
+
+note right of result
+  比较 materialized state，
+  不比较中间消息条数
+end note
+@enduml

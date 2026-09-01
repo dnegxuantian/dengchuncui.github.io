@@ -1,0 +1,47 @@
+@startuml
+title HDFS 小文件治理闭环
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "发现\n按表 / 分区统计新增文件、大小分布、读取频率" as observe #E0F2FE
+rectangle "归因\n路径映射到调度实例、写入组件与并行度" as trace #DBEAFE
+rectangle "止增\n调整分区粒度、输出并行度与滚动策略" as stop #FEF3C7
+rectangle "存量处理" as remedy {
+  rectangle "表数据\n用计算任务重写到 staging" as rewrite #F8FAFC
+  rectangle "特定普通文件\n满足限制时使用 concat" as concat #F8FAFC
+  rectangle "冷且只读\n创建 HAR 后单独验证" as har #F8FAFC
+}
+rectangle "校验\n记录数、关键聚合、格式可读、文件数" as verify #DCFCE7
+rectangle "切换与观察\nrename 正式路径，保留原目录回滚窗口" as swap #DCFCE7
+
+observe -down-> trace
+trace -down-> stop
+stop -down-> rewrite
+stop -down-> concat
+stop -down-> har
+rewrite -down-> verify
+concat -down-> verify
+har -down-> verify
+verify -down-> swap
+swap .up.> observe : 持续复查新增量
+
+note right of stop
+  先停止继续制造，
+  再清理历史存量
+end note
+
+note right of swap
+  验证通过后才删除备份；
+  每一步都要能回滚
+end note
+@enduml

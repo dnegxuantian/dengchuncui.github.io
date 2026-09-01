@@ -1,0 +1,39 @@
+@startuml
+title 数据契约变更控制
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "变更提案\nSchema + 语义 + SLA + 生效时间" as proposal #E0F2FE
+rectangle "机器检查\nAvro 兼容、SQL/字段引用、样本校验" as check #FEF3C7
+rectangle "消费者影响清单\nowner、版本、最后活跃时间" as impact
+rectangle "双读 / 影子验证\n旧新结果对账" as shadow #FEE2E2
+rectangle "分阶段发布\nproducer -> consumer -> 默认版本" as rollout #DCFCE7
+rectangle "观测与回滚\n解析错误、null、分布、延迟" as observe #DCFCE7
+rectangle "完成或撤回\n保留证据与迁移期限" as finish #E0F2FE
+
+proposal --> check
+check --> impact
+impact --> shadow
+shadow --> rollout
+rollout --> observe
+observe --> finish
+
+note right of check
+  Schema 兼容只是底线；
+  “状态码含义改变”通常无法自动发现
+end note
+
+note right of finish
+  契约允许变化，
+  但变化不能静默发生
+end note
+@enduml

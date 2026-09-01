@@ -1,0 +1,27 @@
+@startuml
+title Agent Skill 的显式边界结构
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "真实任务语言\n正例 / 近邻负例" as query #E0F2FE
+rectangle "Description\n触发、边界、移交" as route
+rectangle "Evidence Gates\n必须读取与验证的事实" as evidence
+rectangle "Action Contract\n工具、风险、审批、停止" as action #FEF3C7
+rectangle "References / Scripts\n按需资料与确定性操作" as resource
+rectangle "Outcome Verification\n业务结果而非接口状态" as verify #DCFCE7
+rectangle "Replay Suite\n路由、边界、失败样本" as eval
+query --> route
+route --> evidence
+evidence --> action
+action --> resource
+resource --> verify
+verify --> eval
+eval --> route : 版本化改进
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+title 调度实例状态：主路径、等待路径与失联对账
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "等待依赖\nWAITING" as waiting #E0F2FE
+rectangle "可调度\nSCHEDULED" as scheduled
+rectangle "已入执行队列\nQUEUED" as queued
+rectangle "运行中\nRUNNING" as running #FEF3C7
+rectangle "结束\nSUCCESS / FAILED / SKIPPED" as terminal #DCFCE7
+
+waiting --> scheduled : 依赖、时间、配额通过
+scheduled --> queued : executor 接单
+queued --> running : worker 回报开始
+running --> terminal : 带 attempt 的完成事件
+
+rectangle "等待类状态\nUP_FOR_RETRY\nDEFERRED / RESCHEDULE" as pause
+rectangle "重新进入调度\n到点 / 事件到达" as resume
+running -right-> pause : 可恢复，不占 worker
+pause --> resume
+resume -left-> scheduled
+
+rectangle "失联待确认\nLOST / UNKNOWN" as lost #FEE2E2
+rectangle "证据对账\nexecutor / worker / output / event" as reconcile
+rectangle "确定结论\n重投、成功或失败" as resolve
+queued -left-> lost : 队列超时
+running -left-> lost : 心跳失联
+lost --> reconcile
+reconcile --> resolve
+resolve --> terminal : 已有终态证据
+resolve --> scheduled : 确认未执行，可重投
+
+note bottom of lost
+  失联只表达“当前未知”，
+  不能直接等价为业务失败
+end note
+@enduml

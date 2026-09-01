@@ -1,0 +1,31 @@
+@startuml
+title 上下文压缩的约束保全模型
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Event History\n对话、工具、证据" as events #E0F2FE
+rectangle "Compactor\n固定 cutoff + version" as compact
+database "Active Constraints\n禁止项、范围、审批" as constraints #FEE2E2
+database "Claims\nverified / inferred + evidence" as claims
+database "Open State\n计划、未决项、unknown operation" as state #FEF3C7
+database "Artifact Refs\n版本、hash、权限" as refs
+rectangle "Invariant Gate\n集合、状态、引用、权限不变" as gate #DCFCE7
+rectangle "Next Context Snapshot" as next
+events --> compact
+compact --> constraints
+compact --> claims
+compact --> state
+compact --> refs
+constraints --> gate
+claims --> gate
+state --> gate
+refs --> gate
+gate --> next
+@enduml

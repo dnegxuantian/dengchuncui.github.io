@@ -98,6 +98,6 @@ sitemap:
 
 deploy:
   type: git
-  repo: https://github.com/dengchuncui/dengchuncui.github.io.git
+  repo: https://github.com/dnegxuantian/dengchuncui.github.io.git
   branch: public
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"

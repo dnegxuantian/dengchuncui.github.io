@@ -1,0 +1,32 @@
+@startuml
+title 知识摄取失败的分层定位
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "枚举\n应有多少 source？分页完整吗？" as enumerate #E0F2FE
+rectangle "抓取\n权限、状态码、内容类型、hash" as fetch
+rectangle "解析\n页数、章节、表格、字符、警告" as parse
+rectangle "切块与向量\nchunk manifest、失败批次、维度" as embed #FEF3C7
+rectangle "发布\n索引数量、ACL、alias、tombstone" as publish
+rectangle "查询探针\n能召回、能过滤、旧版消失" as query #DCFCE7
+
+enumerate --> fetch
+fetch --> parse
+parse --> embed
+embed --> publish
+publish --> query
+
+note right of parse
+  exit code=0 不等于内容完整；
+  每层都要对输入输出做不变量检查
+end note
+@enduml

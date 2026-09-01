@@ -1,0 +1,33 @@
+@startuml
+title 数据平台 Agent 可验证执行闭环
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+rectangle "Natural Language Intent" as intent #E0F2FE
+rectangle "Object Resolution\n环境、ID、版本、业务日期" as resolve
+rectangle "Evidence Diagnosis\n日志、配置、SQL、指标" as diagnose
+rectangle "Executable Plan\nDiff、风险、验证、停止" as plan #FEF3C7
+rectangle "Policy & Approval\n绑定对象与 Plan hash" as approval
+rectangle "Idempotent Operations\n领域工具 + 状态核对" as execute
+rectangle "Verification\n运行态 + 数据态 + 业务态" as verify #DCFCE7
+database "Trace & Regression\n决定、证据、失败样本" as trace
+intent --> resolve
+resolve --> diagnose
+diagnose --> plan
+plan --> approval
+approval --> execute
+execute --> verify
+resolve --> trace
+diagnose --> trace
+plan --> trace
+execute --> trace
+verify --> trace
+verify --> diagnose : 失败证据回流
+@enduml

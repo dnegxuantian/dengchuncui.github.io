@@ -1,0 +1,47 @@
+@startuml
+title DataX 速度预算、并发与背压
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam ArrowThickness 1.4
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "Job 级速度预算\njob.setting.speed.byte / record" as job_speed #E0F2FE
+rectangle "单 Channel 上限\ncore.transport.channel.speed" as channel_speed #E0F2FE
+rectangle "adjustChannelNumber()\n总预算 ÷ 单 Channel 上限" as adjust #DBEAFE
+rectangle "Reader / Writer split()\n得到 taskNumber" as split #FEF3C7
+rectangle "schedule()\nmin(needChannel, taskNumber)" as schedule #DBEAFE
+
+rectangle "ReaderRunner" as reader
+rectangle "MemoryChannel\n有界记录队列 + byteCapacity" as memory #F1F5F9
+rectangle "WriterRunner" as writer
+
+job_speed -[hidden]right-> channel_speed
+channel_speed -[hidden]right-> split
+job_speed -down-> adjust
+channel_speed -down-> adjust
+adjust -down-> schedule : needChannelNumber
+split -down-> schedule : taskNumber
+schedule -down-> reader : 分配 Task
+reader -right-> memory : push / pushAll
+memory -right-> writer : pull / pullAll
+
+note bottom of memory
+  队列满：waitWriterTime 增加
+  队列空：waitReaderTime 增加
+end note
+
+note bottom of reader
+  Channel.statPush()
+  按 flowControlInterval 统计
+  超速后 Thread.sleep()
+end note
+@enduml

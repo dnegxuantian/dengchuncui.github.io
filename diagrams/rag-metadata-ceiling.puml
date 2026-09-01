@@ -1,0 +1,32 @@
+@startuml
+title RAG 的上限由元数据事实链决定
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "业务对象\n表、指标、任务、负责人、制度" as objects #E0F2FE
+rectangle "事实采集\nHook / API / 代码解析 / 人工维护" as collect
+rectangle "对象身份与版本\nGUID / qualifiedName / source_version" as identity
+rectangle "关系与时间\n血缘、归属、valid_from/to" as relation #FEF3C7
+rectangle "检索视图\n文本 chunk + 结构化字段 + ACL" as view
+rectangle "回答证据\n结论绑定实体、关系、版本" as answer #DCFCE7
+
+objects --> collect
+collect --> identity
+identity --> relation
+relation --> view
+view --> answer
+
+note right of collect
+  缺失、过期、冲突的元数据，
+  不会被更好的 embedding 自动修复
+end note
+@enduml

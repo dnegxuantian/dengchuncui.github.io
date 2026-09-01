@@ -1,0 +1,43 @@
+@startuml
+title 一次数据质量结论需要的上下文
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "生产实例\ninstance / attempt\n提交 output version" as producer #E0F2FE
+rectangle "冻结 Batch\npartition / snapshot / offset / file manifest" as batch #DBEAFE
+rectangle "冻结规则集\nExpectation Suite / config version / rule hash" as rules #FEF3C7
+rectangle "Validation Run\nrun id / engine execution / start-end time" as run #FDE68A
+rectangle "Validation Result" as result {
+  rectangle "判断\nPASS / FAIL / ERROR / UNKNOWN" as status #F8FAFC
+  rectangle "证据\nobserved、expected、sample、exception" as detail #F8FAFC
+}
+rectangle "Action\n发布 / 阻断 / 隔离 / 告警 / 人工放行" as action #DCFCE7
+
+producer -down-> batch
+batch -down-> rules : 固定数据后选择规则版本
+rules -down-> run
+run -down-> status
+run -down-> detail
+status -down-> action
+detail -down-> action
+
+note right of batch
+  校验开始时间不是数据边界；
+  同一次重验必须能读取同一批数据
+end note
+
+note right of rules
+  使用新规则重验时创建新 attempt，
+  不能覆盖旧结论
+end note
+@enduml

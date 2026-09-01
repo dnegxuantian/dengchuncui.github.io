@@ -1,0 +1,29 @@
+@startuml
+title 表格式升级的五道兼容性门槛
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 6
+skinparam ArrowColor #475569
+
+rectangle "目标表能力\nFormat v2 + Row-level Delete" as target #FEE2E2
+
+rectangle "Reader\n能否解析 v2 metadata\n能否应用 delete files" as reader #E0F2FE
+rectangle "Writer\n能否正确写 sequence number\n能否提交目标操作" as writer #FEF3C7
+rectangle "Catalog\n加载方式、锁/CAS、权限" as catalog #F8FAFC
+rectangle "SQL / API\nMERGE、UPDATE、DELETE\n是否需要 extensions" as sql #F8FAFC
+rectangle "Maintenance\nrewrite、expire、orphan 清理" as maintenance #DCFCE7
+
+reader --> writer
+writer --> catalog
+catalog --> sql
+sql --> maintenance
+maintenance --> target
+
+note bottom of target
+  只有所有生产访问路径都验证通过，
+  才能修改 format-version；升级不可当场降级
+end note
+@enduml

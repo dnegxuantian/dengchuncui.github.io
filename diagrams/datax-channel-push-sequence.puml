@@ -1,0 +1,66 @@
+@startuml
+title Channel.push() 的实际调用顺序
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam ParticipantBorderColor #334155
+skinparam ParticipantBackgroundColor #F8FAFC
+skinparam ParticipantFontColor #0F172A
+skinparam NoteBorderColor #94A3B8
+skinparam NoteBackgroundColor #F8FAFC
+skinparam LifeLineBorderColor #94A3B8
+
+participant ReaderRunner as reader
+participant Channel as channel
+participant MemoryChannel as memory
+participant WriterRunner as writer
+
+reader -> channel : push(record) / pushAll(records)
+activate channel
+channel -> memory : doPush() / doPushAll()
+activate memory
+
+alt 队列满或超过 byteCapacity
+  memory -> memory : await(200 ms)
+  note right
+    等 Writer 腾位置
+    时间累计到 waitWriterTime
+  end note
+end
+
+memory --> channel : 入队完成
+deactivate memory
+channel -> channel : statPush(recordCount, byteSize)
+
+alt interval >= flowControlInterval
+  channel -> channel : 计算 byteSpeed / recordSpeed
+  alt 当前速度超过限制
+    channel -> channel : sleep(max(byteSleep, recordSleep))
+  end
+end
+
+channel --> reader : push 完成
+deactivate channel
+
+writer -> channel : pull() / pullAll()
+activate channel
+channel -> memory : doPull() / doPullAll()
+activate memory
+
+alt 队列为空
+  memory -> memory : take() / await(200 ms)
+  note right
+    等 Reader 供数
+    时间累计到 waitReaderTime
+  end note
+end
+
+memory --> channel : 返回 Record
+deactivate memory
+channel --> writer : pull 完成
+deactivate channel
+@enduml

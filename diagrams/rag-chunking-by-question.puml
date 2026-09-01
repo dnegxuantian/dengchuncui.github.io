@@ -1,0 +1,35 @@
+@startuml
+title 用问题验证切块，而不是先猜 chunk_size
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "真实问题集\n问题 + 最小充分证据 span" as questions #E0F2FE
+rectangle "结构解析\n标题、段落、表格、代码、列表" as parse
+rectangle "候选切块策略\n结构块 / 父子块 / 邻接扩展" as chunk #FEF3C7
+rectangle "检索回放\n固定 embedding、top-k 与过滤" as replay
+rectangle "证据覆盖检查\n召回了吗？条件完整吗？噪声多少？" as cover
+rectangle "生成隔离评测\n只用标注证据，再测答案" as answer #DCFCE7
+rectangle "版本化发布\nparser + chunker + index version" as release #DCFCE7
+
+questions --> parse
+parse --> chunk
+chunk --> replay
+replay --> cover
+cover --> answer
+answer --> release
+cover --> chunk : 缺条件或噪声过多
+
+note right of cover
+  chunk 大小只是实验参数；
+  最小充分证据才是验收对象
+end note
+@enduml

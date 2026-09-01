@@ -1,0 +1,35 @@
+@startuml
+title ClickHouse 与 Doris：数据模型把成本放在哪里
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+
+package "ClickHouse MergeTree Family" #F8FAFC {
+  rectangle "ORDER BY\n排序 + 稀疏索引" as chorder #E0F2FE
+  rectangle "每批写成 Data Part\n后台 Merge" as chpart
+  rectangle "Replacing / Summing / Aggregating\n合并时处理重复或聚合" as chmodel #FEF3C7
+  rectangle "查询可能仍需 FINAL / 聚合\n主键默认不保证唯一" as chquery #FEE2E2
+  chorder --> chpart
+  chpart --> chmodel
+  chmodel --> chquery
+}
+
+package "Apache Doris Data Model" #F8FAFC {
+  rectangle "KEY 列\n排序前缀 + 模型语义" as doriskey #E0F2FE
+  rectangle "Duplicate / Aggregate / Unique\n建表时确定" as dorismodel #FEF3C7
+  rectangle "导入、Compaction、查询\n分阶段聚合或 REPLACE" as dorisagg
+  rectangle "查询返回最终模型语义\n可由 Rollup 减少扫描" as dorisquery #DCFCE7
+  doriskey --> dorismodel
+  dorismodel --> dorisagg
+  dorisagg --> dorisquery
+}
+
+note bottom
+  选型不是“谁有主键”，而是确认重复、更新与聚合
+  在写入、后台合并、查询哪个阶段付费
+end note
+@enduml

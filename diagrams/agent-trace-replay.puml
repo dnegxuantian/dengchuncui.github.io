@@ -1,0 +1,32 @@
+@startuml
+title Agent Trace 的三层回放
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Replay Manifest\nBundle / input / artifacts / policy / assertions" as manifest #E0F2FE
+rectangle "L1 纯协议回放\nraw events -> adapter/reducer/finalizer" as l1
+rectangle "L2 组件回放\n固定检索与工具 fixtures，真实编排" as l2 #FEF3C7
+rectangle "L3 受控在线重演\n新模型/索引，副作用工具 dry-run" as l3
+rectangle "差异报告\n事件、状态、工具、答案、成本" as diff #DCFCE7
+
+manifest --> l1
+manifest --> l2
+manifest --> l3
+l1 --> diff
+l2 --> diff
+l3 --> diff
+
+note right of l3
+  回放不是重复执行生产副作用；
+  外部动作必须 mock、查询状态或 dry-run
+end note
+@enduml

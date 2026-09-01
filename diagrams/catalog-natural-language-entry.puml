@@ -1,0 +1,32 @@
+@startuml
+title 自然语言进入 Catalog 的两段解析
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "自然语言\n找生产集群的订单明细，谁负责？" as q #E0F2FE
+rectangle "意图结构化\ntype=table / env=prod / keyword=订单明细\nneed=owner" as intent #FEF3C7
+rectangle "Catalog 原生搜索\n类型、属性、术语、分类、全文" as search
+rectangle "候选实体\nGUID + qualifiedName + metadata version" as candidates
+rectangle "关系展开\nowner / glossary / lineage / columns" as graph
+rectangle "答案与歧义\n候选列表、来源、需确认项" as answer #DCFCE7
+
+q --> intent
+intent --> search
+search --> candidates
+candidates --> graph
+graph --> answer
+
+note right of candidates
+  模型可以解释名称，
+  不能发明对象身份
+end note
+@enduml

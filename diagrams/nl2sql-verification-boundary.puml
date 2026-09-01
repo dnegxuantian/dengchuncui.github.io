@@ -1,0 +1,36 @@
+@startuml
+title NL2SQL 的验证边界
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "用户问题\n口径、时间、对象、粒度" as q #E0F2FE
+rectangle "受控上下文\n允许访问的表、列、关系、指标定义" as context
+rectangle "候选 SQL\n同时保存生成依据" as sql #FEF3C7
+rectangle "语法与对象检查\nParser / Catalog / 权限" as static
+rectangle "执行计划检查\nEXPLAIN / 扫描范围 / Join 风险" as plan
+rectangle "受限执行\n只读、超时、限行、资源隔离" as run
+rectangle "结果断言\n粒度、空值、总量、抽样证据" as result #DCFCE7
+rectangle "返回答案\nSQL + 口径 + 限制 + 可复核结果" as answer #DCFCE7
+
+q --> context
+context --> sql
+sql --> static
+static --> plan
+plan --> run
+run --> result
+result --> answer
+
+note right of static
+  能解析不等于语义正确，
+  能执行也不等于回答了问题
+end note
+@enduml

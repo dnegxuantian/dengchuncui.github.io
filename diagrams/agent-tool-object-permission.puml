@@ -1,0 +1,34 @@
+@startuml
+title Agent 工具权限落到动作与对象
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "可信主体\nuser / tenant / session" as subject #E0F2FE
+rectangle "模型建议\ntool + arguments" as proposal
+rectangle "对象解析\nname -> immutable resource_id" as resolve
+rectangle "策略判定\nsubject × action × resource × context" as policy #FEF3C7
+rectangle "确认与约束\nplan hash / version / expiry" as confirm
+rectangle "工具内再次鉴权\n当前状态 + policy version" as tool
+rectangle "执行与审计\ndecision_id / operation_id / result" as audit #DCFCE7
+
+subject --> policy
+proposal --> resolve
+resolve --> policy
+policy --> confirm
+confirm --> tool
+tool --> audit
+
+note right of policy
+  “能调用工具”不是权限；
+  权限必须包含具体动作和对象
+end note
+@enduml

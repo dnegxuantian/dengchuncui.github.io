@@ -1,0 +1,40 @@
+@startuml
+title YARN 资源请求为什么会等待
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "Container 请求\n8 GB memory / 4 vCore" as request #E0F2FE
+rectangle "请求规范化\nminimum 粒度向上取整\nmaximum 超限则拒绝" as normalize #DBEAFE
+rectangle "队列边界\ncapacity / maximum-capacity\n用户限制 / AM 比例" as queue #FEF3C7
+rectangle "资源比较方式" as calculator {
+  rectangle "DefaultResourceCalculator\n主要按 memory 比较" as default #F8FAFC
+  rectangle "DominantResourceCalculator\n取 memory、CPU 中最大占比" as drf #F8FAFC
+}
+rectangle "节点装箱\n必须有一个节点同时满足全部资源" as placement #DCFCE7
+rectangle "等待\n聚合空闲很多，单节点形状仍不匹配" as pending #FEE2E2
+rectangle "分配成功" as allocated #DCFCE7
+
+request -down-> normalize
+normalize -down-> queue
+queue -down-> default
+queue -down-> drf
+default -down-> placement
+drf -down-> placement
+placement -down-> allocated : 存在匹配节点
+placement -right-> pending : 无匹配节点
+
+note right of pending
+  总空闲资源不能跨节点
+  拼成一个 Container
+end note
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+title Iceberg 两个 Writer 的乐观并发提交
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam sequence {
+  ArrowColor #475569
+  LifeLineBorderColor #64748B
+  LifeLineBackgroundColor #F8FAFC
+  ParticipantBorderColor #334155
+  ParticipantBackgroundColor #E0F2FE
+}
+
+participant "Writer A" as a
+participant "对象存储 / HDFS" as store
+participant "Catalog\nmetadata pointer" as catalog
+participant "Writer B" as b
+
+a -> catalog : 读取 base metadata v10
+catalog --> a : v10
+b -> catalog : 读取 base metadata v10
+catalog --> b : v10
+
+a -> store : 写 data / manifest / metadata v11-A
+b -> store : 写 data / manifest / metadata v11-B
+
+a -> catalog : CAS: v10 -> v11-A
+catalog --> a : SUCCESS
+b -> catalog : CAS: v10 -> v11-B
+catalog --> b : CommitFailedException
+
+b -> catalog : refresh 当前 metadata
+catalog --> b : v11-A
+b -> b : 在新 base 上重新验证并 apply
+b -> store : 复用 data/manifest，写新 manifest list 与 v12-B
+b -> catalog : CAS: v11-A -> v12-B
+catalog --> b : SUCCESS
+
+note over store,catalog
+  文件先写入；只有 catalog pointer 切换成功，
+  新 snapshot 才对 reader 可见
+end note
+
+note over catalog,b
+  网络异常可能让结果变成 UNKNOWN；
+  先查 current / previous metadata，不能盲目重试或删文件
+end note
+@enduml

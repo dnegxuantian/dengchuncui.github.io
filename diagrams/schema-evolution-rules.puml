@@ -1,0 +1,43 @@
+@startuml
+title Schema 变更的发布与验证流程
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "变更申请\nadd / drop / rename / reorder / type / nullability" as request #E0F2FE
+rectangle "身份检查\n保持或新建 Field ID\n禁止按名称复用旧字段" as identity #DBEAFE
+rectangle "兼容性检查" as compatibility {
+  rectangle "可直接演进\n新增 optional、rename、reorder\nint->long、float->double" as safe #DCFCE7
+  rectangle "需要迁移\n新增 required、收紧 nullability\n缩窄类型或改变语义" as migrate #FEE2E2
+}
+rectangle "消费者矩阵\nCDC / 消息 / 批流引擎 / 表格式 / 下游" as consumers #FEF3C7
+rectangle "分阶段发布\n先 reader，后 writer，再收紧约束" as rollout #FDE68A
+rectangle "历史文件验证\n新旧 schema 读取、边界值、分区裁剪、回滚" as verify #DCFCE7
+
+request -down-> identity
+identity -down-> safe
+identity -down-> migrate
+safe -down-> consumers
+migrate -down-> consumers
+consumers -down-> rollout
+rollout -down-> verify
+
+note right of identity
+  字段名与位置都会变化；
+  稳定 ID 才能连接历史语义
+end note
+
+note right of migrate
+  allowIncompatibleChanges
+  只绕过检查，不会自动修复旧数据
+end note
+@enduml

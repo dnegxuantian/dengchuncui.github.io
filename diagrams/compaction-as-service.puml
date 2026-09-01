@@ -1,0 +1,44 @@
+@startuml
+title Compaction 服务闭环
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "表体检\n文件大小、数量、Delete Debt、热分区" as inspect #E0F2FE
+rectangle "候选选择\n收益 / IO 成本 / 并发冲突风险" as select #FEF3C7
+rectangle "File Group 切分\n分区内按数据量分组" as group
+rectangle "Rewrite\nbin-pack 或 sort" as rewrite #FEE2E2
+rectangle "Snapshot Commit\n记录重写输入与输出" as commit #DCFCE7
+rectangle "验收\n文件分布、查询计划、失败组" as verify #DCFCE7
+rectangle "节流与下轮计划\n避免追赶实时写入" as next #E0F2FE
+
+inspect --> select
+select --> group
+group --> rewrite
+rewrite --> commit
+commit --> verify
+verify --> next
+
+note bottom of next
+  下一轮重新体检，不沿用旧候选；
+  债务变化与查询热度都可能改变优先级
+end note
+
+note right of select
+  不是“到点全表重写”，
+  而是只处理收益明确的 file groups
+end note
+
+note right of commit
+  partial progress 会产生多次提交；
+  必须逐组记录成功与失败
+end note
+@enduml

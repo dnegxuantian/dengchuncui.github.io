@@ -1,0 +1,31 @@
+@startuml
+title Agent 权限决定与策略快照
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "User / Service\n原始主体" as user #E0F2FE
+rectangle "Agent / Workload\n委托身份" as agent
+rectangle "Authorization Input\n对象、动作、参数、环境" as input
+rectangle "Policy Engine\n不可变 model/policy id" as policy #FEF3C7
+rectangle "Decision Record\nallow/deny + reason + obligations" as decision #DCFCE7
+rectangle "Tool Operation\n引用 decision_id" as tool
+database "Audit Evidence\n事实快照、版本、结果" as audit
+
+user --> agent : consent / delegation
+agent --> input
+input --> policy
+policy --> decision
+decision --> tool : enforce obligations
+input --> audit
+policy --> audit
+decision --> audit
+tool --> audit : actual outcome
+@enduml

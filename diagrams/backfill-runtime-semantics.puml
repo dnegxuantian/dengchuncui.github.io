@@ -1,0 +1,39 @@
+@startuml
+title 补数据运行的四个时间与一个发布闸门
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "补数请求\nrange / requester / reason / code_version" as request #E0F2FE
+rectangle "业务数据区间\ndata_interval_start / end" as interval
+rectangle "独立运行身份\nrun_id / attempt / trigger_time" as run
+rectangle "隔离输出\nstaging/version path" as staging #FEF3C7
+rectangle "校验\n行数、分区、质量、下游契约" as verify
+rectangle "原子发布\n切换 current pointer / partition" as publish #DCFCE7
+rectangle "失败留痕\n不覆盖已发布版本" as failed #FEE2E2
+
+request --> interval : 展开待补分区
+interval --> run : 每个区间生成 Run
+run --> staging : 执行并写入新版本
+staging --> verify
+verify --> publish : 通过
+verify --> failed : 未通过
+
+note right of interval
+  业务时间不等于提交时间，
+  也不等于实际开始时间
+end note
+
+note right of run
+  同一业务区间可以有多次运行，
+  每次运行必须可单独追踪
+end note
+@enduml

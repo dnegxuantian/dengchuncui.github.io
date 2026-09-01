@@ -1,0 +1,35 @@
+@startuml
+title 从生产失败生成可回放评测
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "生产 Run\ntrace + artifacts + user impact" as run #E0F2FE
+rectangle "失败归因\ncontext / model / tool / policy / runtime" as classify
+rectangle "最小可复现场景\n固定输入、环境、mocks、断言" as case #FEF3C7
+rectangle "安全脱敏与审核\nowner / risk / retention" as review
+rectangle "回归集\n能力桶 + 守门桶 + 版本" as suite
+rectangle "候选修复\n一次只改变可归因变量" as fix
+rectangle "离线回放 + 灰度\n修复通过且无新增高风险失败" as release #DCFCE7
+
+run --> classify
+classify --> case
+case --> review
+review --> suite
+suite --> fix
+fix --> release
+release --> suite : 新失败继续沉淀
+
+note right of case
+  保存的是失败不变量，
+  不是把整段生产会话原样复制
+end note
+@enduml

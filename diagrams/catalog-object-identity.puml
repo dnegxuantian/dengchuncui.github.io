@@ -1,0 +1,41 @@
+@startuml
+title Catalog 对象标识：名称只是输入，身份必须稳定
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "采集端输入\nHive / Kafka / RDBMS / 文件" as source #E0F2FE
+rectangle "规范化\n大小写、转义、默认库、路径" as normalize #FEF3C7
+rectangle "命名空间\n环境 + 集群 + 引擎实例" as namespace #FEF3C7
+rectangle "类型内唯一键\ntypeName + qualifiedName" as key #DCFCE7
+rectangle "Catalog GUID\n关系、标签、血缘的稳定引用" as guid #DCFCE7
+
+source --> normalize
+normalize --> namespace
+namespace --> key
+key --> guid
+
+note right of source
+  displayName 可以重复，
+  不能直接拿来做主键
+end note
+
+note right of key
+  例：
+  hive_table
+  sales.orders@prod-hive-a
+end note
+
+note bottom of guid
+  重命名、迁移、重建必须定义语义：
+  更新原对象，还是生成新对象并保留映射
+end note
+@enduml

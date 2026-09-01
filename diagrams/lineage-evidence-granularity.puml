@@ -1,0 +1,46 @@
+@startuml
+title 数据血缘的四层证据粒度
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "证据来源\n静态解析 / plan 或 hook / 运行事实 / 人工声明\n记录采集时间与置信度" as evidence #FDE68A
+rectangle "1. 资产 / 表级\nDataSet -> Process -> DataSet" as table #E0F2FE
+rectangle "2. 字段级\n输入 Field ID -> expression -> 输出 Field ID" as column #DBEAFE
+rectangle "3. 运行实例级\nprocess version + instance / attempt\n输入水位 -> 输出 commit" as run #FEF3C7
+rectangle "审计结论\n按需显示路径、版本、来源与缺口" as result #DCFCE7
+
+evidence -down-> table : 建立资产范围
+table -down-> column : 下钻字段转换
+column -down-> run : 关联具体执行
+run -down-> result
+
+note right of evidence
+  图上没有边，也可能是采集失败；
+  hook 链路本身必须可观测
+end note
+
+note right of table
+  回答：这张表从哪里来？
+  表级边只是候选影响范围
+end note
+
+note right of column
+  回答：修改字段会影响哪些指标？
+  必须保留表达式与稳定字段 ID
+end note
+
+note right of run
+  回答：昨晚哪次运行写坏了哪批数据？
+  静态定义不能替代运行水位
+end note
+@enduml

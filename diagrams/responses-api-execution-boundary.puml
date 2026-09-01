@@ -1,0 +1,35 @@
+@startuml
+title Responses API 接入后的两层执行边界
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "企业 Run\nuser / policy / Bundle / deadline" as run #E0F2FE
+rectangle "Responses API\nitems / model / built-in tools / stream" as response
+rectangle "Provider-managed evidence\nresponse_id / output items / tool events / usage" as provider #FEF3C7
+rectangle "Enterprise function proposal\nname + arguments" as proposal
+rectangle "企业执行网关\nresolve / authorize / confirm / idempotency" as gateway
+rectangle "业务 Operation\nstatus / result / evidence" as operation
+rectangle "最终化\nprovider result + enterprise state verification" as final #DCFCE7
+
+run --> response
+response --> provider
+response --> proposal
+proposal --> gateway
+gateway --> operation
+provider --> final
+operation --> final
+
+note right of gateway
+  供应商统一了模型与内置工具协议，
+  不等于替企业授权和执行内部动作
+end note
+@enduml

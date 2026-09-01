@@ -1,0 +1,32 @@
+@startuml
+title MCP 连接层与企业治理层
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Host\nAgent application + user control" as host #E0F2FE
+rectangle "MCP Client\nprotocol version / capabilities / session" as client
+rectangle "Transport\nstdio / HTTP" as transport
+rectangle "MCP Server\nresources / prompts / tools" as server #FEF3C7
+rectangle "Enterprise Gateway\nserver allowlist / identity / policy / audit" as gateway
+rectangle "Data & Tool Systems" as systems #DCFCE7
+
+host --> client
+client --> transport
+transport --> server
+server --> gateway
+gateway --> systems
+
+note right of client
+  MCP 统一发现与调用协议；
+  用户授权、对象权限和风险策略仍由 Host/网关负责
+end note
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+title YARN 队列容量的设计与回收
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+rectangle "历史时间片\n每队列 demand / allocated / pending\n任务到达、Container 时长、完成 SLA" as history #E0F2FE
+rectangle "峰值重叠分析\n哪些关键工作负载在同一窗口出现" as overlap #DBEAFE
+rectangle "保证容量 capacity\n目标等待时间内必须启动的需求" as guaranteed #DCFCE7
+rectangle "弹性区间\n空闲时可借用，maximum-capacity 限上界" as elastic #FEF3C7
+rectangle "资源回收\n自然结束或 preemption\n观察归还 guaranteed capacity 的耗时" as reclaim #FDE68A
+rectangle "验证\n关键作业 SLA、pending、重算成本与利用率" as verify #DCFCE7
+
+history -down-> overlap
+overlap -down-> guaranteed
+guaranteed -down-> elastic
+elastic -down-> reclaim
+reclaim -down-> verify
+verify .up.> history : 定期重算
+
+note right of history
+  Allocated 被配额截断时，
+  不能代表真实 Demand
+end note
+
+note right of guaranteed
+  平均使用率用于成本观察，
+  峰值重叠与等待 SLA 决定保证量
+end note
+
+note right of reclaim
+  capacity 是最终收敛目标；
+  不开启抢占时常要等 Container 自然结束
+end note
+@enduml

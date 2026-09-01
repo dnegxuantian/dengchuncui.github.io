@@ -1,0 +1,32 @@
+@startuml
+title 企业工具接口的 Preview-Execute-Observe 闭环
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Discover / Resolve\n找对象，返回稳定 ID 与版本" as discover #E0F2FE
+rectangle "Preview\n规范化参数、影响、风险、plan hash" as preview
+rectangle "Authorize / Confirm\n主体、动作、对象、状态" as auth #FEF3C7
+rectangle "Execute\nidempotency key -> operation ID" as execute
+rectangle "Observe\noperation status / progress / evidence" as observe
+rectangle "Verify / Compensate\n回读业务状态或执行补偿" as verify #DCFCE7
+
+discover --> preview
+preview --> auth
+auth --> execute
+execute --> observe
+observe --> verify
+
+note right of execute
+  HTTP 超时后查询 operation，
+  不直接再次执行同一动作
+end note
+@enduml

@@ -1,0 +1,73 @@
+@startuml
+title 面向运维的元数据与运行证据模型
+
+left to right direction
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam class {
+  BorderColor #334155
+  BackgroundColor #F8FAFC
+  FontColor #0F172A
+}
+
+class "源 DataSet" as input <<Atlas>> #E0F2FE {
+  qualifiedName
+  owner
+}
+
+class "JobDefinition / Process" as job <<Atlas + 扩展>> #DBEAFE {
+  qualifiedName
+  inputs / outputs
+  codeVersion
+  configVersion
+}
+
+class "目标 DataSet" as output <<Atlas>> #E0F2FE {
+  qualifiedName
+  owner
+}
+
+class "JobRun" as run <<运行库>> #FEF3C7 {
+  runId
+  scheduledTime
+  startTime / endTime
+  state
+}
+
+class "配置快照" as config <<证据>> {
+  configVersion
+  contentHash
+}
+
+class "引擎运行" as engine <<证据>> {
+  applicationId
+  resourceProfile
+}
+
+class "原始日志" as log <<证据>> {
+  logUri
+  errorCode
+}
+
+input "*" --> "*" job : inputs
+job "*" --> "*" output : outputs
+job "1" --> "*" run : instance of
+run --> config : used
+run --> engine : submitted as
+run --> log : produced
+run ..> input : 本次观察到读取
+run ..> output : 本次观察到写入
+
+note bottom of job
+  Atlas 保存稳定对象与设计态关系
+end note
+
+note bottom of run
+  运行库存高频实例
+  runId 与 qualifiedName 对齐两边
+end note
+@enduml

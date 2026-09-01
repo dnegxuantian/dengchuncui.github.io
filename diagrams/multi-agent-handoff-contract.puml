@@ -1,0 +1,36 @@
+@startuml
+title 多 Agent 交接是一份有所有权的契约
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "Orchestrator\n拆分任务并保留最终责任" as orch #E0F2FE
+rectangle "Handoff Manifest\ntask_id / objective / input refs\nallowed tools / budget / deadline / done criteria" as manifest
+rectangle "Worker Lease\nowner / attempt / expiry" as lease #FEF3C7
+rectangle "Worker Execution\n事件、工具、证据、产物" as worker
+rectangle "Result Contract\nstatus / artifacts / evidence / unresolved / cost" as result
+rectangle "Acceptance Gate\n验证完成标准、冲突与重复" as accept #DCFCE7
+rectangle "Shared Artifact Store\n不可变版本，不用聊天转述状态" as store
+
+orch --> manifest
+manifest --> lease
+lease --> worker
+worker --> result
+result --> accept
+worker --> store
+accept --> store
+accept --> orch
+
+note right of lease
+  同一任务只有一个有效执行 lease；
+  worker 失联后先对账再重派
+end note
+@enduml

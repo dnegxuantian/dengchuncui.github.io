@@ -1,0 +1,35 @@
+@startuml
+title 答案层之外增加 Claim-Evidence 层
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "来源事实\nsource_id / version / span / observed_at" as source #E0F2FE
+rectangle "检索上下文\n本次实际提供给模型的片段" as context
+rectangle "答案草稿\n句子与结构" as draft #FEF3C7
+rectangle "Claim 提取\n可核查结论、数值、对象、时间" as claims
+rectangle "Evidence 对齐\nsupports / contradicts / insufficient" as align
+rectangle "发布策略\n保留、降级措辞、显示冲突、拒答" as policy
+rectangle "可复核答案\n结论旁的来源版本与片段" as answer #DCFCE7
+
+source --> context
+context --> draft
+draft --> claims
+claims --> align
+context --> align
+align --> policy
+policy --> answer
+
+note right of align
+  有引用不等于引用支持结论；
+  必须检查 claim 与 span 的关系
+end note
+@enduml

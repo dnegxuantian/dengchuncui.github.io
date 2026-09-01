@@ -1,0 +1,39 @@
+@startuml
+title Agent Trace 中的建议、决定与执行责任
+
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+
+rectangle "用户意图\nrequest + constraints" as user #E0F2FE
+rectangle "模型 Proposal\n候选动作与理由" as model
+rectangle "Policy Decision\nallow / deny / obligations" as policy #FEF3C7
+rectangle "Human Approval\n可选，绑定 plan hash" as human
+rectangle "Orchestrator Decision\n选择分支、attempt、fallback" as orch
+rectangle "Tool Operation\n实际副作用与业务结果" as tool
+rectangle "Decision Ledger\nactor / input / rule/model version / evidence" as ledger #DCFCE7
+
+user --> model
+model --> policy
+policy --> human
+policy --> orch
+human --> orch
+orch --> tool
+model --> ledger
+policy --> ledger
+human --> ledger
+orch --> ledger
+tool --> ledger
+
+note right of ledger
+  模型提出不等于系统授权，
+  系统授权也不等于工具已经成功
+end note
+@enduml
