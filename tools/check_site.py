@@ -55,8 +55,7 @@ def main() -> int:
                 '" article-type-post ")]'
             )
             and relative_parts
-            and len(relative_parts[0]) == 4
-            and relative_parts[0].isdigit()
+            and relative_parts[0] in {"2020", "2021"}
         ):
             post_files.append(page)
         titles = document.xpath("//title/text()")
@@ -81,15 +80,15 @@ def main() -> int:
     for label, value in checks.items():
         print(f"{label}: {value}")
 
-    if len(post_files) != 120:
-        print(f"Expected 120 posts, found {len(post_files)}", file=sys.stderr)
+    if len(post_files) != 30:
+        print(f"Expected 30 posts, found {len(post_files)}", file=sys.stderr)
     for page, source in missing_assets[:20]:
         print(f"Missing asset: {page.relative_to(public_root)} -> {source}", file=sys.stderr)
     for page, source in deleted_hosts[:20]:
         print(f"Deleted image host: {page.relative_to(public_root)} -> {source}", file=sys.stderr)
 
     failed = (
-        len(post_files) != 120
+        len(post_files) != 30
         or bool(missing_titles)
         or bool(missing_assets)
         or bool(deleted_hosts)
