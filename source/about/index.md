@@ -1,7 +1,7 @@
 ---
 title: 邓明瑞（纯粹 / Chuncui）— 数据中台与 AI Agent 技术架构师
 seo_title: 邓明瑞（纯粹 / Chuncui）— 数据中台与 AI Agent 技术架构师
-date: 2026-09-01 10:00:00
+date: 2020-03-01 10:00:00
 updated: 2026-09-01 15:45:00
 type: about
 sidebar: false
