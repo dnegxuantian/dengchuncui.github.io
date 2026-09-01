@@ -24,6 +24,12 @@ navbar:
     - name: 关于
       icon: fa-solid fa-circle-info
       url: /about/
+    - name: 显示
+      icon: fa-solid fa-sliders
+      rows:
+        - name: 深色模式
+          icon: fa-solid fa-moon
+          toggle: darkmode
   search: 搜索文章
 
 cover:
@@ -33,26 +39,26 @@ cover:
     home: true
     archive: true
     others: true
-  background: /images/hero.svg
+  background: /images/wallpaper/minimalist-003.webp
   logo:
   title: 纯粹博客
   subtitle: 代码、数据系统与工程实践
   search: 搜索文章、技术与关键词
   features:
     - name: 首页
-      icon: fa-solid fa-house
+      img: volantis-static/media/twemoji/assets/svg/1f4f0.svg
       url: /
     - name: 归档
-      icon: fa-solid fa-box-archive
+      img: volantis-static/media/twemoji/assets/svg/1f5c3.svg
       url: /archives/
     - name: 分类
-      icon: fa-solid fa-folder-open
+      img: volantis-static/media/twemoji/assets/svg/1f4c2.svg
       url: /categories/
     - name: 标签
-      icon: fa-solid fa-tags
+      img: volantis-static/media/twemoji/assets/svg/1f516.svg
       url: /tags/
     - name: 关于
-      icon: fa-solid fa-circle-info
+      img: volantis-static/media/twemoji/assets/svg/1f9e9.svg
       url: /about/
 
 article:
@@ -62,7 +68,7 @@ article:
     auto_excerpt: true
     hide_excerpt: false
     line_style: solid
-    author: false
+    author: true
     readmore: auto
   body:
     top_meta: [category, date]
@@ -151,21 +157,47 @@ plugins:
   highlightjs:
     copy_code: true
   scrollreveal:
-    enable: false
+    enable: true
   wordcount:
     enable: false
   busuanzi:
     enable: false
   nodewaves:
-    enable: false
+    enable: true
+  clipboard:
+    enable: true
+  darkmode:
+    enable: true
   pjax:
     enable: true
+    animation: nprogress
   parallax:
-    enable: false
+    enable: true
+    position: fixed
+    images:
+      - /images/wallpaper/minimalist-001.webp
+      - /images/wallpaper/minimalist-003.webp
+      - /images/wallpaper/minimalist-011.webp
+      - /images/wallpaper/minimalist-017.webp
+      - /images/wallpaper/minimalist-028.webp
+      - /images/wallpaper/minimalist-038.webp
+      - /images/wallpaper/minimalist-045.webp
+      - /images/wallpaper/minimalist-050.webp
+      - /images/wallpaper/minimalist-055.webp
+      - /images/wallpaper/minimalist-056.webp
+      - /images/wallpaper/md-002.webp
+      - /images/wallpaper/md-008.webp
 
 search:
   enable: true
   service: hexo
+
+custom_css:
+  fontfamily:
+    bodyfont:
+      fontfamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"'
+    codefont:
+      fontfamily: 'SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace'
 
 seo:
   use_tags_as_keywords: true
