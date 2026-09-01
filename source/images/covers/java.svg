@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Java 文章封面">
+  <rect width="1200" height="720" fill="#e5ded2"/>
+  <path d="M0 0h1200v18H0z" fill="#b95832"/>
+  <text x="74" y="124" font-family="monospace" font-size="26" letter-spacing="7" fill="#6f6a63">LANGUAGE / RUNTIME</text>
+  <text x="70" y="268" font-family="'Songti SC',serif" font-size="104" font-weight="700" fill="#1f292b">Java</text>
+  <text x="76" y="335" font-family="'Noto Sans SC',sans-serif" font-size="28" fill="#6f6a63">基础、集合与运行时机制</text>
+  <path d="M722 145h344v110H722zM722 305h344v110H722zM722 465h344v110H722z" fill="none" stroke="#1f292b" stroke-width="8"/>
+  <path d="M894 255v50M894 415v50" stroke="#b95832" stroke-width="14"/>
+  <circle cx="894" cy="360" r="30" fill="#b95832"/>
+  <path d="M70 590h996" stroke="#1f292b" stroke-width="3"/>
+</svg>

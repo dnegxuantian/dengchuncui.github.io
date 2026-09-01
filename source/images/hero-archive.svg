@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 640" role="img" aria-label="纯粹博客栏目背景">
+  <defs>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#f2efe8" stroke-opacity=".06"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="640" fill="#1f292b"/>
+  <rect width="1600" height="640" fill="url(#grid)"/>
+  <path d="M107 98h8v444h-8z" fill="#b95832"/>
+  <path d="M1260 70h220v500h-220z" fill="none" stroke="#b95832" stroke-width="12"/>
+  <circle cx="1370" cy="320" r="82" fill="none" stroke="#f2efe8" stroke-opacity=".8" stroke-width="2"/>
+  <path d="M1370 150v340M1200 320h340" stroke="#f2efe8" stroke-opacity=".16" stroke-width="2"/>
+  <text x="152" y="292" font-family="'SFMono-Regular',monospace" font-size="24" letter-spacing="8" fill="#b95832">ARCHIVE / INDEX</text>
+  <text x="146" y="402" font-family="'Songti SC','Noto Serif SC',serif" font-size="98" font-weight="700" fill="#f2efe8">把复杂讲清楚</text>
+</svg>

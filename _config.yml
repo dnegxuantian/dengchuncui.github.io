@@ -1,0 +1,100 @@
+title: 纯粹博客
+subtitle: 关于代码、数据与系统的长期笔记
+description: 邓纯粹的技术博客，记录 Java、NIO、大数据、设计模式与工程实践。
+keywords:
+  - Java
+  - NIO
+  - DataX
+  - 大数据
+  - 设计模式
+  - 工程实践
+author: 邓纯粹
+language: zh-CN
+timezone: Asia/Shanghai
+
+url: https://blog.chuncui.icu
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults: null
+pretty_urls:
+  trailing_index: false
+  trailing_html: false
+
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render: null
+
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: null
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: "  "
+  wrap: true
+  hljs: false
+
+default_category: 未分类
+category_map: null
+tag_map: null
+
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: mtime
+
+per_page: 8
+pagination_dir: page
+
+theme: butterfly
+
+index_generator:
+  path: ''
+  per_page: 8
+  order_by: -date
+
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true
+
+category_generator:
+  per_page: 12
+
+tag_generator:
+  per_page: 12
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: true
+
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+
+sitemap:
+  path: sitemap.xml
+
+deploy:
+  type: git
+  repo: https://github.com/dengchuncui/dengchuncui.github.io.git
+  branch: public
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"

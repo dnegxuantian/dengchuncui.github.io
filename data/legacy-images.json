@@ -1,0 +1,466 @@
+{
+  "summary": {
+    "posts_recovered": 30,
+    "images_total": 76,
+    "images_recovered": 1,
+    "images_missing_from_deleted_bucket": 75
+  },
+  "images": [
+    {
+      "post": "java 基础知识点整理(三)",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/Xnip2020-03-08_21-47-37-d207e2f4043a439ead86e11865270cd3.jpg",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java IO相关(一) unix的五种模型",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/io1-1b12b48aee254809bd650ffc4638195c.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java IO相关(一) unix的五种模型",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/io2-a6ec6899ab26428aa95bb80299e05774.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java IO相关(一) unix的五种模型",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/io3-5be9c90b5af44e739cf8f0c744a1e72c.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java IO相关(一) unix的五种模型",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/Xnip2020-03-14_00-36-30-a59ced60a0aa466691f3f2ef42442a4c.jpg",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java IO相关(一) unix的五种模型",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/io4-1502c54ca1fb46e7ac155f3db3620c78.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java IO相关(一) unix的五种模型",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/io5-a35468fd1fe94b7a8d90b07ecaaa0ca9.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(一) NIO介绍",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-9b532762da67441e9d0ede2df1f1df40.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(二) 缓冲区buffer的数据存取",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-9547fa6a4cc94749b8f60b2e7126ee82.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(二) 缓冲区buffer的数据存取",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-89fc5cc79c294db8989fa7d3aff05af9.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(二) 缓冲区buffer的数据存取",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-6ffc3b8c1c6343a3905826f1f9b5a791.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(三) NIO 直接缓冲区和非直接缓冲区",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-7e22439d787140f9befa9b7df1b6bb07.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(三) NIO 直接缓冲区和非直接缓冲区",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-d444ebf068de43d09e9caf772a44ae32.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(四) 通道 channel",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-b61c14c0c361492cabc9de32040154f4.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(五) 分散(Scatter) 和聚集(Gather)",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-d7dd945680e34da1b55f41c09e4c583f.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(六) pipe 和 FileChannel文件锁",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-bd9f6b5abebf408b8ce8935ceb5fe357.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java NIO 相关(七) nio selector channel 的多路复用器",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-22c6aa2f552a4064b9f051c9520d9917.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 静态代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-c4b34c32767f4621a2cfc188a670c1fa.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 静态代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-a5e40f4c878a462e84697245290394f1.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-bd78b9420f1948c1a40d2296a963968d.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-662f7405a32640d18fc980a2cfa0f0a5.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-5655df9945ac46fbbdfcc732096d9617.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-26944ac2f4124595a0488f9839f89d05.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-a1db2b12ab37483881d89a6ef1738e0f.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-e76f3aae567d4aeb8f3e6d1b5f07bfc2.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-5dd41bac7c5244c895bf1b375ff8db00.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 jdk代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-29ce1ec01db5495c8101137d1bc51028.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 cglib代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-9d6ebe185caf41dabf565fc34cf4261e.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 cglib代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-c8f1d330468b43cf8c7c366de820eb60.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 cglib代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-b8c6e2ef41bf4aae9d284e0917377c86.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "java 基础知识 动态代理 cglib代理",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image-9d8363bf512c4056b006d7b3180fae63.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 创建型模式 简单工厂模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1585579314830.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 创建型模式 简单工厂模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1585578451696.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 创建型模式 抽象方法模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1585581293704.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 结构型模式 适配器模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586158261596.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 结构型模式 适配器模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586158475272.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 结构型模式 外观模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586160133719.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 结构型模式 桥接模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586163074010.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 结构型模式 桥接模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586164465035.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 行为型模式 观察者模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586165515592.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "设计模式 行为型模式 观察者模式",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586166152531.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "集合类框架 hashmap 源码详解",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586585802287.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "集合类框架 hashmap 源码详解",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586585882830.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "集合类框架 hashmap 源码详解",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/image_1586586239096.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "项目规范 对于服务异常和错误码规范的总结",
+      "original": "https://qingqing-test.oss-cn-qingdao.aliyuncs.com/simba/%E5%BC%82%E5%B8%B8%E5%88%86%E7%B1%BB.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/22.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/23.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/24.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/1.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/2.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/3.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/5.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/6.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/7.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/8.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/9.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/10.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/11.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/12.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/13.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/14.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/15.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/16.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/17.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/18.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/19.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/20.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "数据同步 DATAX 工作原理及源码解读",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/blog/temp/datax/21.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "http://hadoop.apache.org/docs/r1.0.4/cn/images/hdfsarchitecture.gif",
+      "replacement": "/images/recovered/hdfs-architecture.gif",
+      "status": "recovered"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "http://dmr-blog.oss-accelerate.aliyuncs.com/hadoop%20%E5%85%BC%E5%AE%B9%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/simbaFs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/open_read%20%E5%90%9E%E5%90%90%E9%87%8F%E5%AF%B9%E6%AF%94.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/create_write%20%E5%90%9E%E5%90%90%E9%87%8F%E5%AF%B9%E6%AF%94.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/rename%20%E5%90%9E%E5%90%90%E9%87%8F%E5%AF%B9%E6%AF%94.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "10分钟了解SimbaFs解决hadoop存算分离问题",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/delete%20%E5%90%9E%E5%90%90%E9%87%8F%E5%AF%B9%E6%AF%94.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    },
+    {
+      "post": "shell反弹渗透技术分析和解决方案",
+      "original": "https://dmr-blog.oss-cn-shanghai.aliyuncs.com/image.png",
+      "replacement": "/images/legacy-missing.svg",
+      "status": "source_bucket_deleted"
+    }
+  ]
+}

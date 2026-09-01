@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="技术笔记封面">
+  <rect width="1200" height="720" fill="#ded7ca"/>
+  <path d="M0 0h1200v18H0z" fill="#b95832"/>
+  <path d="M72 98h720M72 564h1056" stroke="#1f292b" stroke-width="3"/>
+  <text x="74" y="172" font-family="monospace" font-size="28" letter-spacing="7" fill="#6f6a63">TECHNICAL NOTE</text>
+  <text x="70" y="446" font-family="'Songti SC',serif" font-size="142" font-weight="700" fill="#1f292b">纯粹</text>
+  <circle cx="940" cy="306" r="142" fill="none" stroke="#b95832" stroke-width="20"/>
+  <path d="M940 164v284M798 306h284" stroke="#b95832" stroke-width="7"/>
+</svg>

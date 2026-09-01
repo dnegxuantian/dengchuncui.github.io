@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="纯粹博客首页背景">
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#243033" stroke-opacity=".075" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0" stop-color="#f2efe8"/>
+      <stop offset=".72" stop-color="#eee8dd"/>
+      <stop offset="1" stop-color="#e1d8ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#fade)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <path d="M1114 110h330v680h-330z" fill="#1f292b"/>
+  <path d="M1153 154h251M1153 198h146M1153 636h201M1153 680h251" stroke="#f2efe8" stroke-width="9" stroke-linecap="square"/>
+  <circle cx="1280" cy="423" r="104" fill="none" stroke="#b95832" stroke-width="18"/>
+  <path d="M1280 319v208M1176 423h208" stroke="#b95832" stroke-width="12"/>
+  <path d="M110 128h620" stroke="#b95832" stroke-width="8"/>
+  <text x="110" y="230" font-family="'SFMono-Regular',monospace" font-size="24" letter-spacing="7" fill="#6f6a63">CHUNCUI · TECH NOTES</text>
+  <path d="M110 650h740" stroke="#1f292b" stroke-width="2"/>
+  <text x="110" y="704" font-family="'SFMono-Regular',monospace" font-size="21" letter-spacing="3" fill="#6f6a63">EST. 2020  /  REBUILT 2026</text>
+</svg>

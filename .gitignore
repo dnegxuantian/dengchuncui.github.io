@@ -1,0 +1,9 @@
+node_modules/
+public/
+.deploy_git/
+.DS_Store
+db.json
+*.log
+.npm-dns-override.cjs
+legacy-public/
+reports/
