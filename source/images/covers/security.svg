@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="安全分析文章封面">
-  <rect width="1200" height="720" fill="#ded8cd"/>
-  <path d="M0 0h1200v18H0z" fill="#b95832"/>
-  <text x="74" y="124" font-family="monospace" font-size="26" letter-spacing="7" fill="#6f6a63">SECURITY / ANALYSIS</text>
-  <text x="70" y="282" font-family="'Songti SC',serif" font-size="110" font-weight="700" fill="#1f292b">安全分析</text>
-  <text x="76" y="354" font-family="'Noto Sans SC',sans-serif" font-size="28" fill="#6f6a63">识别风险，解释机制</text>
-  <path d="M628 176h438v356H628z" fill="#1f292b"/>
-  <path d="M700 264l70 66-70 66M808 396h170" fill="none" stroke="#b95832" stroke-width="18"/>
-  <circle cx="1012" cy="225" r="8" fill="#f2efe8"/>
-  <circle cx="980" cy="225" r="8" fill="#f2efe8"/>
+  <rect width="1200" height="720" fill="#eef2f7"/>
+  <path d="M0 0h1200v18H0z" fill="#4f78d4"/>
+  <text x="74" y="124" font-family="monospace" font-size="26" letter-spacing="7" fill="#667085">SECURITY / ANALYSIS</text>
+  <text x="70" y="282" font-family="'PingFang SC',sans-serif" font-size="110" font-weight="700" fill="#172033">安全分析</text>
+  <text x="76" y="354" font-family="'Noto Sans SC',sans-serif" font-size="28" fill="#667085">识别风险，解释机制</text>
+  <path d="M628 176h438v356H628z" fill="#172033"/>
+  <path d="M700 264l70 66-70 66M808 396h170" fill="none" stroke="#7fa7ff" stroke-width="18"/>
+  <circle cx="1012" cy="225" r="8" fill="#f6f8fb"/>
+  <circle cx="980" cy="225" r="8" fill="#f6f8fb"/>
 </svg>

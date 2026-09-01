@@ -1,22 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="纯粹博客首页背景">
   <defs>
-    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
-      <path d="M64 0H0V64" fill="none" stroke="#243033" stroke-opacity=".075" stroke-width="1"/>
+    <radialGradient id="glow" cx="76%" cy="34%" r="62%">
+      <stop offset="0" stop-color="#244b92" stop-opacity=".45"/>
+      <stop offset=".46" stop-color="#142540" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#0d1626" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.5" fill="#a8bad8" fill-opacity=".11"/>
     </pattern>
-    <linearGradient id="fade" x1="0" x2="1">
-      <stop offset="0" stop-color="#f2efe8"/>
-      <stop offset=".72" stop-color="#eee8dd"/>
-      <stop offset="1" stop-color="#e1d8ca"/>
-    </linearGradient>
   </defs>
-  <rect width="1600" height="900" fill="url(#fade)"/>
-  <rect width="1600" height="900" fill="url(#grid)"/>
-  <path d="M1114 110h330v680h-330z" fill="#1f292b"/>
-  <path d="M1153 154h251M1153 198h146M1153 636h201M1153 680h251" stroke="#f2efe8" stroke-width="9" stroke-linecap="square"/>
-  <circle cx="1280" cy="423" r="104" fill="none" stroke="#b95832" stroke-width="18"/>
-  <path d="M1280 319v208M1176 423h208" stroke="#b95832" stroke-width="12"/>
-  <path d="M110 128h620" stroke="#b95832" stroke-width="8"/>
-  <text x="110" y="230" font-family="'SFMono-Regular',monospace" font-size="24" letter-spacing="7" fill="#6f6a63">CHUNCUI · TECH NOTES</text>
-  <path d="M110 650h740" stroke="#1f292b" stroke-width="2"/>
-  <text x="110" y="704" font-family="'SFMono-Regular',monospace" font-size="21" letter-spacing="3" fill="#6f6a63">EST. 2020  /  REBUILT 2026</text>
+  <rect width="1600" height="900" fill="#0d1626"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+  <path d="M0 760C280 660 438 815 700 704s438-326 900-212v408H0z" fill="#111d30" fill-opacity=".72"/>
+  <path d="M0 760C280 660 438 815 700 704s438-326 900-212" fill="none" stroke="#4778df" stroke-opacity=".28" stroke-width="2"/>
+  <g transform="translate(1010 148)">
+    <rect width="440" height="560" rx="26" fill="#121e31" stroke="#738db8" stroke-opacity=".25"/>
+    <path d="M0 72h440" stroke="#738db8" stroke-opacity=".2"/>
+    <circle cx="34" cy="36" r="6" fill="#7fa7ff"/>
+    <circle cx="56" cy="36" r="6" fill="#4a6388"/>
+    <circle cx="78" cy="36" r="6" fill="#4a6388"/>
+    <path d="M42 132h116M42 178h246M42 224h188M42 300h320M42 346h218M42 392h270" stroke="#8395b2" stroke-opacity=".48" stroke-width="12" stroke-linecap="round"/>
+    <path d="M42 132h64M42 224h96M42 346h142" stroke="#7fa7ff" stroke-width="12" stroke-linecap="round"/>
+    <path d="M42 474h176" stroke="#dce6f7" stroke-opacity=".74" stroke-width="12" stroke-linecap="round"/>
+    <rect x="232" y="466" width="10" height="22" rx="2" fill="#7fa7ff"/>
+  </g>
+  <g fill="none" stroke="#7fa7ff" stroke-opacity=".32">
+    <circle cx="930" cy="238" r="9"/>
+    <circle cx="884" cy="418" r="9"/>
+    <circle cx="948" cy="614" r="9"/>
+    <path d="M930 247l-46 162 64 196"/>
+  </g>
+  <path d="M95 172h56" stroke="#7fa7ff" stroke-width="5" stroke-linecap="round"/>
 </svg>

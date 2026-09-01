@@ -21,7 +21,7 @@ code_blocks:
 
 social:
   fab fa-github: https://github.com/dengchuncui || GitHub || '#24292f'
-  fas fa-envelope: mailto:duncan_dengmr@163.com || Email || '#b95832'
+  fas fa-envelope: mailto:duncan_dengmr@163.com || Email || '#3768d4'
 
 favicon: /images/favicon.svg
 avatar:
@@ -35,7 +35,7 @@ archive_img: /images/hero-archive.svg
 tag_img: /images/hero-archive.svg
 category_img: /images/hero-archive.svg
 footer_img: false
-background: '#f2efe8'
+background: '#f6f8fb'
 
 cover:
   index_enable: true
@@ -68,14 +68,14 @@ post_meta:
     tags: true
     label: false
 
-index_site_info_top: 42%
-index_top_img_height: 78vh
+index_site_info_top: 48%
+index_top_img_height: 560px
 subtitle:
   enable: true
   effect: false
   source: false
   sub:
-    - 关于代码、数据与系统的长期笔记
+    - 代码、数据系统与工程实践
 index_layout: 3
 index_post_content:
   method: 2
@@ -175,7 +175,7 @@ readmode: true
 darkmode:
   enable: true
   button: true
-  autoChangeMode: 1
+  autoChangeMode: false
 rightside_scroll_percent: true
 rightside_config_animation: false
 
@@ -215,21 +215,21 @@ comments:
 
 theme_color:
   enable: true
-  main: '#b95832'
-  paginator: '#b95832'
-  button_hover: '#923f25'
-  text_selection: '#d9a58d'
-  link_color: '#65716d'
-  meta_color: '#7b7770'
-  hr_color: '#d2cbc0'
-  code_foreground: '#9a4529'
-  code_background: 'rgba(185, 88, 50, .08)'
-  toc_color: '#b95832'
-  blockquote_padding_color: '#b95832'
-  blockquote_background_color: '#eee7dc'
-  scrollbar_color: '#b95832'
-  meta_theme_color_light: '#f2efe8'
-  meta_theme_color_dark: '#171c1d'
+  main: '#3768d4'
+  paginator: '#3768d4'
+  button_hover: '#2855b5'
+  text_selection: '#cbd9f7'
+  link_color: '#3768d4'
+  meta_color: '#7a8497'
+  hr_color: '#e3e7ee'
+  code_foreground: '#2855b5'
+  code_background: 'rgba(55, 104, 212, .08)'
+  toc_color: '#3768d4'
+  blockquote_padding_color: '#3768d4'
+  blockquote_background_color: '#f0f4fc'
+  scrollbar_color: '#3768d4'
+  meta_theme_color_light: '#f6f8fb'
+  meta_theme_color_dark: '#111720'
 
 category_ui: index
 tag_ui: index
@@ -251,7 +251,7 @@ font:
   code_font_family: '"SFMono-Regular", "JetBrains Mono", Consolas, monospace'
 blog_title_font:
   font_link:
-  font_family: '"Noto Serif SC", "Songti SC", Georgia, serif'
+  font_family: '"Avenir Next", Avenir, "PingFang SC", "Noto Sans SC", sans-serif'
 
 lightbox: medium_zoom
 pjax:
@@ -260,8 +260,8 @@ pjax:
 snackbar:
   enable: true
   position: bottom-center
-  bg_light: '#1f292b'
-  bg_dark: '#b95832'
+  bg_light: '#172033'
+  bg_dark: '#3768d4'
 instantpage: true
 lazyload:
   enable: true
