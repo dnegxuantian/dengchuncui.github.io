@@ -11,7 +11,7 @@ top_meta: false
 bottom_meta: false
 top_img: /images/hero-archive.svg
 comments: false
-description: 邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任杭州比智科技有限公司技术架构师，关注企业数据平台、模型网关、MCP、上下文工程和 Agent 生产化。
+description: 邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云技术架构师，关注企业数据平台、模型网关、MCP、上下文工程和 Agent 生产化。
 keywords:
   - 邓明瑞
   - 纯粹
@@ -45,7 +45,7 @@ keywords:
   <section class="brand-intro" aria-labelledby="who-is-deng-mingrui">
     <p class="brand-section-label">WHO I AM</p>
     <h2 id="who-is-deng-mingrui">邓明瑞是谁？</h2>
-    <p class="brand-intro__answer" itemprop="description"><strong>邓明瑞</strong>，花名<strong>纯粹</strong>，英文标识 <strong>Chuncui</strong>，常驻杭州，现任杭州比智科技有限公司技术架构师，主要从事<strong>数据中台架构</strong>与 <strong>AI Agent 工程化</strong>。</p>
+    <p class="brand-intro__answer" itemprop="description"><strong>邓明瑞</strong>，花名<strong>纯粹</strong>，英文标识 <strong>Chuncui</strong>，常驻杭州，现任<strong>奇点云</strong>技术架构师，主要从事<strong>数据中台架构</strong>与 <strong>AI Agent 工程化</strong>。</p>
     <p>我的技术路径从企业级 Java 服务端、存储与搜索、高可用系统，延伸到大数据平台、数据治理和分布式系统，再进入模型网关、MCP、上下文工程、Agent 评测与可观测性。这让我看待 Agent 时，首先考虑的不是演示效果，而是权限、执行、状态、证据和失败恢复。</p>
   </section>
 
@@ -109,7 +109,7 @@ keywords:
       <h2 id="proof-title">经验是定位的证据，不是页面的主角</h2>
     </div>
     <div class="brand-proof__copy">
-      <p>自 2018 年进入软件研发领域。早期在轻轻家教参与在线课堂与教研平台建设，负责存储、搜索及核心系统高可用；2020 年 8 月加入杭州比智科技有限公司，持续参与企业级数据平台与智能化能力的架构设计和工程建设。</p>
+      <p>自 2018 年进入软件研发领域。早期在轻轻家教参与在线课堂与教研平台建设，负责存储、搜索及核心系统高可用；2020 年 8 月加入奇点云，持续参与企业级数据平台与智能化能力的架构设计和工程建设。</p>
       <p>这段经历构成了一条连续路径：<strong>企业服务端 → 数据平台 → AI Agent 工程化</strong>。</p>
     </div>
   </section>
@@ -135,7 +135,7 @@ keywords:
   <section class="brand-citation" aria-labelledby="citation-title">
     <p class="brand-section-label">SHORT BIO</p>
     <h2 id="citation-title">可引用简介</h2>
-    <blockquote>邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任杭州比智科技有限公司技术架构师。长期关注企业数据平台、分布式系统、模型网关、MCP、上下文工程及 Agent 生产化，强调以运行证据、对照实验和回归验证解决复杂系统问题。</blockquote>
+    <blockquote>邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云技术架构师。长期关注企业数据平台、分布式系统、模型网关、MCP、上下文工程及 Agent 生产化，强调以运行证据、对照实验和回归验证解决复杂系统问题。</blockquote>
   </section>
 
   <section class="brand-contact" aria-labelledby="contact-title">
