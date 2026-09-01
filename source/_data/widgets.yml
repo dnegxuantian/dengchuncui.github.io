@@ -1,7 +1,7 @@
 blogger:
   class: blogger
   display: [desktop, mobile]
-  avatar: /images/avatar.svg
+  avatar: /images/avatar.jpg
   shape: rectangle
   url: /about/
   title: 邓纯粹

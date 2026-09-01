@@ -88,7 +88,7 @@ article:
         enable: false
     meta_library:
       author:
-        avatar: /images/avatar.svg
+        avatar: /images/avatar.jpg
         name: 邓纯粹
         url: /about/
       date:
@@ -122,7 +122,7 @@ sidebar:
     page: [toc, recent]
 
 site_footer:
-  layout: [social, info, copyright]
+  layout: [social, copyright]
   social:
     - icon: fab fa-github
       url: https://github.com/dengchuncui
@@ -210,7 +210,7 @@ seo:
     tag: noindex,follow
 
 open_graph:
-  image: /images/avatar.svg
+  image: /images/avatar.jpg
   twitter_card: summary
 
 structured_data:
@@ -220,11 +220,11 @@ structured_data:
       sns:
         - https://github.com/dengchuncui
     logo:
-      path: /images/avatar.svg
-      width: 512
-      height: 512
+      path: /images/avatar.jpg
+      width: 1024
+      height: 1024
 
 default:
-  avatar: /images/avatar.svg
+  avatar: /images/avatar.jpg
   cover: /images/covers/default.svg
   image: /images/legacy-missing.svg
