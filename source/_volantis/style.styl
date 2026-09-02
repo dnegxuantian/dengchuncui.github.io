@@ -22,9 +22,58 @@
 .legacy-image-notice figcaption strong
   color var(--color-text)
 
+.home-seo-title
+  display flex
+  flex-direction column
+  align-items center
+  gap 0
+  text-wrap balance
+
+.home-seo-title .home-brand-name
+  font-family "Avenir Next", "Helvetica Neue", "PingFang SC", sans-serif
+  font-size clamp(3rem, 8vw, 5.75rem)
+  font-weight 700
+  letter-spacing .11em
+  line-height .95
+  transform translateX(.055em)
+
+.home-seo-title .home-brand-author,
+.home-seo-title .home-brand-domain
+  font-family "SFMono-Regular", "JetBrains Mono", Consolas, monospace
+  line-height 1.4
+
+.home-seo-title .home-brand-author
+  margin-top 1.2rem
+  font-size clamp(.68rem, 1.15vw, .82rem)
+  font-weight 600
+  letter-spacing .18em
+
+.home-seo-title .home-brand-domain
+  margin-top .45rem
+  font-size clamp(.62rem, 1vw, .74rem)
+  font-weight 500
+  letter-spacing .13em
+  opacity .78
+
 @media screen and (max-width: 600px)
   .legacy-image-notice figcaption
     font-size .68rem
+
+  .home-seo-title
+    max-width 22rem
+    margin 0 auto
+
+  .home-seo-title .home-brand-name
+    font-size 2.8rem
+
+  .home-seo-title .home-brand-author
+    margin-top 1rem
+    font-size .65rem
+
+  .home-seo-title .home-brand-domain
+    margin-top .4rem
+    font-size .58rem
+    letter-spacing .1em
 
 // Personal brand profile page
 .brand-profile
