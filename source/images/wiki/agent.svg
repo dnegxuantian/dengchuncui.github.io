@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="AI Agent 工程化">
+  <path d="M48 16 75 32v32L48 80 21 64V32L48 16Z" fill="#172033"/>
+  <circle cx="48" cy="48" r="12" fill="#65DFC8"/>
+  <circle cx="48" cy="10" r="7" fill="#3EC5F3"/>
+  <circle cx="81" cy="70" r="7" fill="#3EC5F3"/>
+  <circle cx="15" cy="70" r="7" fill="#3EC5F3"/>
+  <path d="M48 17v19m10 19 17 11M38 55 21 66" stroke="#F4F7FB" stroke-width="5" stroke-linecap="round"/>
+</svg>

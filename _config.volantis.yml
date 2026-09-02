@@ -2,6 +2,15 @@ debug: false
 
 replace: []
 
+site_tree:
+  index_wiki:
+    base_dir: wiki
+    data:
+      title: 技术体系
+      description: DataX、湖仓架构与 AI Agent 工程化的体系化技术索引。
+      robots: index,follow
+      sitemap: true
+
 navbar:
   visiable: auto
   logo:
@@ -21,6 +30,9 @@ navbar:
     - name: 标签
       icon: fa-solid fa-tags
       url: /tags/
+    - name: 技术体系
+      icon: fa-solid fa-layer-group
+      url: /wiki/
     - name: 关于
       icon: fa-solid fa-circle-info
       url: /about/
@@ -42,7 +54,7 @@ cover:
   background: /images/wallpaper/minimalist-003.webp
   logo:
   title: 邓明瑞 · 纯粹
-  subtitle: 数据中台 × AI Agent 工程化
+  subtitle:
   search: 搜索文章、技术与关键词
   features:
     - name: 首页
@@ -57,6 +69,9 @@ cover:
     - name: 标签
       img: volantis-static/media/twemoji/assets/svg/1f516.svg
       url: /tags/
+    - name: 技术体系
+      img: volantis-static/media/twemoji/assets/svg/1f9ed.svg
+      url: /wiki/
     - name: 关于
       img: volantis-static/media/twemoji/assets/svg/1f9e9.svg
       url: /about/
@@ -71,13 +86,17 @@ article:
     author: true
     readmore: auto
   body:
-    top_meta: [category, date]
+    top_meta: [category, date, wordcount]
     bottom_meta: [updated, tags]
     footer_widget:
       recommended_article:
         enable: false
       related_posts:
-        enable: false
+        enable: true
+        title: 延伸阅读
+        icon: fa-solid fa-diagram-project
+        max_count: 4
+        placeholder_img:
       copyright:
         enable: true
         permalink: '本文永久链接：'
@@ -111,13 +130,13 @@ comments:
 sidebar:
   position: right
   for:
-    home: [blogger, category, tagcloud, recent]
+    home: [blogger, category, tagcloud, recent, webinfo]
     index_blog: [blogger, recent]
-    index_wiki: [recent]
+    index_wiki: [blogger, webinfo, recent]
     notebooks: [recent]
     notes: [recent]
     post: [toc, recent]
-    wiki: [toc, recent]
+    wiki: [toc, tree, related, recent]
     note: [toc, recent]
     page: [toc, recent]
 
@@ -159,7 +178,7 @@ plugins:
   scrollreveal:
     enable: true
   wordcount:
-    enable: false
+    enable: true
   busuanzi:
     enable: false
   nodewaves:

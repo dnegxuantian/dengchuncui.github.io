@@ -1,0 +1,15 @@
+name: Lakehouse Architecture
+title: 湖仓架构与表维护
+subtitle: 提交、兼容、维护与运行负债
+tags: [数据湖, Apache Iceberg, 湖仓架构]
+description: 从 Snapshot 原子提交、行级更新和格式兼容出发，延伸到 Compaction、并发写入、快照清理与表维护 SLA。
+icon: /images/wiki/lakehouse.svg
+base_dir: /knowledge/lakehouse/
+sidebar: [toc, tree, related, recent]
+tree:
+  阅读入口:
+    - index
+  提交与兼容:
+    - commit-and-compatibility/index
+  维护与治理:
+    - maintenance-and-governance/index

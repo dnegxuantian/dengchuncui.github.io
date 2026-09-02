@@ -54,3 +54,31 @@ recent:
     icon: fa-solid fa-clock
     title: 最近更新
   limit: 6
+
+webinfo:
+  class: webinfo
+  display: [desktop]
+  header:
+    icon: fa-solid fa-chart-simple
+    title: 站点信息
+  type:
+    article:
+      enable: true
+      text: 文章数目：
+      unit: 篇
+    runtime:
+      enable: true
+      data: '2020/03/04'
+      text: 已持续记录：
+      unit: 天
+    wordcount:
+      enable: true
+      text: 本站总字数：
+      unit: 字
+    visitcounter:
+      enable: false
+    lastupd:
+      enable: true
+      friendlyShow: true
+      text: 最后活动：
+      unit: 日
