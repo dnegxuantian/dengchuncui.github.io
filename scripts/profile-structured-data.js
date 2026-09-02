@@ -7,11 +7,10 @@ const PROFILE_URL = `${SITE_URL}/about/`;
 const PROFILE_ID = `${PROFILE_URL}#person`;
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const GITHUB_URL = 'https://github.com/dnegxuantian';
-const HOME_TITLE = '邓明瑞的技术博客｜DataX、数据中台与 AI Agent 实战';
+const HOME_TITLE = '纯粹博客｜邓明瑞';
 const HOME_H1 = `
       <h1 class="title home-seo-title">
-        <span>邓明瑞的技术博客</span>
-        <small>DataX、数据中台与 AI Agent 实战</small>
+        <span>邓明瑞 · 纯粹</span>
       </h1>`;
 
 function absoluteSiteUrl(value) {
