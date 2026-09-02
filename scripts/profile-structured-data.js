@@ -10,7 +10,8 @@ const GITHUB_URL = 'https://github.com/dnegxuantian';
 const HOME_TITLE = '纯粹博客｜邓明瑞';
 const HOME_H1 = `
       <h1 class="title home-seo-title">
-        <span>邓明瑞 · 纯粹</span>
+        <span>纯粹博客</span>
+        <small>邓明瑞的工程实践与思考</small>
       </h1>`;
 
 function absoluteSiteUrl(value) {
