@@ -17,9 +17,4 @@
     <lastmod>{{ posts[0].updated | formatDate }}</lastmod>
     {% endif %}
   </url>
-
-  <url>
-    <loc>{{ (config.url + '/wiki/') | uriencode }}</loc>
-    <lastmod>2026-09-02</lastmod>
-  </url>
 </urlset>

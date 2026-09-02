@@ -2,15 +2,6 @@ debug: false
 
 replace: []
 
-site_tree:
-  index_wiki:
-    base_dir: wiki
-    data:
-      title: 技术体系
-      description: DataX、湖仓架构与 AI Agent 工程化的体系化技术索引。
-      robots: index,follow
-      sitemap: true
-
 navbar:
   visiable: auto
   logo:
@@ -30,9 +21,6 @@ navbar:
     - name: 标签
       icon: fa-solid fa-tags
       url: /tags/
-    - name: 技术体系
-      icon: fa-solid fa-layer-group
-      url: /wiki/
     - name: 关于
       icon: fa-solid fa-circle-info
       url: /about/
@@ -69,9 +57,6 @@ cover:
     - name: 标签
       img: volantis-static/media/twemoji/assets/svg/1f516.svg
       url: /tags/
-    - name: 技术体系
-      img: volantis-static/media/twemoji/assets/svg/1f9ed.svg
-      url: /wiki/
     - name: 关于
       img: volantis-static/media/twemoji/assets/svg/1f9e9.svg
       url: /about/
@@ -132,11 +117,11 @@ sidebar:
   for:
     home: [blogger, category, tagcloud, recent, webinfo]
     index_blog: [blogger, recent]
-    index_wiki: [blogger, webinfo, recent]
+    index_wiki: [recent]
     notebooks: [recent]
     notes: [recent]
     post: [toc, recent]
-    wiki: [toc, tree, related, recent]
+    wiki: [toc, recent]
     note: [toc, recent]
     page: [toc, recent]
 
