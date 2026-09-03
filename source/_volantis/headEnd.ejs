@@ -55,3 +55,31 @@
 }
 </script>
 <% } %>
+<% if (page.type === 'topic') { %>
+<script id="topic-page-jsonld" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://blog.chuncui.icu/topics/data-platform-agent/#collection",
+  "url": "https://blog.chuncui.icu/topics/data-platform-agent/",
+  "name": "数据平台 × AI Agent：从可信上下文到可验证执行",
+  "description": "围绕数据平台与 AI Agent 工程化整理的专题入口，讨论元数据上下文、MCP 工具边界、执行审计、流式协议、诊断和回归验证。",
+  "author": {
+    "@type": "Person",
+    "@id": "https://blog.chuncui.icu/about/#person",
+    "name": "邓明瑞",
+    "alternateName": ["纯粹", "Chuncui"],
+    "url": "https://blog.chuncui.icu/about/",
+    "sameAs": ["https://github.com/dnegxuantian"]
+  },
+  "hasPart": [
+    {"@type": "BlogPosting", "url": "https://blog.chuncui.icu/2026/08/20/data-platform-agent-verifiable-execution/", "name": "数据平台 Agent 的终点为什么是可验证执行"},
+    {"@type": "BlogPosting", "url": "https://blog.chuncui.icu/2025/04/04/mcp-server-narrow-surface/", "name": "MCP Server 设计先收窄能力面"},
+    {"@type": "BlogPosting", "url": "https://blog.chuncui.icu/2025/03/20/agent-trace-decision-owner/", "name": "Agent Trace 要能回答这一步是谁做的决定"},
+    {"@type": "BlogPosting", "url": "https://blog.chuncui.icu/2026/06/25/sse-event-invariants/", "name": "SSE 完整性为什么要用事件不变量验证"},
+    {"@type": "BlogPosting", "url": "https://blog.chuncui.icu/2026/03/25/agent-diagnostic-evidence-chain/", "name": "Agent 诊断怎样建立证据链"},
+    {"@type": "BlogPosting", "url": "https://blog.chuncui.icu/2025/08/04/agent-regression-fixed-environment/", "name": "Agent 回归为什么要固定工具与数据版本"}
+  ]
+}
+</script>
+<% } %>

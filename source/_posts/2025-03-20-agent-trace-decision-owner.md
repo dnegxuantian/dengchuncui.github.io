@@ -82,7 +82,7 @@ W3C/OpenTelemetry trace 用 span/event 表示技术链路，Decision Ledger 补�
 
 评测断言 actor boundary：模型不能产生 allow 决策，policy 不能伪造用户确认，orchestrator 不能把 accepted 当 succeeded，finalizer 不能在 verification 缺失时成功。结构性断言比审核最终文字更可靠。
 
-Agent 越自动化，越要避免一句“AI 做了决定”掩盖系统实际责任。模型提出候选，策略授权，人在必要时确认，编排器推进，工具产生效果。Trace 把这些角色和证据拆开，才能用于审计、优化和事故问责。
+Agent 越自动化，越要避免一句“AI 做了决定”掩盖系统实际责任。模型提出候选，策略授权，人在必要时确认，编排器推进，工具产生效果。Trace 把这些角色和证据拆开，才能用于审计、优化和事故问责。这条责任链如何落到数据平台操作上，见[数据平台 Agent 可验证执行总纲](/2026/08/20/data-platform-agent-verifiable-execution/)；同一专题的阅读顺序收在[数据平台 × AI Agent 专题页](/topics/data-platform-agent/)。
 
 ## 对照规范与资料
 

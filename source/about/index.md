@@ -118,7 +118,7 @@ keywords:
     <header class="brand-section__header">
       <p class="brand-section-label">PUBLIC WRITING</p>
       <h2 id="writing-title">我公开讨论什么</h2>
-      <p>纯粹博客记录可验证的技术实践，希望成为数据平台与 Agent 工程化问题的长期知识索引。</p>
+      <p>纯粹博客记录可验证的技术实践。第一次到这里，可以先从<a href="/topics/data-platform-agent/">数据平台 × AI Agent 专题</a>开始，再按问题进入具体文章。</p>
     </header>
     <div class="brand-writing">
       <div>

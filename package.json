@@ -11,7 +11,8 @@
     "recover:legacy": "python3 tools/recover_posts.py",
     "check:editorial": "python3 tools/check_editorial.py",
     "check:preview": "python3 tools/check_site.py public --include-drafts",
-    "check": "python3 tools/check_site.py public"
+    "check": "python3 tools/check_site.py public",
+    "submit:indexnow": "node tools/submit-indexnow.mjs public/sitemap.xml"
   },
   "engines": {
     "node": ">=20"

@@ -82,7 +82,7 @@ Server registry 保存来源、owner、binary/image hash、protocol versions、c
 
 紧急禁用能按 Server、Tool 或资源域生效。Host 即便收到旧 list，也在调用前查 current deny policy。弃用先检查哪些 Bundles/未完成 Runs 仍引用。
 
-MCP 降低了连接成本，也让一个能力更容易进入多个 Agent。正因为复用范围扩大，Server 接口更需要窄、稳定、可授权。把通用命令包装成标准协议不会自动变安全，业务 Facade 才是生产边界。
+MCP 降低了连接成本，也让一个能力更容易进入多个 Agent。正因为复用范围扩大，Server 接口更需要窄、稳定、可授权。把通用命令包装成标准协议不会自动变安全，业务 Facade 才是生产边界。它在完整系统里的位置，可以回到[数据平台 Agent 可验证执行总纲](/2026/08/20/data-platform-agent-verifiable-execution/)继续看；授权以后由谁推进操作，则要靠 [Agent Trace 的责任分层](/2025/03/20/agent-trace-decision-owner/)说明白。
 
 ## 对照官方规范
 

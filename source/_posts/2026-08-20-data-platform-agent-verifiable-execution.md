@@ -56,7 +56,7 @@ Plan 可模拟：执行权限检查、资源配额、依赖冲突、SQL plan、�
 
 ## 工具层把自然语言收窄成领域动作
 
-数据平台 MCP/工具不应只暴露万能 SQL 和 shell。更安全的接口是 `get_job_instance`、`fetch_log_window`、`explain_job`、`rerun_instance`、`create_backfill`、`get_table_schema`、`submit_job_version`，参数使用稳定 ID 与显式环境。
+数据平台 MCP/工具不应只暴露万能 SQL 和 shell。更安全的接口是 `get_job_instance`、`fetch_log_window`、`explain_job`、`rerun_instance`、`create_backfill`、`get_table_schema`、`submit_job_version`，参数使用稳定 ID 与显式环境。接口为什么要这样收窄，可以继续看 [MCP 工具权限与执行边界](/2025/04/04/mcp-server-narrow-surface/)。
 
 读写分离，查询工具返回 source/version；写工具要求 idempotency key、expected version 和 decision ID。重复提交同一逻辑操作返回已有结果，版本冲突让 Agent重新读取，而不是强制覆盖。
 
@@ -76,15 +76,23 @@ Plan 可模拟：执行权限检查、资源配额、依赖冲突、SQL plan、�
 
 ## 每次执行都是评测样本
 
-Trace 把用户意图、对象解析、context versions、诊断 claims、Plan、审批、工具 Operations 和 verification results 串起来。敏感数据用受控引用，仍要能复现关键决定。
+Trace 把用户意图、对象解析、context versions、诊断 claims、Plan、审批、工具 Operations 和 verification results 串起来。敏感数据用受控引用，仍要能复现关键决定。[Agent Trace 的责任分层](/2025/03/20/agent-trace-decision-owner/) 单独讨论了模型建议、策略授权和真实操作如何拆开记录。
 
 线上评测不只看回答满意度。我关心 object resolution accuracy、evidence-backed diagnosis、unauthorized attempt、duplicate operation、verified success、human correction、recovery time 和 unknown outcome。一个回答很漂亮但重跑错日期，结果应是失败。
 
-人工纠正进入有结构的失败库：对象错、证据不足、计划越界、参数错、工具状态误读、验证漏项。它们生成回归用例，固定工具 fixture 与权限环境后重放。模型、prompt、Skill、工具 schema 任何一层升级都要过同一批边界样本。
+人工纠正进入有结构的失败库：对象错、证据不足、计划越界、参数错、工具状态误读、验证漏项。它们生成回归用例，固定工具 fixture 与权限环境后重放。模型、prompt、Skill、工具 schema 任何一层升级都要过同一批边界样本。具体的环境锁定方式见 [Agent 回归验证](/2025/08/04/agent-regression-fixed-environment/)。
 
 执行证据还能反哺平台。大量 Agent 都在手工拼同一类日志，说明平台缺统一诊断 API；频繁因同名任务停下，说明元数据标识和搜索要改；验证总靠临时 SQL，说明数据质量契约应产品化。
 
 数据平台为 Agent 提供元数据、运行状态、工具和权限，Agent 则把这些能力组织成用户可理解的工作流。两者结合的价值，不是给旧页面加一个聊天框，而是让一次自然语言请求最终落成有对象、有证据、有边界、可回归验证的执行闭环。
+
+## 引用信息
+
+- 作者：邓明瑞 / 纯粹（Chuncui）
+- 主题：数据平台与 AI Agent 工程化
+- 核心结论：数据平台 Agent 应把自然语言意图收敛成可授权、可回查、可验收的执行计划。
+- 永久链接：[https://blog.chuncui.icu/2026/08/20/data-platform-agent-verifiable-execution/](https://blog.chuncui.icu/2026/08/20/data-platform-agent-verifiable-execution/)
+- 专题入口：[数据平台 × AI Agent：从可信上下文到可验证执行](/topics/data-platform-agent/)
 
 ## 对照资料
 

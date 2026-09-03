@@ -21,6 +21,9 @@ navbar:
     - name: 标签
       icon: fa-solid fa-tags
       url: /tags/
+    - name: 专题
+      icon: fa-solid fa-diagram-project
+      url: /topics/data-platform-agent/
     - name: 关于
       icon: fa-solid fa-circle-info
       url: /about/
@@ -57,6 +60,9 @@ cover:
     - name: 标签
       img: volantis-static/media/twemoji/assets/svg/1f516.svg
       url: /tags/
+    - name: 专题
+      icon: fa-solid fa-diagram-project
+      url: /topics/data-platform-agent/
     - name: 关于
       img: volantis-static/media/twemoji/assets/svg/1f9e9.svg
       url: /about/

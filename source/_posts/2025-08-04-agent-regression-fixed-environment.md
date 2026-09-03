@@ -80,7 +80,7 @@ Policy rules 和 resource state 同时固定。allow/deny 决策保存 matched r
 
 离线通过后 shadow/canary 使用真实环境，记录 drift。固定测试保障历史错误不复发，线上灰度验证真实分布与外部系统变化，两者互补。
 
-OpenAI Evals 等框架能组织样本与 grader，但环境锁定需要应用自己完成。Agent 是模型、上下文、工具和运行时的组合，不固定组合就没有可靠回归，只有一次新的演示。
+OpenAI Evals 等框架能组织样本与 grader，但环境锁定需要应用自己完成。Agent 是模型、上下文、工具和运行时的组合，不固定组合就没有可靠回归，只有一次新的演示。线上故障样本怎样变成这类回归用例，可以接着看 [Agent 诊断证据链](/2026/03/25/agent-diagnostic-evidence-chain/)；完整阅读路径在[数据平台 × AI Agent 专题页](/topics/data-platform-agent/)。
 
 ## 对照框架与规范
 
