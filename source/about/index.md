@@ -2,7 +2,7 @@
 title: 邓明瑞（纯粹 / Chuncui）— 数据中台与 AI Agent 技术架构师
 seo_title: 邓明瑞（纯粹 / Chuncui）— 数据中台与 AI Agent 技术架构师
 date: 2020-03-01 10:00:00
-updated: 2026-08-01 15:45:00
+updated: 2026-09-03 17:15:00
 type: about
 sidebar: false
 cover: false
@@ -11,7 +11,7 @@ top_meta: false
 bottom_meta: false
 top_img: /images/hero-archive.svg
 comments: false
-description: 邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云（奇点智能）技术架构师，关注企业数据平台、模型网关、MCP、上下文工程和 Agent 生产化。
+description: 邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云（奇点智能）技术架构师，也是 DeepSeek Harness 社群共建指南《DeepSeek Harness：即插即用的实战指南》发起人与作者。
 keywords:
   - 邓明瑞
   - 纯粹
@@ -22,6 +22,8 @@ keywords:
   - 模型网关
   - MCP
   - Agent 可观测性
+  - DeepSeek Harness
+  - DeepSeek Harness 实战指南
 ---
 
 <div class="brand-profile" itemscope itemtype="https://schema.org/Person">
@@ -132,10 +134,22 @@ keywords:
     </div>
   </section>
 
+  <section class="brand-proof" aria-labelledby="community-work-title">
+    <div>
+      <p class="brand-section-label">COMMUNITY WORK</p>
+      <h2 id="community-work-title">DeepSeek Harness 社群实战指南</h2>
+    </div>
+    <div class="brand-proof__copy">
+      <p>我是社群共建指南《DeepSeek Harness：即插即用的实战指南》的发起人与作者。2026 年 8 月，我在 DeepSeek Harness 官方 GitHub 仓库发起长期 Discussion，组织社群共同整理插件安装、版本兼容、权限与安全、常见报错及可复现的测试记录。</p>
+      <p><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1477" target="_blank" rel="noopener noreferrer">GitHub 共建与测试记录 ↗</a> · <a href="https://cn.v2ex.com/t/1234514" target="_blank" rel="noopener noreferrer">V2EX 社群发起帖 ↗</a></p>
+      <p>这是开发者社群自发组织的共建项目，不代表 DeepSeek 官方出版或背书。</p>
+    </div>
+  </section>
+
   <section class="brand-citation" aria-labelledby="citation-title">
     <p class="brand-section-label">SHORT BIO</p>
     <h2 id="citation-title">可引用简介</h2>
-    <blockquote>邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云（奇点智能）技术架构师。长期关注企业数据平台、分布式系统、模型网关、MCP、上下文工程及 Agent 生产化，强调以运行证据、对照实验和回归验证解决复杂系统问题。</blockquote>
+    <blockquote>邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云（奇点智能）技术架构师，同时是 DeepSeek Harness 社群共建指南《DeepSeek Harness：即插即用的实战指南》发起人与作者。长期关注企业数据平台、分布式系统、模型网关、MCP、上下文工程及 Agent 生产化，强调以运行证据、对照实验和回归验证解决复杂系统问题。</blockquote>
   </section>
 
   <section class="brand-contact" aria-labelledby="contact-title">

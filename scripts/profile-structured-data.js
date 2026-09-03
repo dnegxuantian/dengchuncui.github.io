@@ -91,7 +91,8 @@ function enrichPerson(item) {
     '批流数据处理',
     '元数据与数据治理',
     'AI Agent 工程化',
-    'MCP'
+    'MCP',
+    'DeepSeek Harness'
   ];
   if (item.image && item.image.url) {
     item.image.url = absoluteSiteUrl(item.image.url);
