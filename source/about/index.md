@@ -141,7 +141,6 @@ keywords:
     </div>
     <div class="brand-proof__copy">
       <p>我是社群共建指南《DeepSeek Harness：即插即用的实战指南》的发起人与作者。2026 年 8 月，我在 DeepSeek Harness 官方 GitHub 仓库发起长期 Discussion，组织社群共同整理插件安装、版本兼容、权限与安全、常见报错及可复现的测试记录。</p>
-      <p><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1477" target="_blank" rel="noopener noreferrer">GitHub 共建与测试记录 ↗</a> · <a href="https://cn.v2ex.com/t/1234514" target="_blank" rel="noopener noreferrer">V2EX 社群发起帖 ↗</a></p>
       <p>这是开发者社群自发组织的共建项目，不代表 DeepSeek 官方出版或背书。</p>
     </div>
   </section>
