@@ -189,5 +189,12 @@ hexo.extend.filter.register('after_render:html', (html, data) => {
       .replace(/<title>[\s\S]*?<\/title>/, `<title>${HOME_TITLE}</title>`)
       .replace(/<p class="title">邓明瑞 \/ 纯粹<\/p>/, HOME_H1);
   }
+  if (data.path === 'about/index.html') {
+    // About 正文已经提供可见 H1，移除主题为 title_display=false 生成的重复隐藏 H1。
+    output = output.replace(
+      /\s*<h1 class="hidden" itemprop="name headline">[\s\S]*?<\/h1>/,
+      ''
+    );
+  }
   return output;
 });
