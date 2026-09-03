@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="邓纯粹头像标识">
+  <rect width="512" height="512" rx="108" fill="#121e31"/>
+  <path d="M76 76h360v10H76zM76 426h360v10H76z" fill="#5f8cf0"/>
+  <circle cx="394" cy="120" r="18" fill="#7fa7ff"/>
+  <text x="256" y="329" text-anchor="middle" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="224" font-weight="650" fill="#f7f9fc">纯</text>
+</svg>
