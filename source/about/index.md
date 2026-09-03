@@ -155,7 +155,7 @@ keywords:
     <div>
       <p class="brand-section-label">CONNECT</p>
       <h2 id="contact-title">与我交流</h2>
-      <p>数据平台、AI Agent 工程化与相关技术合作，欢迎联系。</p>
+      <p>数据平台、AI Agent 工程化与相关技术合作，欢迎联系。<br>微信 <code>Orz_8888888</code></p>
     </div>
     <div class="brand-contact__links">
       <a itemprop="sameAs" href="https://github.com/dnegxuantian" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
