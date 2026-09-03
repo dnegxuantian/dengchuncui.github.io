@@ -7,7 +7,7 @@ navbar:
   logo:
     img:
     icon: fa-solid fa-code
-    title: CHUNCUI
+    title: 邓明瑞 / 纯粹
   menu:
     - name: 首页
       icon: fa-solid fa-house
@@ -41,7 +41,7 @@ cover:
     others: true
   background: /images/wallpaper/minimalist-003.webp
   logo:
-  title: CHUNCUI
+  title: 邓明瑞 / 纯粹
   subtitle:
   search: 搜索文章、技术与关键词
   features:

@@ -4,8 +4,8 @@ blogger:
   avatar: /images/avatar.jpg
   shape: rectangle
   url: /about/
-  title: DENG MINGRUI / 邓明瑞
-  subtitle: DATA SYSTEMS · AGENT ENGINEERING
+  title: 邓明瑞 / 纯粹
+  subtitle: 数据中台 × AI Agent
   jinrishici: false
   social:
     - icon: fab fa-github

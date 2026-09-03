@@ -7,13 +7,12 @@ const PROFILE_URL = `${SITE_URL}/about/`;
 const PROFILE_ID = `${PROFILE_URL}#person`;
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const GITHUB_URL = 'https://github.com/dnegxuantian';
-const SITE_NAME = 'CHUNCUI';
-const HOME_TITLE = '邓明瑞（Chuncui）｜数据系统与 Agent 工程';
+const SITE_NAME = '邓明瑞 / 纯粹';
+const HOME_TITLE = '邓明瑞 / 纯粹 / 数据中台 × AI Agent';
 const HOME_H1 = `
       <h1 class="title home-seo-title">
-        <span class="home-brand-name">CHUNCUI</span>
-        <small class="home-brand-author">DENG MINGRUI / 邓明瑞</small>
-        <small class="home-brand-domain">DATA SYSTEMS · AGENT ENGINEERING</small>
+        <span class="home-brand-name">邓明瑞 / 纯粹</span>
+        <small class="home-brand-domain">数据中台 × AI Agent</small>
       </h1>`;
 
 function absoluteSiteUrl(value) {
@@ -187,7 +186,7 @@ hexo.extend.filter.register('after_render:html', (html, data) => {
   if (data.path === 'index.html') {
     output = output
       .replace(/<title>[\s\S]*?<\/title>/, `<title>${HOME_TITLE}</title>`)
-      .replace(/<p class="title">CHUNCUI<\/p>/, HOME_H1);
+      .replace(/<p class="title">邓明瑞 \/ 纯粹<\/p>/, HOME_H1);
   }
   return output;
 });
