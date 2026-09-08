@@ -1,0 +1,51 @@
+{
+  "session": "session-f0c35466-640a-4378-8e41-16f6e9f4bb0a",
+  "sessionSha256": "42db875c2996cb22d8f0ec9a1fe54810c3d0340c7b0b77b5b008a150b75ed60a",
+  "classified": [
+    {
+      "id": "orders",
+      "category": "over-limit"
+    },
+    {
+      "id": "products",
+      "category": "failed"
+    },
+    {
+      "id": "customers",
+      "category": "normal"
+    },
+    {
+      "id": "inventory",
+      "category": "missing"
+    }
+  ],
+  "calls": [
+    {
+      "seq": 159,
+      "name": "glob"
+    },
+    {
+      "seq": 241,
+      "name": "read"
+    },
+    {
+      "seq": 242,
+      "name": "read"
+    }
+  ],
+  "results": [
+    {
+      "seq": 160,
+      "isError": false
+    },
+    {
+      "seq": 243,
+      "isError": false
+    },
+    {
+      "seq": 244,
+      "isError": false
+    }
+  ],
+  "note": "Classification independently checked. Prose reviewed manually; not a general automated semantic evaluator."
+}

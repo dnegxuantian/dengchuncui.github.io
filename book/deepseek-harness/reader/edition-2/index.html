@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="邓明瑞（纯粹）" />
+  <title>DeepSeek Harness：即插即用的实战指南</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  html{background:#fafaf8;color:#242a30;scroll-behavior:smooth}
+  body{max-width:56rem;padding:3rem 2rem;margin:auto;font:17px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+  header{text-align:left!important;border-bottom:1px solid #dfe3e1;padding-bottom:1.5rem;margin-bottom:2rem}
+  h1{font-size:1.85rem;line-height:1.45;margin-top:4rem;scroll-margin-top:2rem}header h1{font-size:2.25rem;margin-top:0}
+  h2{font-size:1.35rem;line-height:1.6;margin-top:2.5rem}h3{font-size:1.12rem}
+  a{color:#146e73;text-decoration-thickness:1px;text-underline-offset:3px}
+  #TOC{border-bottom:1px solid #dfe3e1;padding-bottom:2rem;font-size:.95rem}#TOC li{margin:.4rem 0}
+  pre{background:#eef0ee;padding:1rem;overflow-x:auto;line-height:1.5;font-size:.85rem}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+  pre code{overflow-wrap:normal}img{max-width:100%;height:auto}figure{margin:2rem 0}figcaption{font-size:.85rem;color:#65706d;line-height:1.6;margin-top:.5rem}
+  .book-image-link{display:block;cursor:zoom-in}.book-image-link:focus-visible{outline:3px solid #146e73;outline-offset:5px}.book-image-help{display:block;font-size:.85rem;margin-top:.4rem}
+  @media(min-width:1100px){figure{width:min(1180px,calc(100vw - 64px));max-width:none;position:relative;left:50%;transform:translateX(-50%)}figure img{display:block;width:100%}}
+  table{width:100%;font-size:.9rem;line-height:1.65}th,td{padding:.65rem;text-align:left;vertical-align:top;border-bottom:1px solid #dfe3e1}
+  blockquote{border-left:3px solid #9ebbb7;padding-left:1rem;color:#4e5b58}
+  @media(max-width:600px){body{padding:1.5rem 1rem;font-size:16px}header h1{font-size:1.7rem}h1{font-size:1.5rem}table{display:block;overflow-x:auto}}
+  @media print{body{background:white;font-size:11pt;max-width:none}h1{break-before:page}header h1{break-before:auto}pre{white-space:pre-wrap}img{max-height:70vh}}
+  </style>
+<meta name="robots" content="noindex,nofollow">
+<style>figure{width:100%;left:auto;transform:none}figure img{width:auto;max-width:100%}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">DeepSeek Harness：即插即用的实战指南</h1>
+<p class="subtitle">第二版重写样章 · 从一份作业日报开始</p>
+<p class="author">邓明瑞（纯粹）</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#第-1-章先做一份能检查的作业日报"
+id="toc-第-1-章先做一份能检查的作业日报">第 1
+章：先做一份能检查的作业日报</a>
+<ul>
+<li><a href="#为什么不直接写脚本" id="toc-为什么不直接写脚本">1.1
+为什么不直接写脚本</a></li>
+<li><a href="#harness-在这里做什么" id="toc-harness-在这里做什么">1.2
+Harness 在这里做什么</a></li>
+<li><a href="#这份日报要回答什么" id="toc-这份日报要回答什么">1.3
+这份日报要回答什么</a></li>
+<li><a href="#先知道自己准备做什么再安装"
+id="toc-先知道自己准备做什么再安装">1.4
+先知道自己准备做什么，再安装</a></li>
+</ul></li>
+<li><a href="#第-2-章让助手读文件交出第一份日报"
+id="toc-第-2-章让助手读文件交出第一份日报">第 2
+章：让助手读文件，交出第一份日报</a>
+<ul>
+<li><a href="#程序和任务文件分开放" id="toc-程序和任务文件分开放">2.1
+程序和任务文件分开放</a></li>
+<li><a href="#准备两份材料" id="toc-准备两份材料">2.2
+准备两份材料</a></li>
+<li><a href="#启动选择工作区" id="toc-启动选择工作区">2.3
+启动，选择工作区</a></li>
+<li><a href="#给它一个明确任务" id="toc-给它一个明确任务">2.4
+给它一个明确任务</a></li>
+<li><a href="#怎样检查这份报告" id="toc-怎样检查这份报告">2.5
+怎样检查这份报告</a></li>
+<li><a href="#本章实验说明" id="toc-本章实验说明">本章实验说明</a></li>
+</ul></li>
+</ul>
+</nav>
+<p>本页是重写中的前两章，不是完成版。</p>
+<h1 id="第-1-章先做一份能检查的作业日报">第 1
+章：先做一份能检查的作业日报</h1>
+<p>早上打开调度平台，你看到一批夜间作业。大多数成功了，有一个失败，还有几个比平时慢。发日报并不难，麻烦的是把这些信息讲准确：哪些需要处理，依据是什么，还缺什么材料。</p>
+<p>我们就从这件事开始。全书会逐步做出一个助手：它读取当天的作业记录，按约定规则找出需要关注的项，写出报告；你还能继续问它某项判断依据来自哪里。后面再把固定检查封装成插件，让下一次运行沿用相同规则。</p>
+<p>教学文件是虚构样本，不连接公司的调度平台。先在本地把流程弄明白，再考虑接入真实系统。这样即使操作出错，也不会重跑生产任务或给同事发送一份错误报告。</p>
+<h2 id="为什么不直接写脚本">1.1 为什么不直接写脚本</h2>
+<p>如果每天只需要把一列数字相加，我会写脚本。结果稳定，调度方便，也不需要付模型调用费。</p>
+<p>日报里也有适合脚本的部分：按规则比较耗时、列出失败状态、检查预期作业是否都有记录。这些工作不应该每次由模型重新猜一套标准。</p>
+<p>模型更适合承担另一部分工作。它可以把检查结果组织成读得懂的报告，结合补充材料回答追问，也可以根据任务选择已经提供的工具。例如，你问“这个失败影响了哪些下游”，助手需要找到依赖资料，而不是继续计算平均耗时。能否回答，取决于我们是否给了资料和可用工具；没有这些材料时，正确的回答就是说明缺少什么。</p>
+<p>本书会保留这个分工：固定规则交给代码，材料组织和交互交给模型。这样既能利用模型，也方便检查它的答案。</p>
+<h2 id="harness-在这里做什么">1.2 Harness 在这里做什么</h2>
+<p>模型服务接收输入，返回文字或工具调用请求。它不会因为读到一句“打开文件”，就自动获得你电脑上的文件。</p>
+<p>Harness
+是让这个过程实际运行起来的程序。它向模型说明有哪些工具，接收工具调用，执行相应操作，再把结果交回模型。它也管理会话和执行过程。DeepSeek
+Harness
+把许多这样的能力做成插件，文件读取、模型接入以及驱动任务的循环可以由不同部件提供。</p>
+<p>现在不必记插件目录和接口名称。第一次任务只需要理解：模型决定请求什么操作，工具完成具体操作，Harness
+负责把它们接起来。结果是否可信，我们还要根据输入和执行记录检查。</p>
+<p>直接聊天也能帮你分析粘贴进去的记录。差别在于，本书要让助手通过工具读取工作区中的材料，而不是每次手工复制整份文件。当任务开始涉及多份材料、重复检查和继续追问，执行环境与工具管理才显得有用。</p>
+<h2 id="这份日报要回答什么">1.3 这份日报要回答什么</h2>
+<p>样本分成两个文件。一份说明今天应该观察哪些作业、每个作业的耗时阈值；另一份是当天导出的结果。阈值由我们显式约定，不让模型凭感觉判断“慢”。</p>
+<p>约定检查四个作业：订单入库、商品维表、客户快照和库存快照。当天文件中有前三个，库存快照没有记录；商品维表失败；订单入库成功，但耗时超过阈值；客户快照正常。</p>
+<p>报告需要把这些情况分开。找不到库存快照的记录，不等于它一定没运行，也可能是导出漏了。订单入库超过阈值，不等于已经证明源数据库慢。商品维表返回错误摘要，也不足以替代完整日志。</p>
+<p>我们希望得到这样的内容。下面是人工制定的验收样例，不是模型实际输出：</p>
+<blockquote>
+<p>今日有三项需要关注。订单入库成功，耗时 180 秒，超过约定的 120
+秒阈值；商品维表失败，记录中的错误摘要为连接超时；库存快照没有出现在本次导出中，需要核对调度记录或导出范围。客户快照成功，耗时
+45 秒，未超过 90 秒阈值。当前材料不足以确定连接超时的根因。</p>
+</blockquote>
+<p>这段话不花哨，但每一句都能回到某条记录或规则。后面换模型、加插件，仍按同一份要求检查。</p>
+<h2 id="先知道自己准备做什么再安装">1.4
+先知道自己准备做什么，再安装</h2>
+<p>下一步，我们会准备两个 JSON 文件，启动
+Harness，选定只读工作区，让它读取材料并生成第一份报告。先在会话里查看报告，不急着授予写权限。等读取和判断稳定了，再允许它保存文件。</p>
+<p>任务跑通以后，才回头看模型与工具之间发生了什么。那时学习会话、插件和执行循环，是为了理解刚才完成的工作，而不是记一串还用不上的术语。</p>
+<p>完成全书后，读者应能安装并使用 Harness
+完成本地任务，把固定检查写成插件，并沿执行记录定位一次失败。真实平台接入还需要单独处理认证、数据权限和调度接口，本书的离线样本不会替你完成这些工作。</p>
+<h1 id="第-2-章让助手读文件交出第一份日报">第 2
+章：让助手读文件，交出第一份日报</h1>
+<p>这一章先不写插件。Harness
+已经提供文件读取工具，我们用它完成第一份报告，看看现成能力能做到哪一步。</p>
+<p>需要准备
+Node、pnpm，以及你自己的模型服务凭据。模型请求会把任务文字和读取到的材料发送给模型提供方，所以先用随书的虚构数据，不要拿公司的原始日志尝试。密钥也不要放进任务目录或粘贴到聊天框。</p>
+<h2 id="程序和任务文件分开放">2.1 程序和任务文件分开放</h2>
+<p>建一个专门的练习目录，其中 <code>app</code>
+放安装的程序，<code>workspace</code> 放要分析的文件。另一个
+<code>home</code> 目录留给 Harness 保存配置和会话。</p>
+<pre class="text"><code>harness-daily/
+├── app/
+├── workspace/
+│   ├── daily-policy.json
+│   └── daily-runs.json
+└── home/</code></pre>
+<p>这里的目录名由你决定。工作区只选
+<code>workspace</code>，不要为了省事把整个个人主目录交给助手。</p>
+<p>在 <code>app/package.json</code> 保存以下内容，然后在
+<code>app</code> 目录运行
+<code>pnpm install --ignore-scripts</code>：</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;module&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@deepseek-ai/dsh&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.1-rc.2&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>固定版本是为了使书中的操作可以对照，并不意味着以后都应该使用这个版本。<code>--ignore-scripts</code>
+跳过依赖的安装脚本，不能限制程序启动后的行为。</p>
+<h2 id="准备两份材料">2.2 准备两份材料</h2>
+<p>把随书的 <a href="daily-policy.json">daily-policy.json</a> 和 <a
+href="daily-runs.json">daily-runs.json</a> 放入
+<code>workspace</code>。第一份列出预期作业及阈值，第二份列出当天结果。</p>
+<p>例如，规则中 <code>orders.maxSeconds</code> 为 120，当天
+<code>orders.durationSeconds</code> 为 180，状态为
+<code>success</code>。报告应该写“成功但超过阈值”，不能把它改成执行失败。<code>inventory</code>
+只出现在规则中，它对应的是缺少记录。</p>
+<p>日期也要一致。今天的规则配上昨天的数据，即使模型算得正确，日报仍然用错了材料。</p>
+<h2 id="启动选择工作区">2.3 启动，选择工作区</h2>
+<p>从 <code>app</code> 目录启动 Web 界面。把下列 <code>DSH_HOME</code>
+换成练习目录中 <code>home</code> 的绝对路径：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">DSH_HOME</span><span class="op">=</span>/你的练习目录/harness-daily/home <span class="ex">pnpm</span> exec dsh <span class="at">--profile</span> web</span></code></pre></div>
+<p>终端会显示本地地址。打开它，选择练习的 <code>workspace</code>
+作为工作区。模型需要有效凭据；缺少凭据时，页面可能正常显示，但发送任务会报鉴权错误。不要通过增加文件写权限处理鉴权问题。</p>
+<p>本书实测使用 <code>DEEPSEEK_API_KEY</code>
+环境变量把密钥传给程序，启动器从受控文件读取，命令中不出现密钥值。你若已有安全的环境变量管理方式，可以沿用。不要把实际密钥写进将要提交
+Git 的配置或 shell 示例。</p>
+<p>发送之前，点输入框附近的访问模式，选择
+<code>Read Only</code>。本章只需要读材料；不要选
+<code>Full access</code>。模型名称和权限模式是两项独立设置。</p>
+<h2 id="给它一个明确任务">2.4 给它一个明确任务</h2>
+<p>把下面这段发送到新会话：</p>
+<pre class="text"><code>读取工作区 daily-policy.json 和 daily-runs.json，生成当天作业日报。
+按 policy 的 maxSeconds 检查失败、成功但超时、缺失记录和正常作业。
+每项写清 id、数值及来源文件字段。
+缺失记录不能断言未运行，连接超时不能推断根因。
+只读文件，不调用 Shell，不访问网络，不修改文件。
+报告控制在 500 字以内。</code></pre>
+<p>这段任务同时说明了材料、规则和输出要求。它没有要求模型“扮演资深专家”，因为我们需要的是按材料做判断，而不是一种自信的口气。</p>
+<p>界面里应该能看到两份文件的读取记录。模型可以一次提出两次读取，也可以分步读取；顺序不是验收重点。点开读取结果时，先确认文件名和内容属于本次工作区。</p>
+<h2 id="怎样检查这份报告">2.5 怎样检查这份报告</h2>
+<p>对照输入检查四项即可，不需要再让另一个模型投票：</p>
+<table>
+<thead>
+<tr>
+<th>作业</th>
+<th>应有结论</th>
+<th>数据依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>orders</td>
+<td>成功但超过阈值</td>
+<td>success；180 &gt; 120 秒</td>
+</tr>
+<tr>
+<td>products</td>
+<td>失败</td>
+<td>failed；错误摘要为连接超时</td>
+</tr>
+<tr>
+<td>inventory</td>
+<td>导出中缺少记录</td>
+<td>规则中存在，结果中不存在</td>
+</tr>
+<tr>
+<td>customers</td>
+<td>成功且未超阈值</td>
+<td>success；45 ≤ 90 秒</td>
+</tr>
+</tbody>
+</table>
+<p>再检查报告有没有添加材料中不存在的解释。例如“数据库连接池耗尽”需要额外证据，不是“连接超时”的同义词。若出现这类句子，让它指出来自哪个字段；找不到依据，就应删除或明确列为待验证假设。</p>
+<p>第一次命令行实测得到了正确的四类结果。它还列出了需要补充的调度记录、详细日志和数据口径。实际回答保存在
+<a
+href="daily-task-actual.md">首次任务回答</a>，下面的截图取自同一次真实会话在
+Web 界面恢复后的显示。</p>
+<figure>
+<a class="book-image-link" href="daily-task-screen.png" target="_blank" rel="noopener"><img src="daily-task-screen.png"
+alt="两次读取及日报开头；截图只保留与本节有关的区域" /></a><a class="book-image-help" href="daily-task-screen.png" target="_blank" rel="noopener">查看原尺寸图片 ↗</a>
+<figcaption
+aria-hidden="true">两次读取及日报开头；截图只保留与本节有关的区域</figcaption>
+</figure>
+<p>图片用来辨认界面，不承担全部说明。上面的表格才是可以直接核对的数据。原始回答中的“检查失败”指作业的
+failed
+状态，并不是检查程序本身失败；给同事的报告应改成更明确的“失败作业”。</p>
+<p>图形界面另开只读会话后，同样得到了四类结果。下面保留报告和底部的 Read
+Only 标记，不把无关侧栏缩进图片里。</p>
+<figure>
+<a class="book-image-link" href="daily-readonly-screen.png" target="_blank" rel="noopener"><img src="daily-readonly-screen.png"
+alt="只读会话的实际报告与权限标记" /></a><a class="book-image-help" href="daily-readonly-screen.png" target="_blank" rel="noopener">查看原尺寸图片 ↗</a>
+<figcaption aria-hidden="true">只读会话的实际报告与权限标记</figcaption>
+</figure>
+<p>这次回答还增加了“成功率 50%（2/4
+有成功结果）”。它写明了分母，但我们并没有约定成功率口径。正式日报最好只保留“4
+项预期作业中，2
+项有成功记录”，避免读者把缺失记录直接计成执行失败。这也是后续把固定规则写进工具的原因：报告写出来之后，还要有稳定的验收标准。</p>
+<h2 id="本章实验说明">本章实验说明</h2>
+<p>命令行主任务使用官方 npm 包 <code>0.1.1-rc.2</code>，macOS、Node
+v25.8.0。会话中两次 <code>read</code> 成功，未出现
+Shell、网络或写入工具调用；独立检查得到上表分类。该次命令行的默认访问模式为
+Workspace Write。图形界面另行选择 Read Only，实际执行 <code>glob</code>
+与两次 <code>read</code>，四类结果正确，原始回答另存于 <a
+href="daily-readonly-actual.md">只读任务回答</a>。两次操作使用不同会话，不混作一次运行。</p>
+<p>本章安装包在先前隔离目录中安装成功；上面的 <code>harness-daily</code>
+是读者目录示例，还需要在新目录按整段步骤重新验收。完整的初学者安装路径和只读截图验收完成后，本章才进入正式第二版。</p>
+</body>
+</html>

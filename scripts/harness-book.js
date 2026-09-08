@@ -7,6 +7,7 @@ hexo.extend.generator.register('harness-book-reader', function () {
   if (!fs.existsSync(path.join(root, 'index.html'))) return [];
   function walk(dir) {
     return fs.readdirSync(dir, {withFileTypes: true}).flatMap(entry => {
+      if (dir === root && entry.name === 'edition-2') return []; // Local rewrite preview, not a release.
       const file = path.join(dir, entry.name);
       if (entry.isSymbolicLink()) throw new Error('Book reader must not contain symlinks');
       if (entry.isDirectory()) return walk(file);

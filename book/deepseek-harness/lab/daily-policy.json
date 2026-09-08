@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-08",
+  "fixture": true,
+  "jobs": [
+    {"id": "orders", "label": "订单入库", "maxSeconds": 120},
+    {"id": "products", "label": "商品维表", "maxSeconds": 60},
+    {"id": "customers", "label": "客户快照", "maxSeconds": 90},
+    {"id": "inventory", "label": "库存快照", "maxSeconds": 120}
+  ]
+}

@@ -30,6 +30,13 @@ book+='\n# 附录 C：实验记录\n\n'+readFileSync(resolve(root,'evidence/vali
 writeFileSync(resolve(out,'book.md'),book);
 execFileSync('npm',['pack','--ignore-scripts',resolve(root,'examples/job-summary'),'--pack-destination',out],{stdio:'pipe'});
 execFileSync('pandoc',['book.md','--standalone','--toc','--toc-depth=1','--include-in-header',resolve(root,'tools/reader-head.inc'),'--metadata','pagetitle=DeepSeek Harness 实战指南','-o','index.html'],{cwd:out});
+// Keep screenshots available at their native resolution, without AI upscaling.
+const htmlPath=resolve(out,'index.html');
+const html=readFileSync(htmlPath,'utf8').replace(/<img\b([^>]*?)src="([^"]+)"([^>]*)>/g,(tag,before,src)=>{
+  if(!/^(screenshots|diagrams)\//.test(src))return tag;
+  return `<a class="book-image-link" href="${src}" target="_blank" rel="noopener" aria-label="查看原尺寸图片（新标签页）">${tag}</a><a class="book-image-help" href="${src}" target="_blank" rel="noopener">查看原尺寸图片 ↗</a>`;
+});
+writeFileSync(htmlPath,html);
 // EPUB embeds images; supporting source is in Appendix B, not dangling local URLs.
 const epubBook=book.replace(/^\[下载 EPUB\].*\n/m,'').replace(/(?<!!)\[([^\]]+)\]\((?!https?:|#)[^)]+\)/g,'$1');
 execFileSync('pandoc',['--from=markdown','--toc','--toc-depth=2','-o','deepseek-harness-guide.epub'],{cwd:out,input:epubBook});
