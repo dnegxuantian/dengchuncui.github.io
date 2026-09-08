@@ -123,7 +123,11 @@ node --input-type=module -e 'import fs from "node:fs"; const x=JSON.parse(fs.rea
 
 这套设计也有成本。扩展点多了，故障可能来自配置、依赖、作用域或生命周期，不能看到“插件不可用”就一律重新安装。我认为学习 DSH 最有用的起点，是先把这几层分开，而不是背下全部插件名字。
 
-相关入口：[默认 Agent 循环插件](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/index.ts)。
+这里需要把两个时间点分开。启动阶段负责把能力装配好：文件服务是否存在、工具能否注册、默认循环由谁提供。发送任务以后，才进入运行阶段：从会话构建请求，等待模型输出，执行工具，再决定是否继续下一步。前者出错，常见表现是能力根本没有出现；后者出错，才会看到某次调用失败或某轮执行中断。
+
+默认循环插件还负责 Agent 的生命周期。它内部的 `FactoryOwnership` 会追踪已经创建的 Agent 和尚未完成的启动工作；开始卸载时，先停止接受新工作，发出取消信号，再等待清理。如果只从界面移除插件，却让旧 Agent 继续使用它，后续请求就可能访问已经失效的服务。
+
+这部分可在 [Agent 创建与清理实现](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/index.ts) 中核对，重点看 `FactoryOwnership.dispose()` 的执行顺序。理解本章不需要先读完整个文件。
 
 ## 2.3 启动时，哪些插件被装进来了
 
@@ -154,7 +158,11 @@ dsh --profile web --dump-config
 
 配置层还存在顺序。Bundle 按 profile 的声明顺序组合，之后叠加 profile、home 和命令行的补丁。排查配置不生效时，要检查最后结果，不能只看最早写下的那份文件。尤其不要默认每个配置对象都按字段深合并；补丁的具体替换语义要看实现。
 
-源码入口：[loadProfile 与 composeEntries](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/src/profile.ts#L358)、[配置输出实现](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/src/index.ts#L379)。本次实际检查的是组装结果，没有修改这些配置层做覆盖实验。
+把这段加载过程写成输入与输出，会更清楚：`loadProfile()` 接收 profile 名称、安装位置和 Harness home，返回解析后的配置层；`composeEntries()` 再把这些补丁按顺序应用到空配置树，得到最终的插件条目。到这里得到的仍然是“准备加载什么”，并不是“所有服务已经工作正常”。
+
+例如，一个包下载到了磁盘，但未列入当前 profile，它不会因为文件存在就自动生效。另一个包已经列入 profile，却缺少 `dsh.bundle.patch` 声明，加载器会在读取配置层时直接报错。这两种情况都发生在模型请求之前，换模型解决不了它们。
+
+[配置层解析与组合实现](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/src/profile.ts#L358) 展示了上述输入输出和缺失声明的检查；[配置输出实现](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/src/index.ts#L379) 则用于核对命令输出。本节检查了实际组装结果，配置覆盖顺序的说明来自源码分析，尚未做逐层覆盖实验。
 
 ## 2.4 一个 read 工具背后有哪些协作
 
@@ -174,7 +182,9 @@ export const inject = ['tools', 'fs', 'systemPrompt']
 
 这并不表示卸载能撤销插件已经发送的网络请求，或恢复它已经写坏的文件。可清理的注册与外部世界的历史副作用，是两回事。
 
-源码入口：[tool-fs 的依赖和初始化](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/index.ts#L19)、[读取工具](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/read.ts#L136)、[工具注册](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/index.ts#L1037)。
+因此，排查 `read` 时可以沿着一条明确的关系往下走：先确认 `tool-fs` 的依赖已经满足，再确认它把读取工具注册给当前作用域，最后检查文件服务是否接受路径并返回内容。工具名称存在，只能说明注册这一层可见，不能代替最后一步的文件访问验证。
+
+需要进一步核对时，[tool-fs 初始化代码](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/index.ts#L19) 说明它依赖哪些服务；[read 实现](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/read.ts#L136) 说明它怎样读取文件；[工具注册表](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/index.ts#L1037) 说明注册怎样随作用域清理。三份代码分别回答三个问题，不必一次通读。
 
 ## 2.5 调用已经出现，为什么操作仍可能被拒绝
 
@@ -210,7 +220,7 @@ Error: [sandbox: file access denied under read-only mode]
 
 同样，不能把所有事件监听器都写成 waterfall。事件类型和调用约定要对应，不能看到名字以 `agent/` 开头就照抄一段模板。
 
-源码入口：[prepareExecution](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/index.ts#L1463)、[调用和结果的持久记录](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/tool-calls.ts#L261)。这次只验证了本地文件工具的一条拒绝路径，不构成完整的沙箱安全审计。
+如果要从代码复查这次拒绝，应先读 [工具执行准备过程](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/index.ts#L1463)，辨认哪些阶段发生在工具实现之前；再读 [调用与结果的会话记录过程](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/tool-calls.ts#L261)，理解失败为何仍会留下成对记录。本次文件沙箱拒绝只是其中一条实测路径，不能据此判断所有工具都受到相同约束。
 
 ## 2.6 会话记录为什么参与下一次请求
 
@@ -236,7 +246,9 @@ DSH 还提供了请求重建的不变量检查插件。其源码把循环构建�
 
 还要避免另一个误解：能重建请求，不等于再调用一次必然得到同样回答。模型版本、采样、外部文件状态和工具环境都可能变化。会话日志让差异更容易核对，并不会消除这些变量。
 
-源码入口：[循环构建请求](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/agent.ts#L332)、[历史推导](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts#L726)、[请求重建检查](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/invariant.ts)。
+这也解释了会话记录在 DSH 中为什么不只是聊天存档。下一次请求需要从它恢复模型可见的历史，诊断工具又需要用它检查实际请求是否有据可查。记录缺失，可能影响后续行为；界面少显示一项，则未必表示模型也没有收到。两者必须分别检查。
+
+实现上的对应关系是：[循环的请求构建](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/agent.ts#L332) 消费历史，[Session 的历史推导](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts#L726) 提供历史，[请求不变量检查](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/invariant.ts) 比较两者是否一致。读源码时沿着这个方向，比按目录顺序阅读更容易理解。
 
 ## 2.7 用这套结构判断问题发生在哪里
 
@@ -551,7 +563,28 @@ nearest-rank 的样本 P95 就是排序后第 `ceil(0.95*n)` 个值。n=3 时取
 
 Usage 的例子更适合练习排除法。页面空白；会话消息确实有用量；直接折叠这些事件也能统计。由此不能立刻指定某一行客户端代码为根因，但可以停止反复更换密钥和模型。
 
-接下来应检查投影是否注册、会话摘要是否携带 modelCost、客户端读到什么值。当前书稿保留“未定位最终连接环节”的状态。诊断记录允许有未解决项，不能把推断写成修复。
+这里的“投影”需要先解释。会话事件记录的是一次次发生的事情，Usage 页面需要的却是累计请求数、输入 token 和输出 token。投影就是从事件中计算这些统计值的过程。它不需要再次请求模型；只要保存的事件足够完整，就能重新计算。
+
+本次实际会话里，一条 `assistant/message` 记录包含 9471 个输入 token 和 80 个输出 token。把同一份会话交给插件的 `foldModelCostEvents()`，得到 1 次请求以及相同的 token 计数。因此至少有两件事已经成立：用量进入了持久记录，插件的折叠函数能识别这份记录。实验故意使用零费率，验证的是计数，不能拿结果当作实际账单。
+
+但页面并不直接调用这个折叠函数读取磁盘。`dsh-usage` 0.2.5 的服务端先通过 `ctx.sessionProjections.register()` 注册统计单元；客户端设置页再从会话摘要的 `projectionValues.modelCost` 取值。离线计算成功，只检查了中间的计算逻辑，没有验证注册、传输和页面消费这一整段链路。
+
+更值得注意的是空状态的含义。检查该版本的 `UsageSection` 后，可以把页面筛选条件概括为下面这段伪代码。它用于解释逻辑，不是可安装的插件代码：
+
+```text
+遍历会话摘要：
+  找不到摘要或 modelCost → 不显示该会话
+  请求数为 0，并且总 token 为 0 → 不显示该会话
+  其余会话 → 加入统计列表
+
+统计列表为空 → 显示“模型调用报告 token 后将出现用量”
+```
+
+所以这句提示并不能证明模型没有返回 token。缺少投影字段也会走到同一个空状态。若只根据提示文字继续换密钥、换模型，会反复验证已经确认正常的上游，而没有碰到真正未检查的部分。
+
+下一次检查应在服务端投影快照和客户端会话摘要之间取证：若快照没有 `modelCost`，检查注册与回放；若快照有值而客户端摘要没有，检查传输和状态更新；若摘要已有非零计数，再检查页面筛选。每一步都应记录观察值，而不是同时改三个地方。
+
+截至这次实验，最终断点仍未定位，也没有经过修复后的页面复测。这个案例目前教的是如何缩小故障范围，不能当作一份已解决问题的操作指南。读者可以用随书的 [会话用量重算脚本](tools/replay-usage.mjs) 核对计算方法，用 [脱敏后的重算结果](evidence/usage-replay.json) 对照上述计数；脚本使用本书隔离实验的本地会话路径，在其他机器运行前需要替换为自己的测试会话。
 
 ## 8.4 14 个失败，为什么没去改宿主
 

@@ -1,16 +1,16 @@
 {
-  "checkedAt": "2026-09-08T04:57:04.868Z",
+  "checkedAt": "2026-09-08T05:00:34.755Z",
   "results": [
     {
       "file": "index.html",
       "status": 200,
-      "sha256": "9eb6365f3066dcf76816a63c775dd5b4b513270c4cccbc8c2b3e321e2f0341fd",
+      "sha256": "cb822ad86370f8f62afd3df4e1e5d514ba15c1b437c45e9aba000405b06c4357",
       "matchesLocal": true
     },
     {
       "file": "deepseek-harness-guide.epub",
       "status": 200,
-      "sha256": "6239e457ac5d91ce9bf35f59c38084ffd6ac95bfbe4beea952eb7f5fa6c9dae1",
+      "sha256": "38defc93dc7f321a17c22184c64bdfdc99f1f3e74989233ad3689e4a4aad3939",
       "matchesLocal": true
     },
     {
