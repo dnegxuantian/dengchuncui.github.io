@@ -1,0 +1,31 @@
+@startuml
+title 日报任务：Web 只读会话的三个步骤
+skinparam defaultFontName PingFang SC
+skinparam defaultFontSize 16
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+participant "Harness 循环" as loop
+participant "模型服务" as model
+participant "文件工具" as fs
+group 第一步：查找
+loop -> model: 任务、工具定义和历史
+model --> loop: 请求 glob
+loop -> fs: 查找 JSON 文件
+fs --> loop: 文件列表
+end
+group 第二步：读取
+loop -> model: 带上查找结果
+model --> loop: 请求读取两份文件
+loop -> fs: daily-policy.json\ndaily-runs.json
+fs --> loop: 规则与运行记录
+end
+group 第三步：回答
+loop -> model: 带上读取结果
+model --> loop: 四类作业情况及依据
+end
+note over loop,fs
+  调用来自实际会话；省去流式块。
+  同一步有两次读取，不代表精确并发时序。
+end note
+@enduml

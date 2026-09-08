@@ -1,0 +1,29 @@
+@startuml
+title DSH：配置组装与实际执行是两条不同的检查线
+skinparam defaultFontName PingFang SC
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #425466
+skinparam rectangleBackgroundColor #F3F7FA
+skinparam rectangleBorderColor #607D8B
+rectangle "Profile 中的 Bundle 列表\n按声明顺序组合" as bundles
+rectangle "Profile patch → Home patch\n→ 命令行 patch" as patches
+rectangle "有效配置树\n--dump-config 可观察" as tree
+rectangle "Cordis 加载插件\n依赖服务、注册与生命周期" as cordis
+rectangle "当前 Agent 的能力\n上下文、工具、执行策略" as agent
+rectangle "模型请求与工具执行\n结果进入会话记录" as execution
+bundles --> patches
+patches --> tree
+tree --> cordis
+cordis --> agent
+agent --> execution
+note right of tree
+  出现在配置树中
+  不等于加载成功
+end note
+note right of agent
+  工具已注册
+  不等于获准执行
+end note
+@enduml

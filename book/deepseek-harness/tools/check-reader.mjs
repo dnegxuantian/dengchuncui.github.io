@@ -2,7 +2,8 @@ import {readFileSync,readdirSync,existsSync,writeFileSync} from 'node:fs';
 import {resolve,dirname,relative} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url));
-const dir=resolve(root,'reader');
+const editionTwo=process.argv.includes('--edition-two');
+const dir=resolve(root,editionTwo?'reader/edition-2':'reader');
 const html=readFileSync(resolve(dir,'index.html'),'utf8');
 const issues=[];
 const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
@@ -19,6 +20,7 @@ for(const file of walk(dir)){
   if(file.includes('/runtime/'))issues.push('Runtime leaked');
   const bytes=readFileSync(file);for(const secret of secrets)if(bytes.includes(Buffer.from(secret)))issues.push('Credential match in '+relative(dir,file));
 }
-const result={checkedAt:new Date().toISOString(),htmlLocalLinks:'checked',chapterCount:readdirSync(resolve(root,'chapters')).filter(f=>f.endsWith('.md')).length,credentialMatches:issues.filter(i=>i.startsWith('Credential')).length,issues};
-writeFileSync(resolve(root,'evidence/reader-check.json'),JSON.stringify(result,null,2)+'\n');
+const chapterDir=resolve(root,editionTwo?'edition-2':'chapters');
+const result={checkedAt:new Date().toISOString(),htmlLocalLinks:'checked',chapterCount:readdirSync(chapterDir).filter(f=>editionTwo?/^\d\d-.*\.md$/.test(f):f.endsWith('.md')).length,credentialMatches:issues.filter(i=>i.startsWith('Credential')).length,issues};
+writeFileSync(resolve(root,editionTwo?'edition-2/reader-check.json':'evidence/reader-check.json'),JSON.stringify(result,null,2)+'\n');
 console.log(result);if(issues.length)process.exitCode=1;
