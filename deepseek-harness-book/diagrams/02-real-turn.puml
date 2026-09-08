@@ -1,0 +1,39 @@
+@startuml
+title 读取 jobs.json：实测一轮任务中的三个步骤
+skinparam defaultFontName PingFang SC
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+actor 读者 as user
+participant "Agent 循环" as loop
+participant "模型" as model
+participant "工具与文件能力" as tools
+database "会话事件" as log
+user -> loop: 读取文件并计算汇总
+loop -> log: turn/start（seq 23）
+group step 1：定位文件
+loop -> model: 请求（含工具定义）
+model --> loop: glob 调用
+loop -> log: tool/call（seq 113）
+loop -> tools: glob jobs.json
+tools --> loop: jobs.json
+loop -> log: tool/result（seq 114）
+end
+group step 2：读取内容
+loop -> model: 历史包含定位结果
+model --> loop: read 调用
+loop -> tools: read jobs.json
+tools --> loop: 三条任务数据
+loop -> log: call 170 / result 171
+end
+group step 3：形成回答
+loop -> model: 历史包含文件内容
+model --> loop: 3 个任务，30 秒，平均 10 秒
+loop -> log: turn/end completed（seq 513）
+loop --> user: 展示回答
+end
+note over loop, log
+  图中事件序号取自本次真实会话。
+  省去流式块与其他事件，不是完整协议抓包。
+end note
+@enduml

@@ -1,0 +1,5 @@
+[
+  {"name": "orders", "durationSeconds": 12},
+  {"name": "products", "durationSeconds": 8},
+  {"name": "customers", "durationSeconds": 10}
+]

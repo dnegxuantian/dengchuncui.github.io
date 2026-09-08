@@ -1,0 +1,12 @@
+{
+  "name": "dsh-book-job-summary",
+  "version": "0.1.1",
+  "description": "Read a task-duration JSON file through the Harness filesystem service and return validated statistics.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "stats.js", "cordis.patch.yml", "README.md", "LICENSE"],
+  "engines": {"node": ">=22.19.0"},
+  "license": "MIT",
+  "scripts": {"test": "node --test stats.test.js"},
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}}
+}
