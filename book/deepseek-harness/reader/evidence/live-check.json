@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-09-08T04:57:04.868Z",
+  "results": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "sha256": "9eb6365f3066dcf76816a63c775dd5b4b513270c4cccbc8c2b3e321e2f0341fd",
+      "matchesLocal": true
+    },
+    {
+      "file": "deepseek-harness-guide.epub",
+      "status": 200,
+      "sha256": "6239e457ac5d91ce9bf35f59c38084ffd6ac95bfbe4beea952eb7f5fa6c9dae1",
+      "matchesLocal": true
+    },
+    {
+      "file": "dsh-book-job-summary-0.1.1.tgz",
+      "status": 200,
+      "sha256": "988cf620d2cdb6d7a5d7b2f3bdde7cb0da1a91b7f61f0e9e7189f3d6b041e5b3",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/03-missing-credential.png",
+      "status": 200,
+      "sha256": "f5b978c1afc6e0f3db6039b8d4652f2af976b7eecad3fc524f27498beb9db708",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/07-official-install.png",
+      "status": 200,
+      "sha256": "f08bbcf80e2d74885735cf355bc8a839dde3562c3ca784d5406f1bc0c6119fdf",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/05-real-read-result.png",
+      "status": 200,
+      "sha256": "23d1d9773b5c0920b1332fb6fe5afe83a5b12221e550c2c9de4d2b2b6cd60c50",
+      "matchesLocal": true
+    },
+    {
+      "file": "diagrams/02-real-turn.svg",
+      "status": 200,
+      "sha256": "974698bb948dbdb51f44b980e84d6fbced37ae6ab3bc8b59dad036e139fd15c7",
+      "matchesLocal": true
+    },
+    {
+      "file": "diagrams/02-composition.svg",
+      "status": 200,
+      "sha256": "379372b81e403b63fc96ea279459c2460cafa699c9f2adf68feb93314d0dad58",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/06-readonly-write-denied.png",
+      "status": 200,
+      "sha256": "98549a3dfc9ea4c88b6445f2af116cb99a39a04b50eef535aab7e7bdba82096c",
+      "matchesLocal": true
+    },
+    {
+      "file": "diagrams/02-tool-stages.svg",
+      "status": 200,
+      "sha256": "22623ec789621a172903a965c7a048ca8882a27980bb80727b3ee45d94934121",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/09-plugin-first-failure.png",
+      "status": 200,
+      "sha256": "98fcf18bf3c68651872b5b9d469642eff42629f9a21eb7ad21ef1c749c824ee0",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/10-plugin-fixed-result.png",
+      "status": 200,
+      "sha256": "ff47f2a28d68fd2f0c4437daf7b9f1e4701ca6c6f13ee027bc11842ba3b72959",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/11-community-clippy.png",
+      "status": 200,
+      "sha256": "4b66f6078fe36578fead61902f58dcc5a181c68b475a84c12875806cbf354a99",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/15-usage-empty-after-call.png",
+      "status": 200,
+      "sha256": "a95d4ba44d9f68091da1e66fe48cf2b0236f87f729f58fd1fe3336efa792f15c",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/12-model-pro.png",
+      "status": 200,
+      "sha256": "7f5235426a39d11449d10bc8d6e1b4992614588bfb8dd30723bf1f2290d4ee9e",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/13-model-flash.png",
+      "status": 200,
+      "sha256": "0918251b9b4d05326841025f85d2c31eb0304e5a47259b59bd2fb8b740ba20ff",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/16-shell-environment.png",
+      "status": 200,
+      "sha256": "1c46e7e21922183911512a0d0f372df22b7583932ed96abc9b943d649d930efa",
+      "matchesLocal": true
+    },
+    {
+      "file": "screenshots/14-plugin-invalid-data.png",
+      "status": 200,
+      "sha256": "bfa59d9ad6c5dea81964d2a9a76af24aa4655f9257d78ae6f2a8035c899d2582",
+      "matchesLocal": true
+    }
+  ],
+  "guideStatus": 200,
+  "guideLinksBook": true
+}

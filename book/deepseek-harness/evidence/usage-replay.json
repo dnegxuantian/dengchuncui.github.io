@@ -1,0 +1,79 @@
+{
+  "note": "Zero-rate counter experiment, not actual cost or invoice",
+  "pluginVersion": "0.2.5",
+  "result": {
+    "currency": "USD",
+    "requests": 1,
+    "unpricedRequests": 0,
+    "usageUnavailableRequests": 0,
+    "costNano": 0,
+    "uncachedInputTokens": 9471,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "outputTokens": 80,
+    "byModel": [
+      {
+        "provider": "deepseek-official",
+        "model": "deepseek-v4-flash",
+        "requests": 1,
+        "unpricedRequests": 0,
+        "usageUnavailableRequests": 0,
+        "costNano": 0,
+        "uncachedInputTokens": 9471,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 80
+      }
+    ],
+    "byPurpose": [
+      {
+        "purpose": "agent",
+        "requests": 1,
+        "unpricedRequests": 0,
+        "usageUnavailableRequests": 0,
+        "costNano": 0,
+        "uncachedInputTokens": 9471,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 80
+      },
+      {
+        "purpose": "compaction",
+        "requests": 0,
+        "unpricedRequests": 0,
+        "usageUnavailableRequests": 0,
+        "costNano": 0,
+        "uncachedInputTokens": 0,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 0
+      }
+    ],
+    "byTurn": [
+      {
+        "turn": 1,
+        "requests": 1,
+        "unpricedRequests": 0,
+        "usageUnavailableRequests": 0,
+        "costNano": 0,
+        "uncachedInputTokens": 9471,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 80
+      }
+    ],
+    "byDay": [
+      {
+        "day": "2026-09-08",
+        "requests": 1,
+        "unpricedRequests": 0,
+        "usageUnavailableRequests": 0,
+        "costNano": 0,
+        "uncachedInputTokens": 9471,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0,
+        "outputTokens": 80
+      }
+    ]
+  }
+}

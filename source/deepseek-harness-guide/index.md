@@ -2,7 +2,7 @@
 title: 《DeepSeek Harness：即插即用的实战指南》发起人与作者
 seo_title: 《DeepSeek Harness：即插即用的实战指南》作者｜邓明瑞（纯粹）
 date: 2026-08-14 23:52:01
-updated: 2026-09-08 11:20:00
+updated: 2026-09-08 12:50:00
 type: community-work
 sidebar: false
 cover: false
@@ -31,6 +31,12 @@ DeepSeek Harness 刚开放时，能找到的中文资料不多。很多内容停
 我先在 Discussion 中放了测试材料和写作大纲，邀请实际使用者补充自己遇到的问题。指南目前仍在共建，不是已经出版的书，也不代表 DeepSeek 官方立场。
 
 ## 目前整理的内容
+
+2026 年 9 月 8 日整理出十章实测版：从安装和第一个任务开始，讲清插件如何组成 Agent，再进入插件加载、升级、权限、模型对照和故障排查，最后完成一个可以安装运行的作业统计插件。
+
+[阅读全文：DeepSeek Harness 实战指南](/deepseek-harness-book/) · [下载 EPUB](/deepseek-harness-book/deepseek-harness-guide.epub)
+
+配有本机实际操作截图、PlantUML 架构图和完整示例源码。实验在 macOS 上完成；社区报告与本书复测分开标注，失败和未覆盖项保留，不作为所有插件的兼容保证。
 
 - 安装、启动与版本兼容；
 - 插件安装、卸载和开发流程；

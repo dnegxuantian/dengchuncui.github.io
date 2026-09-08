@@ -1,0 +1,436 @@
+[
+  {
+    "home": "official-home",
+    "session": "session-4b802d72-5584-47cc-8cb9-841f4613f3b9",
+    "sha256": "fa1b22c6004e7bb209c03fcf8f0cb8efa8cb274f81e065cfd9063b7985f8a48e",
+    "events": []
+  },
+  {
+    "home": "official-home",
+    "session": "session-5757be1e-8316-4f13-9341-ad2d6eeef6df",
+    "sha256": "4d66737080abd79937faad26a5acae29e089c54284ade5e68fa6dc43922694c0",
+    "events": [
+      {
+        "seq": 87,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 1,
+        "usage": {
+          "inputTokens": 9263,
+          "outputTokens": 99,
+          "cacheReadTokens": 0,
+          "reasoningTokens": 53
+        }
+      },
+      {
+        "seq": 88,
+        "type": "tool/call",
+        "turn": 1,
+        "step": 1,
+        "tool": "glob"
+      },
+      {
+        "seq": 89,
+        "type": "tool/result",
+        "turn": 1,
+        "step": 1,
+        "callEventSeqs": [
+          88
+        ],
+        "isError": false
+      },
+      {
+        "seq": 143,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 2,
+        "usage": {
+          "inputTokens": 32,
+          "outputTokens": 78,
+          "cacheReadTokens": 9344,
+          "reasoningTokens": 12
+        }
+      },
+      {
+        "seq": 144,
+        "type": "tool/call",
+        "turn": 1,
+        "step": 2,
+        "tool": "read"
+      },
+      {
+        "seq": 145,
+        "type": "tool/result",
+        "turn": 1,
+        "step": 2,
+        "callEventSeqs": [
+          144
+        ],
+        "isError": false
+      },
+      {
+        "seq": 333,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 3,
+        "usage": {
+          "inputTokens": 226,
+          "outputTokens": 180,
+          "cacheReadTokens": 9344,
+          "reasoningTokens": 62
+        }
+      },
+      {
+        "seq": 335,
+        "type": "turn/end",
+        "turn": 1,
+        "reason": "completed"
+      }
+    ]
+  },
+  {
+    "home": "experiments",
+    "session": "session-1a678591-c2a6-44c8-89e7-f9ba92f8cc8c",
+    "sha256": "99669493f6313a061e5734b190618e0e7ead82e8568a16546695bd5d8967aebd",
+    "events": [
+      {
+        "seq": 218,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 1,
+        "usage": {
+          "inputTokens": 7604,
+          "outputTokens": 234,
+          "cacheReadTokens": 2048,
+          "reasoningTokens": 164
+        }
+      },
+      {
+        "seq": 219,
+        "type": "tool/call",
+        "turn": 1,
+        "step": 1,
+        "tool": "book_job_summary"
+      },
+      {
+        "seq": 220,
+        "type": "tool/result",
+        "turn": 1,
+        "step": 1,
+        "callEventSeqs": [
+          219
+        ],
+        "isError": false
+      },
+      {
+        "seq": 952,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 2,
+        "usage": {
+          "inputTokens": 86,
+          "outputTokens": 724,
+          "cacheReadTokens": 9856,
+          "reasoningTokens": 80
+        }
+      },
+      {
+        "seq": 954,
+        "type": "turn/end",
+        "turn": 1,
+        "reason": "completed"
+      },
+      {
+        "seq": 1057,
+        "type": "assistant/message",
+        "turn": 2,
+        "step": 1,
+        "usage": {
+          "inputTokens": 110,
+          "outputTokens": 128,
+          "cacheReadTokens": 10624,
+          "reasoningTokens": 56
+        }
+      },
+      {
+        "seq": 1058,
+        "type": "tool/call",
+        "turn": 2,
+        "step": 1,
+        "tool": "book_job_summary"
+      },
+      {
+        "seq": 1059,
+        "type": "tool/result",
+        "turn": 2,
+        "step": 1,
+        "callEventSeqs": [
+          1058
+        ],
+        "isError": true
+      },
+      {
+        "seq": 1201,
+        "type": "assistant/message",
+        "turn": 2,
+        "step": 2,
+        "usage": {
+          "inputTokens": 144,
+          "outputTokens": 134,
+          "cacheReadTokens": 10752,
+          "reasoningTokens": 19
+        }
+      },
+      {
+        "seq": 1203,
+        "type": "turn/end",
+        "turn": 2,
+        "reason": "completed"
+      },
+      {
+        "seq": 1450,
+        "type": "assistant/message",
+        "turn": 3,
+        "step": 1,
+        "usage": {
+          "inputTokens": 75,
+          "outputTokens": 301,
+          "cacheReadTokens": 11008,
+          "reasoningTokens": 188
+        }
+      },
+      {
+        "seq": 1451,
+        "type": "tool/call",
+        "turn": 3,
+        "step": 1,
+        "tool": "bash"
+      },
+      {
+        "seq": 1452,
+        "type": "tool/result",
+        "turn": 3,
+        "step": 1,
+        "callEventSeqs": [
+          1451
+        ],
+        "isError": false
+      },
+      {
+        "seq": 1453,
+        "type": "tool/call",
+        "turn": 3,
+        "step": 1,
+        "tool": "bash"
+      },
+      {
+        "seq": 1454,
+        "type": "tool/result",
+        "turn": 3,
+        "step": 1,
+        "callEventSeqs": [
+          1453
+        ],
+        "isError": false
+      },
+      {
+        "seq": 1622,
+        "type": "assistant/message",
+        "turn": 3,
+        "step": 2,
+        "usage": {
+          "inputTokens": 167,
+          "outputTokens": 160,
+          "cacheReadTokens": 11264,
+          "reasoningTokens": 21
+        }
+      },
+      {
+        "seq": 1624,
+        "type": "turn/end",
+        "turn": 3,
+        "reason": "completed"
+      }
+    ]
+  },
+  {
+    "home": "experiments",
+    "session": "session-3c7f62b3-cc5f-463d-81ed-269490dcc09a",
+    "sha256": "c2d2c4bda4d49949c333e77fa5d4d67e3a012f14ee7dba916e0252b00431f893",
+    "events": [
+      {
+        "seq": 116,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 1,
+        "usage": {
+          "inputTokens": 9651,
+          "outputTokens": 132,
+          "cacheReadTokens": 0,
+          "reasoningTokens": 62
+        }
+      },
+      {
+        "seq": 117,
+        "type": "tool/call",
+        "turn": 1,
+        "step": 1,
+        "tool": "book_job_summary"
+      },
+      {
+        "seq": 118,
+        "type": "tool/result",
+        "turn": 1,
+        "step": 1,
+        "callEventSeqs": [
+          117
+        ],
+        "isError": false
+      },
+      {
+        "seq": 835,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 2,
+        "usage": {
+          "inputTokens": 111,
+          "outputTokens": 708,
+          "cacheReadTokens": 9728,
+          "reasoningTokens": 186
+        }
+      },
+      {
+        "seq": 837,
+        "type": "turn/end",
+        "turn": 1,
+        "reason": "completed"
+      }
+    ]
+  },
+  {
+    "home": "experiments",
+    "session": "session-f6c4599a-85de-441c-b69e-6d0be4b0c0e4",
+    "sha256": "97c5854ec94cadb33ab147d6c98e5ece246f53e720afd5c6d9d4349f3dd41004",
+    "events": [
+      {
+        "seq": 101,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 1,
+        "usage": {
+          "inputTokens": 9638,
+          "outputTokens": 117,
+          "cacheReadTokens": 0,
+          "reasoningTokens": 47
+        }
+      },
+      {
+        "seq": 102,
+        "type": "tool/call",
+        "turn": 1,
+        "step": 1,
+        "tool": "book_job_summary"
+      },
+      {
+        "seq": 103,
+        "type": "tool/result",
+        "turn": 1,
+        "step": 1,
+        "callEventSeqs": [
+          102
+        ],
+        "isError": true
+      },
+      {
+        "seq": 296,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 2,
+        "usage": {
+          "inputTokens": 61,
+          "outputTokens": 184,
+          "cacheReadTokens": 9728,
+          "reasoningTokens": 57
+        }
+      },
+      {
+        "seq": 298,
+        "type": "turn/end",
+        "turn": 1,
+        "reason": "completed"
+      },
+      {
+        "seq": 343,
+        "type": "assistant/message",
+        "turn": 2,
+        "step": 1,
+        "usage": {
+          "inputTokens": 177,
+          "outputTokens": 70,
+          "cacheReadTokens": 9856,
+          "reasoningTokens": 0
+        }
+      },
+      {
+        "seq": 344,
+        "type": "tool/call",
+        "turn": 2,
+        "step": 1,
+        "tool": "book_job_summary"
+      },
+      {
+        "seq": 345,
+        "type": "tool/result",
+        "turn": 2,
+        "step": 1,
+        "callEventSeqs": [
+          344
+        ],
+        "isError": false
+      },
+      {
+        "seq": 472,
+        "type": "assistant/message",
+        "turn": 2,
+        "step": 2,
+        "usage": {
+          "inputTokens": 175,
+          "outputTokens": 121,
+          "cacheReadTokens": 9984,
+          "reasoningTokens": 0
+        }
+      },
+      {
+        "seq": 474,
+        "type": "turn/end",
+        "turn": 2,
+        "reason": "completed"
+      }
+    ]
+  },
+  {
+    "home": "community",
+    "session": "session-4cfc84e2-e71b-4587-856a-0592062a552e",
+    "sha256": "3016abc0929bad266724e055d66ea84c8d6a491249e6d1daf5206ba6208e5efb",
+    "events": [
+      {
+        "seq": 100,
+        "type": "assistant/message",
+        "turn": 1,
+        "step": 1,
+        "usage": {
+          "inputTokens": 9471,
+          "outputTokens": 80,
+          "cacheReadTokens": 0,
+          "reasoningTokens": 72
+        }
+      },
+      {
+        "seq": 102,
+        "type": "turn/end",
+        "turn": 1,
+        "reason": "completed"
+      }
+    ]
+  }
+]

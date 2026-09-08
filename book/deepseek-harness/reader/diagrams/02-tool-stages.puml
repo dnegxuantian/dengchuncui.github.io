@@ -1,0 +1,30 @@
+@startuml
+title 工具调用存在，不等于文件已经写入
+skinparam defaultFontName PingFang SC
+skinparam backgroundColor white
+skinparam shadowing false
+start
+:记录 tool/call;
+:tools/pre-execute\n处理策略与审批;
+if (前置策略允许?) then (是)
+  :检查单调守卫;
+  if (守卫允许?) then (是)
+    :tools/execute 包装实际调用;
+    :工具实现与能力提供方\n文件工具还会执行内部文件策略;
+  else (否)
+    :生成拒绝结果，不运行工具主体;
+  endif
+else (否)
+  :生成拒绝结果，不运行工具主体;
+endif
+:后置处理、结果规范化\n与内容最终约束;
+:tools/result 观察最终结果;
+:记录 tool/result;
+stop
+note right
+  根据本地源码归纳的主要路径。
+  省略取消和异常分支。
+  本次写入拒绝来自文件工具沙箱，
+  不能由截图断言它发生在最外层审批。
+end note
+@enduml

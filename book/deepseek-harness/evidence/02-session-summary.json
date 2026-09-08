@@ -1,0 +1,170 @@
+{
+  "extractedAt": "2026-09-08T03:52:23.428Z",
+  "compressedSha256": "fb79e331e03d7bf82201742030f30e048ad9ca477dcd907950f811112affe244",
+  "events": [
+    {
+      "seq": 4,
+      "type": "turn/start",
+      "turn": 1
+    },
+    {
+      "seq": 6,
+      "type": "step/start",
+      "turn": 1,
+      "step": 1
+    },
+    {
+      "seq": 15,
+      "type": "step/end",
+      "turn": 1,
+      "step": 1
+    },
+    {
+      "seq": 16,
+      "type": "turn/end",
+      "turn": 1,
+      "reason": "error",
+      "code": "MISSING_CREDENTIAL"
+    },
+    {
+      "seq": 23,
+      "type": "turn/start",
+      "turn": 2
+    },
+    {
+      "seq": 25,
+      "type": "step/start",
+      "turn": 2,
+      "step": 1
+    },
+    {
+      "seq": 113,
+      "type": "tool/call",
+      "turn": 2,
+      "step": 1,
+      "tool": "glob"
+    },
+    {
+      "seq": 114,
+      "type": "tool/result",
+      "turn": 2,
+      "step": 1,
+      "callEventSeqs": [
+        113
+      ],
+      "isError": false
+    },
+    {
+      "seq": 115,
+      "type": "step/end",
+      "turn": 2,
+      "step": 1
+    },
+    {
+      "seq": 116,
+      "type": "step/start",
+      "turn": 2,
+      "step": 2
+    },
+    {
+      "seq": 170,
+      "type": "tool/call",
+      "turn": 2,
+      "step": 2,
+      "tool": "read"
+    },
+    {
+      "seq": 171,
+      "type": "tool/result",
+      "turn": 2,
+      "step": 2,
+      "callEventSeqs": [
+        170
+      ],
+      "isError": false
+    },
+    {
+      "seq": 172,
+      "type": "step/end",
+      "turn": 2,
+      "step": 2
+    },
+    {
+      "seq": 173,
+      "type": "step/start",
+      "turn": 2,
+      "step": 3
+    },
+    {
+      "seq": 512,
+      "type": "step/end",
+      "turn": 2,
+      "step": 3
+    },
+    {
+      "seq": 513,
+      "type": "turn/end",
+      "turn": 2,
+      "reason": "completed"
+    },
+    {
+      "seq": 515,
+      "type": "turn/start",
+      "turn": 3
+    },
+    {
+      "seq": 517,
+      "type": "step/start",
+      "turn": 3,
+      "step": 1
+    },
+    {
+      "seq": 646,
+      "type": "tool/call",
+      "turn": 3,
+      "step": 1,
+      "tool": "write"
+    },
+    {
+      "seq": 647,
+      "type": "tool/result",
+      "turn": 3,
+      "step": 1,
+      "callEventSeqs": [
+        646
+      ],
+      "isError": true
+    },
+    {
+      "seq": 648,
+      "type": "step/end",
+      "turn": 3,
+      "step": 1
+    },
+    {
+      "seq": 649,
+      "type": "step/start",
+      "turn": 3,
+      "step": 2
+    },
+    {
+      "seq": 956,
+      "type": "step/end",
+      "turn": 3,
+      "step": 2
+    },
+    {
+      "seq": 957,
+      "type": "turn/end",
+      "turn": 3,
+      "reason": "completed"
+    }
+  ],
+  "independentCheck": {
+    "count": 3,
+    "totalSeconds": 30,
+    "averageSeconds": 10
+  },
+  "probeExists": false,
+  "limitations": "Structural event extraction, not an HTTP capture or a complete sandbox audit."
+}
