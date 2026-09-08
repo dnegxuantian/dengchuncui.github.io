@@ -140,7 +140,7 @@ keywords:
       <h2 id="community-work-title">DeepSeek Harness 社群实战指南</h2>
     </div>
     <div class="brand-proof__copy">
-      <p>我是社群共建指南《DeepSeek Harness：即插即用的实战指南》的发起人与作者。2026 年 8 月，我在 DeepSeek Harness 官方 GitHub 仓库发起长期 Discussion，组织社群共同整理插件安装、版本兼容、权限与安全、常见报错及可复现的测试记录。</p>
+      <p>我是社群共建指南《DeepSeek Harness：即插即用的实战指南》的发起人与作者。2026 年 8 月，我在 DeepSeek Harness 官方 GitHub 仓库发起长期 Discussion，组织社群共同整理插件安装、版本兼容、权限与安全、常见报错及可复现的测试记录。<a href="/deepseek-harness-guide/">查看指南的发起经过与共建范围</a>。</p>
       <p>这是开发者社群自发组织的共建项目，不代表 DeepSeek 官方出版或背书。</p>
     </div>
   </section>
@@ -159,6 +159,7 @@ keywords:
     </div>
     <div class="brand-contact__links">
       <a itemprop="sameAs" href="https://github.com/dnegxuantian" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
+      <a itemprop="sameAs" href="https://cn.linkedin.com/in/%E6%98%8E%E7%91%9E-%E9%82%93-4843541b7" target="_blank" rel="noopener noreferrer">LinkedIn <span>↗</span></a>
       <a itemprop="email" href="mailto:duncan_dengmr@163.com">发送邮件 <span>→</span></a>
     </div>
   </section>

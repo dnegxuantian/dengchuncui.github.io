@@ -7,6 +7,8 @@ const PROFILE_URL = `${SITE_URL}/about/`;
 const PROFILE_ID = `${PROFILE_URL}#person`;
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const GITHUB_URL = 'https://github.com/dnegxuantian';
+const LINKEDIN_URL = 'https://cn.linkedin.com/in/%E6%98%8E%E7%91%9E-%E9%82%93-4843541b7';
+const PROFILE_SAME_AS = [GITHUB_URL, LINKEDIN_URL];
 const SITE_NAME = '邓明瑞 / 纯粹';
 const HOME_TITLE = '邓明瑞 / 纯粹 / 数据中台 × AI Agent';
 const HOME_H1 = `
@@ -75,7 +77,7 @@ function enrichPerson(item) {
   item.name = '邓明瑞';
   item.alternateName = ['纯粹', 'Chuncui'];
   item.url = PROFILE_URL;
-  item.sameAs = [GITHUB_URL];
+  item.sameAs = PROFILE_SAME_AS;
   item.jobTitle = '数据中台与 AI Agent 工程化技术架构师';
   item.worksFor = {
     '@type': 'Organization',
@@ -160,7 +162,7 @@ hexo.extend.filter.register('after_render:html', (html, data) => {
               '@id': PROFILE_ID,
               name: '邓明瑞',
               url: PROFILE_URL,
-              sameAs: [GITHUB_URL]
+              sameAs: PROFILE_SAME_AS
             };
             item.publisher = { '@type': 'Organization', '@id': ORGANIZATION_ID };
             item.image = { '@type': 'ImageObject', url: articleImage };
