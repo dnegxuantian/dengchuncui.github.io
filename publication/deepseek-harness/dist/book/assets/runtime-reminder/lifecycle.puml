@@ -1,0 +1,34 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+hide footbox
+actor "使用者" as User
+participant "DSH 中的模型" as Model
+participant "Host\n动态插件注册表" as Host
+participant "浏览器 Client\nCordis + Slot" as Client
+User -> Model : 定义提醒组件
+Model -> Host : cordis_define(code.client)
+Host --> Model : pluginId / packageId
+note over Client : 此时还没有提醒界面
+User -> Model : 运行这个版本
+Model -> Host : cordis_run(mode=run)
+Host --> Model : awaiting-approval
+User -> Client : 仅允许此版本
+Client -> Host : 提交批准、开始激活
+Client -> Client : 执行 apply\n注册 shell.overlay
+Client --> User : 显示提醒卡片
+User -> Client : 开始、暂停、重置
+Client -> Client : React 状态 + timer\n不需要模型每秒调用
+User -> Model : 更新同一个插件
+Model -> Host : define(existing) + run(update)
+User -> Client : 批准新版本
+Client -> Client : 清理旧 Run，激活新版本
+User -> Model : 停止插件
+Model -> Host : cordis_stop
+Host -> Client : 停止当前 Run
+Client -> Client : 卸载 Slot、清理样式和定时器
+note over Host : 保留代码版本，可再次运行
+@enduml

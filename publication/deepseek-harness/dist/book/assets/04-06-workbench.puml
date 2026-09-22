@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontSize 17
+skinparam shadowing false
+top to bottom direction
+rectangle "DSH 会话\n模型调用工作台工具" as agent
+rectangle "工作台插件" as bench
+rectangle "Filesystem\nctx.fs" as fs
+rectangle "Shell\nctx.shell" as shell
+rectangle "PTY 注册表与后端\nctx.terminals" as pty
+file "练习文件\n配置 / JSONL / 程序\nresult.json" as files
+rectangle "一次性配置检查\nNode 进程" as check
+rectangle "交互预检程序\nrun / pause / status" as process
+agent --> bench : action 与 terminalId
+bench --> fs : 创建文件、读取统计
+fs <--> files : 读写
+bench --> shell : resolve + run
+shell <--> check : 启动检查\n取回退出码和输出
+bench --> pty : open / send / read\nSIGINT / close
+pty <--> process : 输入与输出
+process --> files : 保存统计
+note bottom of pty
+网页重连可继续访问同一所有者的终端。
+Host 重启不会恢复原 PTY。
+end note
+@enduml

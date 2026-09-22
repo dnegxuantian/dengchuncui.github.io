@@ -1,0 +1,34 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontSize 17
+top to bottom direction
+actor 用户 as user
+rectangle "DSH Host（可信代码）" {
+  rectangle "模型返回的工具调用" as model
+  rectangle "工具守卫\n检查命令白名单" as guard
+  rectangle "试验空间工具\n解析文件策略、请求审批" as tool
+  rectangle "Approval\n允许 / 拒绝" as approval
+  rectangle "Shell 服务\n启动并等待子进程" as shell
+  rectangle "SandboxProvider\n生成 Seatbelt 规则" as sandbox
+}
+rectangle "受限子进程\n执行练习命令" as child
+file "工作目录内文件" as inside
+file "工作目录外标记" as outside
+cloud "本机 HTTP 服务" as net
+model --> guard
+guard --> tool : 通过后执行
+tool <--> approval : write-report
+user <--> approval : 本次决定
+tool --> shell : 固定命令
+shell --> sandbox : argv + 文件策略
+sandbox --> shell : 带沙箱规则的启动参数
+shell --> child : 经 sandbox-exec 启动
+child --> inside : workspace-write 可写
+child --> outside : 可读，不可写
+child --> net : offline=true 拒绝
+note right of model
+Host 内插件不因此被隔离。
+本图的系统限制作用于子进程。
+end note
+@enduml

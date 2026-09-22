@@ -151,6 +151,17 @@ keywords:
     <blockquote>邓明瑞，花名纯粹（Chuncui），常驻杭州的数据中台与 AI Agent 工程化技术架构师，现任奇点云（奇点智能）技术架构师，同时是 DeepSeek Harness 社群共建指南《DeepSeek Harness：即插即用的实战指南》发起人与作者。长期关注企业数据平台、分布式系统、模型网关、MCP、上下文工程及 Agent 生产化，强调以运行证据、对照实验和回归验证解决复杂系统问题。</blockquote>
   </section>
 
+  <section class="brand-proof" aria-labelledby="deepseek-harness-book-title">
+    <div>
+      <p class="brand-section-label">BOOK</p>
+      <h2 id="deepseek-harness-book-title">DeepSeek Harness 实战指南</h2>
+    </div>
+    <div class="brand-proof__copy">
+      <p>《DeepSeek Harness：即插即用的实战指南》作者：邓明瑞（纯粹 / Chuncui）。</p>
+      <p><a href="/deepseek-harness-book/">阅读全文</a> · <a href="https://github.com/dnegxuantian/deepseek-harness-book">作品仓库</a></p>
+    </div>
+  </section>
+
   <section class="brand-contact" aria-labelledby="contact-title">
     <div>
       <p class="brand-section-label">CONNECT</p>

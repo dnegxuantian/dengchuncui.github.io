@@ -1,0 +1,11 @@
+{
+  "name": "dsh-book-repair-cycle",
+  "version": "0.1.3",
+  "private": true,
+  "type": "module",
+  "exports": "./index.js",
+  "files": ["index.js", "cordis.patch.yml", "LICENSE"],
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "license": "MIT"
+}

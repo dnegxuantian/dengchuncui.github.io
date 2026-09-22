@@ -1,0 +1,3 @@
+- insert:
+    - id: book-release-read-only
+      name: dsh-book-release-review/guard

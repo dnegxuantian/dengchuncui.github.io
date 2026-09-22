@@ -1,0 +1,9 @@
+{
+  "name": "shipping-review-exercise",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "node -e \"require('fs').writeFileSync('install-ran.txt', 'exercise marker')\"",
+    "test": "node --test shipping.test.js"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "apiBase": "https://service.example.invalid",
+  "timeoutMs": 5000
+}
