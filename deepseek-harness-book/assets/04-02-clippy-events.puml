@@ -1,0 +1,24 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 16
+skinparam sequenceMessageAlign center
+hide footbox
+participant "DSH\n任务执行" as dsh
+participant "Host 插件\nClippyService" as host
+participant "Client 插件\nReact 组件" as client
+actor "用户" as user
+dsh -> host : session/event\n工具调用 → tool
+client -> host : GET /api/clippy/state\n每 800 毫秒读取
+host --> client : phase: tool
+client -> client : 显示执行工具的动作
+user -> dsh : 点击“停止生成”
+dsh -> host : turn/end\nreason.kind: aborted
+host -> host : phaseForTurnEnd\naborted → stopped
+client -> host : 下一次读取
+host --> client : phase: stopped\n提示文字、发生时间
+client -> client : 显示停止提示和“知道了”
+user -> client : 点击“知道了”
+client -> client : 只收起这一次提示\nHost 状态不变
+@enduml

@@ -1,0 +1,9 @@
+- id: sandbox
+  disabled: true
+- insert:
+    - id: book-trial-sandbox
+      name: dsh-book-trial-space
+      config:
+        offline: true
+    - id: book-trial-tools
+      name: dsh-book-trial-space/tools

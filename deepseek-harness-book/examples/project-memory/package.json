@@ -1,0 +1,12 @@
+{
+  "name": "dsh-book-project-memory",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "exports": "./index.js",
+  "files": ["index.js", "schema.js", "cordis.patch.yml", "LICENSE"],
+  "dependencies": {"zod": "4.5.4"},
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "license": "MIT"
+}

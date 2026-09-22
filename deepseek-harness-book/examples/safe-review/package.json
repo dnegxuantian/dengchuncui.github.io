@@ -1,0 +1,9 @@
+{
+  "name": "dsh-book-safe-review",
+  "version": "0.1.4",
+  "type": "module",
+  "exports": {"./roster": "./roster.js", "./guard": "./guard.js"},
+  "files": ["roster.js", "guard.js", "cordis.patch.yml", "presets", "LICENSE"],
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "license": "MIT"
+}

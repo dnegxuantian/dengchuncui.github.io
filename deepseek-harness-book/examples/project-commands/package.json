@@ -1,0 +1,16 @@
+{
+  "name": "dsh-book-project-commands",
+  "version": "0.2.0",
+  "description": "A read-only package.json command catalog for the DSH book",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "exports": "./index.js",
+  "files": ["index.js", "catalog.js", "catalog.test.js", "cordis.patch.yml", "README.md", "LICENSE"],
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "scripts": {"test": "node --test catalog.test.js"},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "peerDependencies": {"@deepseek-ai/dsh-tools": "0.1.1-rc.2"},
+  "peerDependenciesMeta": {"@deepseek-ai/dsh-tools": {"optional": true}},
+  "license": "MIT"
+}

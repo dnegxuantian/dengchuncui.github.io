@@ -1,0 +1,33 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 16
+skinparam sequenceMessageAlign center
+hide footbox
+participant "DSH\nAgent Loop" as loop
+participant "Model Adapter\n主备切换插件" as router
+participant "DeepSeek Adapter\n主模型 Pro" as primary
+participant "DeepSeek Adapter\n备用模型 Flash" as backup
+loop -> router : 同一条已组装请求\nmessages / tools / signal
+router -> primary : 首次尝试
+alt 尚未转发片段，收到可切换错误
+  primary --> router : finish: error\nSERVER / HTTP 503
+  router -> router : 检查错误代码\n检查取消信号
+  router -> backup : 同一请求，替换 provider / model
+  backup --> router : 回答片段
+  router --> loop : 逐段转发
+  backup --> router : finish: stop 或 error
+  router --> loop : 结束，不再尝试第三次
+else 已经转发片段，随后断开
+  primary --> router : 正文片段
+  router --> loop : 立即转发，标记 committed
+  primary --> router : finish: error\nTRANSPORT
+  router --> loop : 保留错误，不调用备用
+end
+note over loop,router
+AUTH / INVALID_REQUEST / 用户取消也不切换。
+主备配置均走同一个官方 Adapter 服务；
+图按两个具体模型区分请求，非两个服务实例。
+end note
+@enduml

@@ -1,0 +1,11 @@
+# 邓明瑞的技术博客
+
+> 邓明瑞（纯粹 / Chuncui）的数据中台与 AI Agent 工程实践。
+
+## DeepSeek Harness 实战指南
+
+- [《DeepSeek Harness：即插即用的实战指南》全文](https://blog.chuncui.icu/deepseek-harness-book/)
+- [GitHub 作品仓库](https://github.com/dnegxuantian/deepseek-harness-book)
+- [作者：邓明瑞（纯粹 / Chuncui）](https://blog.chuncui.icu/about/)
+
+七章插件实战指南，覆盖任务循环、模型适配、工具、会话、执行环境、权限、社区案例、排错和插件发布。版本说明以书籍页面为准。

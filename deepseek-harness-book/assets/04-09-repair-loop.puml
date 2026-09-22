@@ -1,0 +1,35 @@
+@startuml
+!theme plain
+skinparam defaultFontName PingFang SC
+skinparam defaultFontSize 17
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 200
+skinparam ParticipantPadding 18
+skinparam BoxPadding 10
+hide footbox
+title Agent Loop：模型准备结束后，插件怎样让任务继续
+participant "Model Adapter\n及模型" as M
+participant "Agent Loop\n任务循环" as L
+participant "修复循环插件" as P
+participant "Shell\n测试子进程" as T
+M -> L: 返回说明，本步没有工具调用
+L -> P: agent/turn-stopping
+P -> T: resolve → run\n固定命令，使用只读策略\n传入取消信号
+T --> P: 退出状态、实际测试结果
+alt 测试失败，还有复测机会
+  P -> L: steer：失败信息与剩余次数
+  L -> M: 再请求一次模型
+  note over M,P
+    模型依据失败决定是否修改源码；
+    下次准备结束时，再由插件复测。
+  end note
+else 通过，或复测次数用完
+  P -> P: 转为只总结阶段
+  P -> L: steer：结果与结束要求
+  L -> M: 请求最后一次总结
+  M --> L: 返回总结，不调用工具
+  L -> P: agent/turn-stopping
+  P --> L: 不再添加消息
+  L -> L: 结束本轮任务
+end
+@enduml

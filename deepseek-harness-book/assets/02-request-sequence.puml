@@ -1,0 +1,46 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 18
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam sequenceParticipantBackgroundColor #F1F7FA
+skinparam sequenceParticipantBorderColor #7899AA
+skinparam ArrowColor #406074
+skinparam maxMessageSize 240
+participant "Agent Loop" as loop
+database "Session" as session
+participant "Model Adapter\n与模型服务" as model
+participant "Tool\n与执行环境" as tool
+note over loop,tool
+第一章第二轮：只改已确认的链接，再检查。
+图合并流式片段和界面传输，不表示耗时。
+end note
+group Step 1：编辑
+loop -> session : 记录输入，取得历史
+session --> loop : 前轮内容与新请求
+loop -> model : 历史、指引和工具定义
+model --> loop : edit 调用及替换参数
+loop -> session : 记录调用
+loop -> tool : 编辑 docs/start.md
+tool --> loop : 文件已更新
+loop -> session : 记录编辑结果
+end
+group Step 2：复查
+loop -> session : 取得包含编辑结果的历史
+session --> loop : 更新后的消息
+loop -> model : 下一次请求
+model --> loop : bash：npm run check
+loop -> session : 记录调用
+loop -> tool : 执行检查命令
+tool --> loop : 缺失 0 个，exit=0
+loop -> session : 记录检查结果
+end
+group Step 3：回答
+loop -> session : 取得包含检查输出的历史
+session --> loop : 更新后的消息
+loop -> model : 下一次请求
+model --> loop : 回答；没有工具调用
+loop -> session : 记录回答，结束轮次
+end
+@enduml
