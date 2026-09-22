@@ -27,6 +27,9 @@ navbar:
     - name: 关于
       icon: fa-solid fa-circle-info
       url: /about/
+    - name: DeepSeek Harness
+      icon: fa-solid fa-book
+      url: /deepseek-harness-book/
     - name: 显示
       icon: fa-solid fa-sliders
       rows:
@@ -66,6 +69,9 @@ cover:
     - name: 关于
       img: volantis-static/media/twemoji/assets/svg/1f9e9.svg
       url: /about/
+    - name: DeepSeek Harness
+      icon: fa-solid fa-book
+      url: /deepseek-harness-book/
 
 article:
   preview:
