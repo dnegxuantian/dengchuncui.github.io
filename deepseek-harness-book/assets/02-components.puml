@@ -1,0 +1,38 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 18
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #406074
+skinparam componentStyle rectangle
+skinparam componentBackgroundColor #F1F7FA
+skinparam componentBorderColor #7899AA
+skinparam packageBorderColor #C9D7DE
+skinparam packageBackgroundColor #FFFFFF
+skinparam nodesep 24
+skinparam ranksep 34
+component "2.1 启动与插件组合\n选出下列运行部件\nCordis 管理依赖和生命周期" as boot
+component "2.8 Client / UI\n浏览器提交请求、显示结果" as ui
+  component "2.4 会话与上下文\n提供历史与指引" as session
+  component "2.6 Agent Loop\n推进步骤，管理轮次" as loop
+  component "2.2 Model Adapter\n转换模型请求与响应" as model
+  component "2.7 Job / Schedule\n后台工作 / 到期触发" as job
+  component "2.3 Tool\n找到并执行工具" as tool
+  component "2.5 执行环境与权限\n文件、命令与终端" as env
+boot -right[hidden]-> ui
+boot -down[hidden]-> session
+ui -down-> loop : 请求（经 Host API）
+session -right-> loop : 历史与指引
+loop -right-> model : 模型调用
+loop -down-> tool : 工具调用
+tool -right-> env : 实际操作
+job -right-> loop : 后续交互
+session -down[hidden]-> job
+model -down[hidden]-> env
+note bottom of tool
+图中运行服务位于 Host；Client 位于浏览器。
+模型响应交回循环；工具结果进入会话。
+UI 从事件与投影取得状态，不执行模型推理。
+end note
+@enduml

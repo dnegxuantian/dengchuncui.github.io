@@ -1,0 +1,12 @@
+- insert:
+    - id: book-batch-cards
+      name: dsh-book-batch-cards
+      config:
+        docsRoot: ./docs
+        stateRoot: ./.cards-state
+        files: [cache.md, retry.md, export.md]
+        maxAttempts: 2
+        maxOutputTokens: 800
+        betweenItemsMs: 0
+    - id: schedule
+      name: '@deepseek-ai/dsh-schedule'

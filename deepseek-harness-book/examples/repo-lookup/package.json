@@ -1,0 +1,16 @@
+{
+  "name": "dsh-book-repo-lookup",
+  "version": "0.1.2",
+  "description": "Find reading locations for an identifier in a local Git checkout",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "exports": "./index.js",
+  "files": ["index.js", "lookup.js", "lookup.test.js", "cordis.patch.yml", "two-results.yml", "README.md", "LICENSE"],
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "scripts": {"test": "node --test lookup.test.js"},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "peerDependencies": {"@deepseek-ai/dsh-tools": "0.1.1-rc.2"},
+  "peerDependenciesMeta": {"@deepseek-ai/dsh-tools": {"optional": true}},
+  "license": "MIT"
+}

@@ -1,0 +1,15 @@
+- id: directory-picker
+  disabled: true
+- id: llm-deepseek
+  config:
+    reasoningEffort: off
+    maxTokens: 4096
+- id: agent-default-model
+  config:
+    provider: deepseek-official
+    model: deepseek-v4-flash
+- insert:
+    - id: book-directory-backend
+      name: '@deepseek-ai/dsh-host-directory-picker-browse'
+    - id: book-directory-browser
+      name: '@deepseek-ai/dsh-client-ui-directory-picker-browse'

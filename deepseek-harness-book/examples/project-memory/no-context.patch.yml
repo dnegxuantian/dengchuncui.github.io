@@ -1,0 +1,3 @@
+- id: book-project-memory
+  config:
+    injectMemory: false

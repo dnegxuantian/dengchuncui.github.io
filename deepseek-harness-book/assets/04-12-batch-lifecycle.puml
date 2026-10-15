@@ -1,0 +1,34 @@
+@startuml
+!theme plain
+skinparam defaultFontName PingFang SC
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam ArrowColor #456774
+skinparam activityBackgroundColor #EDF7F6
+skinparam activityBorderColor #477C7A
+title 一张卡片怎样成为可恢复的结果
+start
+:cards_batch 启动或恢复批次;
+:读取检查点，跳过 done 项;
+if (还有尝试额度？) then (有)
+  :把本次尝试与 running 状态写入磁盘;
+  :Job 中的工作函数调用 ctx.llm;
+  if (响应完整，字段与引用检查通过？) then (通过)
+    :卡片内容与 done 状态一起保存;
+    :继续下一份文档;
+  else (失败或取消)
+    :保留尝试次数，保存失败或中断状态;
+    :停止本次 Job，等待用户决定是否重试;
+  endif
+else (没有)
+  :保存 budget-paused，结束本次 Job;
+  :提高上限、重新加载后才能继续;
+endif
+stop
+legend bottom
+  Job：当前进程中的执行与取消
+  检查点：重启后仍保留的进度、产物与尝试记录
+  Schedule：在原会话提醒查看，不代替恢复命令
+endlegend
+@enduml

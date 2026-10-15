@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["endpoint"],
+  "properties": {
+    "endpoint": {"type": "string"},
+    "timeoutMs": {"type": "integer"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+@startuml
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam ArrowColor #456774
+skinparam activityBackgroundColor #EDF7F6
+skinparam activityBorderColor #477C7A
+title 一个 DSH 插件从源码到可交付包
+start
+:**源码契约**\n名称、版本、入口、Bundle、依赖、许可;
+:**实现检查**\n成功路径 + 有意义的失败路径;
+:**npm pack --dry-run**\n核对最终文件清单、大小和包名;
+:**生成 tgz**\n记录版本、SHA256 与安装说明;
+:**干净 Profile 安装**\n确认依赖写入且 Bundle 被加载;
+:**真实 DSH 调用**\n成功结果 + 工具拒绝 + 回合终态;
+:**升级与卸载**\n用可辨认行为复测，确认贡献撤销;
+:**选择分发渠道**\ntgz / GitHub Release / npm registry;
+stop
+@enduml

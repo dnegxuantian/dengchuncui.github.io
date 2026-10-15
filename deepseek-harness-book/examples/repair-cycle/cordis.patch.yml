@@ -1,0 +1,8 @@
+- insert:
+    - id: book-repair-cycle
+      name: dsh-book-repair-cycle
+      config:
+        maxRounds: 2
+        maxSteps: 14
+        testTimeoutMs: 20000
+        testDelayMs: 0

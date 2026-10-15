@@ -1,0 +1,6 @@
+- id: llm-deepseek
+  config:
+    baseURL: http://127.0.0.1:3095
+    reasoningEffort: off
+    maxTokens: 1024
+

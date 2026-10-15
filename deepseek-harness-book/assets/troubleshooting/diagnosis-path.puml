@@ -1,0 +1,22 @@
+@startuml
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam ArrowColor #456774
+skinparam activityBackgroundColor #EDF7F6
+skinparam activityBorderColor #477C7A
+title 一次 DSH 故障该停在哪一层
+start
+:执行最小复现操作;
+:**1  安装**\n看 Profile package.json、lock、退出码\n失败：核对依赖名和 file: 来源;
+:**2  加载**\n看 Host 启动日志、Bundle、等待的 Service\n失败：核对 Manifest 与 inject;
+:**3  路由**\n看 command/run、tool/call、模型路由\n失败：核对补全、命令名和工具名;
+:**4  执行**\n看 command/done、tool/result、子会话终态\n失败：检查 Tool / Adapter / Agent Loop;
+:**5  持久化**\n看 turn/end、checkpoint、业务状态\n失败：检查写入与恢复;
+:**6  展示**\n看客户端投影、RPC 返回、组件状态\n失败：检查 Client 与 Slot;
+:全部有证据，才算完成闭环;
+stop
+@enduml

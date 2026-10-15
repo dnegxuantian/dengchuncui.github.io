@@ -1,0 +1,9 @@
+{
+  "name": "dsh-book-batch-cards",
+  "version": "0.1.2",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "core.js", "LICENSE"],
+  "license": "MIT",
+  "scripts": {"test": "node --test core.test.js"}
+}

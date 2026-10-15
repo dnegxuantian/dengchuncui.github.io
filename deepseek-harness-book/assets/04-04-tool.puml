@@ -1,0 +1,26 @@
+@startuml
+!pragma useVerticalIf on
+skinparam backgroundColor transparent
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+hide footbox
+participant "模型" as M
+participant "DSH Tool 调用\n（第 2.3 节）" as T
+participant "repo_lookup 插件" as P
+participant "本机 Git 仓库" as G
+M -> T : repo_lookup\n{symbol: "DeepSeekAdapter"}
+T -> P : 校验参数，执行 execute\n传入当前会话与取消信号
+P -> G : git grep 查位置\ngit log -S 查提交
+G --> P : 定义候选、引用、测试、提交
+P --> T : 返回分组后的结构化值
+T --> M : 校验返回值\nrender 成工具结果
+M -> T : 根据结果调用 read\n打开 adapter.ts 等文件
+T --> M : 文件内容
+M -> M : 依据读到的代码组织回答
+note over P,G
+本例直接使用本机 Git，
+不表示经过 DSH Shell 或 Sandbox 服务。
+end note
+@enduml

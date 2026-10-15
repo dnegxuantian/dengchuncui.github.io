@@ -1,0 +1,28 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 18
+skinparam shadowing false
+skinparam ArrowColor #406074
+skinparam activityBackgroundColor #F1F7FA
+skinparam activityBorderColor #7899AA
+start
+:Profile 选择 Bundle，应用 Patch;
+:加载器读取启用的插件条目;
+if (声明的服务依赖可用？) then (否)
+  :保持未激活，等待依赖;
+  :依赖出现;
+else (是)
+endif
+:Cordis 激活插件，执行入口;
+:通过 Context 注册工具、服务或监听器;
+:处理请求或响应事件;
+:停用、卸载，或失去所需依赖;
+:释放作用域，运行已登记的清理函数;
+note right
+撤销注册、关闭连接等。
+不会自动回滚已修改的文件。
+end note
+:若重新启用，重新检查依赖后激活;
+stop
+@enduml

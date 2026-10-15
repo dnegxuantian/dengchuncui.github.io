@@ -1,0 +1,4 @@
+# 只用于练习点击停止；不是正常修复所需配置。
+- id: book-repair-cycle
+  config:
+    testDelayMs: 12000

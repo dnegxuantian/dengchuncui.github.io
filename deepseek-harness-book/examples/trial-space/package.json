@@ -1,0 +1,11 @@
+{
+  "name": "dsh-book-trial-space",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "exports": {".": "./sandbox.js", "./tools": "./tools.js"},
+  "files": ["sandbox.js", "tools.js", "cordis.patch.yml", "LICENSE"],
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "license": "MIT"
+}

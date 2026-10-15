@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+hide footbox
+participant "DSH 会话\n与模型" as M
+participant "skill 工具\n与注册表" as S
+participant "包内 Skill\n文件来源" as F
+participant "Tool 执行\n与只读守卫" as T
+note over M,F
+启动：插件注册自己的 Skill 目录；
+System Prompt 提醒何时加载发布审查规则。
+end note
+F --> S : 发现名称与 description
+S --> M : 可用 Skill 目录
+M -> S : skill(name="project-release-review")
+S -> F : 加载当前 SKILL.md 正文
+F --> S : 内容与资源目录
+S --> M : Skill 指令作为工具结果
+M -> T : glob / read 检查项目文件
+T --> M : 文件列表与内容
+M -> T : bash pwd（单独验证拦截）
+T -> T : 白名单中没有 bash
+T --> M : 拒绝，不执行命令
+note over M,T
+Skill 影响如何审查；
+守卫决定工具能否执行。
+end note
+@enduml
