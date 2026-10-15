@@ -1,0 +1,35 @@
+@startuml
+title Muse 从长期目标到受控行动
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+actor "用户" as user
+rectangle "长期目标与约束\n截止时间、预算、通知条件" as goal #E0F2FE
+rectangle "Muse\n计划、记忆、后台推进" as muse
+node "Muse Secure VM" as vm {
+  rectangle "浏览器与文件\n持续工作现场" as workspace
+  rectangle "凭据安全存储\nMuse 不读取明文" as vault
+  rectangle "Sentinel\n独立行动检查" as sentinel #FEF3C7
+}
+cloud "连接的应用与网站" as apps
+database "审计记录\n计划、尝试、结果" as audit #DCFCE7
+user --> goal
+goal --> muse
+muse --> workspace
+workspace --> sentinel : 外部动作
+vault --> workspace : 受限会话
+sentinel --> user : 敏感动作请求批准
+user --> sentinel : 允许 / 拒绝 / 接管
+sentinel --> apps : 已授权动作
+workspace --> audit
+sentinel --> audit
+apps --> audit : 外部结果标识
+audit --> user : 复核与停止
+@enduml

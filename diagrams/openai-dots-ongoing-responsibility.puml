@@ -1,0 +1,37 @@
+@startuml
+title OpenAI Dot 的持续责任与停止边界
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam activity {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+  DiamondBorderColor #475569
+  DiamondBackgroundColor #FEF3C7
+}
+start
+:用户定义持续责任\n目标、范围、通知、结束条件;
+:主 Dot\n根据上下文、记忆判断下一步;
+partition "三类独立执行状态" {
+  :云电脑 / 插件 / 本地电脑\n受各自连接与权限约束;
+  :后台任务\n有独立对话与运行状态;
+  :Schedule / Event\n有独立触发状态;
+}
+:Activity\n汇总进度、文件、结果与请求;
+if (用户要停止这项责任？) then (是)
+  :Pause 主 Dot 当前任务;
+  :在 Activity 中\n逐项停止后台任务;
+  :在 Scheduled 中\n禁用或删除计划;
+  note right
+    已完成的外部动作
+    不会随停止而撤销
+  end note
+else (继续)
+  :用户复核结果并给出决定;
+  :主 Dot 进入下一轮判断;
+endif
+stop
+@enduml

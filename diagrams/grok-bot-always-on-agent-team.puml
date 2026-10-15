@@ -1,0 +1,42 @@
+@startuml
+title Grok Bot 的常驻协作与 Routine 边界
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+actor "用户" as user
+rectangle "目标、验收标准、权限" as brief #E0F2FE
+rectangle "协调 Bot\n拆分与交接" as lead
+rectangle "研究 Bot\n来源与素材" as research
+rectangle "制作 Bot\n文件与页面" as maker
+rectangle "复核 Bot\n链接与事实" as reviewer
+node "Bot Cloud Computer" as computer {
+  folder "共享项目工件\n文件、版本、未决事项" as artifacts
+  rectangle "浏览器与应用会话" as browser
+}
+rectangle "Routine\n时间 / 间隔 / 事件" as routine #FEF3C7
+rectangle "动作审批\n发起者、执行者、对象" as approval
+database "可核验结果\n预览、外部记录、历史" as result #DCFCE7
+user --> brief
+brief --> lead
+lead --> research
+lead --> maker
+research --> artifacts
+artifacts --> maker
+maker --> artifacts
+artifacts --> reviewer
+reviewer --> lead : 问题与位置
+routine --> lead : 触发新一轮
+maker --> browser
+browser --> approval : 外部写动作
+approval --> user : 允许 / 拒绝
+approval --> result
+artifacts --> result
+result --> user
+@enduml
