@@ -1,0 +1,53 @@
+@startuml
+title AstrBot 接入 NapCat 的消息链与验证点
+skinparam backgroundColor white
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam ArrowColor #475569
+skinparam rectangle {
+  BorderColor #475569
+  BackgroundColor #F8FAFC
+}
+skinparam note {
+  BorderColor #94A3B8
+  BackgroundColor #FEFCE8
+}
+
+top to bottom direction
+
+actor "测试账号" as user
+rectangle "QQ / NTQQ\n账号已登录" as qq
+rectangle "NapCat\nOneBot v11 协议实现" as napcat
+rectangle "AstrBot OneBot 适配器\n监听 127.0.0.1:6199/ws" as adapter
+rectangle "AstrBot 消息处理\n路由、会话、人格、插件" as pipeline
+rectangle "模型 Provider\n生成回复" as model
+
+user --> qq : ① 发送普通文本
+qq --> napcat : ② 产生消息事件
+napcat --> adapter : ③ 反向 WebSocket\n客户端主动连接服务端
+adapter --> pipeline : ④ 事件进入 handler
+pipeline --> model : ⑤ 模型请求
+model --> pipeline : ⑥ 模型结果
+pipeline --> adapter : ⑦ send_msg 动作
+adapter --> napcat : ⑧ OneBot 动作
+napcat --> qq : ⑨ QQ 接受消息
+qq --> user : ⑩ 收到回复
+
+note right of napcat
+  NapCat WebUI 端口只负责管理
+  不能代替 OneBot 连接端口
+end note
+
+note right of adapter
+  验证日志：
+  adapter connected
+end note
+
+note right of model
+  单独使用 Provider Test
+  检查 API Base、Key、模型 ID
+end note
+
+@enduml
