@@ -1,0 +1,7 @@
+- id: agent-presets
+  disabled: true
+- insert:
+    - id: book-review-presets
+      name: dsh-book-safe-review/roster
+      config:
+        default: standard

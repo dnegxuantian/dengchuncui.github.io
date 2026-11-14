@@ -1,0 +1,9 @@
+- id: book-trial-tools
+  config:
+    allowedCommands:
+      - inspect
+      - write-report
+      - outside-write
+      - outside-read
+      - network
+      - count-files

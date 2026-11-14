@@ -1,0 +1,10 @@
+{
+  "name": "release-lens-demo",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "bin": {"release-lens": "./src/cli.mjs"},
+  "scripts": {"test": "node --test tests/*.test.mjs"},
+  "engines": {"node": ">=22"},
+  "license": "MIT"
+}

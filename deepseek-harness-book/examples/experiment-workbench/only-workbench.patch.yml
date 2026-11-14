@@ -1,0 +1,3 @@
+- insert:
+    - id: book-workbench-only
+      name: dsh-book-experiment-workbench/only

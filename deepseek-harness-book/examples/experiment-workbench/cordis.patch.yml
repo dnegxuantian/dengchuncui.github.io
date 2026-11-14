@@ -1,0 +1,10 @@
+- insert:
+    - id: book-workbench-terminals
+      name: '@deepseek-ai/dsh-terminal'
+    - id: book-workbench-terminal-shell
+      name: '@deepseek-ai/dsh-terminal-bash'
+      config:
+        timeoutMs: 4000
+        idleSilenceMs: 1000
+    - id: book-experiment-workbench
+      name: dsh-book-experiment-workbench

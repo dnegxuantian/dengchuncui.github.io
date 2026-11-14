@@ -1,0 +1,3 @@
+- id: book-trial-sandbox
+  config:
+    offline: false

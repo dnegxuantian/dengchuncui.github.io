@@ -1,0 +1,21 @@
+- insert:
+    - id: book-model-switch
+      name: dsh-book-model-switch
+      config:
+        provider: book-switch
+        primary:
+          provider: deepseek-official
+          model: deepseek-v4-pro
+        fallback:
+          provider: deepseek-official
+          model: deepseek-v4-flash
+        defaultEffort: off
+        maxTokens: 1024
+        switchCodes: [SERVER, RATE_LIMIT, TIMEOUT, TRANSPORT]
+        auditFile: !!js dshHomePath('model-switch.jsonl')
+
+- id: agent-default-model
+  config:
+    provider: book-switch
+    model: auto
+

@@ -1,0 +1,34 @@
+@startuml
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 17
+skinparam sequenceMessageAlign center
+hide footbox
+participant "主会话\nAgent Loop" as Parent
+participant "review_change\n本节插件" as Tool
+participant "Subagent\nspawn 提供者" as Spawn
+participant "三个独立子会话\n代码 / 测试 / 文档" as Children
+Parent -> Tool : 调用审查工具
+Tool -> Tool : 读取固定文件，按角色分配材料
+Tool -> Spawn : start(parent, prompt, signal, ...)
+Spawn -> Children : 创建各自会话，限制工具
+Spawn --> Tool : 返回各自 run 句柄
+note over Tool, Children
+三个任务并行运行；父聊天不会被复制。
+每个子会话只有自己的材料与任务。
+end note
+Children -> Children : 请求模型，提交 structured_output
+Children --> Tool : run.result：状态与结构化结果
+Tool -> Spawn : await run.dispose()
+Tool -> Tool : 取回引用原文，逐项比较冲突
+Tool --> Parent : 三路结果 + 分歧，交给用户判断
+== 运行中只取消一路 ==
+Parent -> Tool : /review-cancel tests
+Tool -> Children : 触发 tests 的取消信号
+Children --> Tool : 等待停止并释放句柄
+note over Tool, Children
+code 与 docs 不受此信号影响。
+主任务停止则影响全部仍运行的子任务。
+end note
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+!pragma teoz true
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam ParticipantPadding 18
+skinparam BoxPadding 8
+hide footbox
+actor "读者" as User
+participant "DSH\n压缩服务" as Engine #E7F2FA
+participant "任务交接单\n插件" as Plugin #DDF3E8
+participant "Model Adapter" as Model #E7F2FA
+database "Session" as Session #F3F1EB
+
+User -> Engine: 在空闲会话输入 /compact
+Engine -> Engine: 选择历史范围\n不拆开工具调用与结果
+Engine -> Session: 记录压缩开始
+Engine -> Plugin: summarize(历史消息、agent、signal)
+Plugin -> Model: 历史消息 + 交接单要求
+Model --> Plugin: JSON 文本
+Plugin -> Plugin: 检查结束状态、字段\n核对待办是否来自原文
+alt 生成失败或校验不通过
+  Plugin --> Engine: 抛出错误
+  Engine -> Session: 记录失败结束\n不替换原对话
+  Engine --> User: 显示压缩失败
+else 校验通过
+  Plugin --> Engine: 交接单 + 模型用量
+  Engine -> Engine: 检查摘要更短、范围未变
+  Engine -> Session: 用交接单替换当前上下文中的旧范围\n原始事件记录仍保留
+  Engine -> Session: 记录结束并保存
+  Engine --> User: 显示已压缩
+  note over Engine,Session
+    读者恢复普通会话后，Agent Loop的下一轮请求
+    使用压缩后的上下文，不再重新调用 /compact。
+    字段合法、原文存在都不等于摘要毫无遗漏；
+    仍须检查继续执行的实际结果。
+  end note
+end
+@enduml

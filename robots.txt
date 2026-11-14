@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://blog.chuncui.icu/sitemap.xml
+Sitemap: https://blog.chuncui.icu/book-sitemap.xml

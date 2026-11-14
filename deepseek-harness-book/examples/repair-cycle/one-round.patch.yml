@@ -1,0 +1,3 @@
+- id: book-repair-cycle
+  config:
+    maxRounds: 1

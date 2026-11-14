@@ -1,0 +1,8 @@
+- id: llm-deepseek
+  config:
+    reasoningEffort: off
+    maxTokens: 4096
+- id: agent-default-model
+  config:
+    provider: deepseek-official
+    model: deepseek-v4-flash

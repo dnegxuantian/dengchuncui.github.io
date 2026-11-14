@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" role="img" aria-label="旧站配图无法恢复">
+  <rect width="1200" height="540" rx="24" fill="#eef2f7"/>
+  <rect x="36" y="36" width="1128" height="468" rx="16" fill="none" stroke="#98a2b3" stroke-width="2" stroke-dasharray="10 12"/>
+  <path d="M124 377l144-147 108 102 82-78 176 123" fill="none" stroke="#4f78d4" stroke-width="14" stroke-linejoin="round"/>
+  <circle cx="291" cy="170" r="37" fill="none" stroke="#4f78d4" stroke-width="12"/>
+  <text x="718" y="236" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="48" font-weight="700" fill="#172033">旧站配图待恢复</text>
+  <text x="718" y="296" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="24" fill="#667085">原 OSS 存储桶已删除，位置与来源已保留</text>
+  <text x="718" y="357" font-family="'SFMono-Regular',monospace" font-size="18" letter-spacing="2" fill="#98a2b3">LEGACY IMAGE / 2020—2021</text>
+</svg>

@@ -1,0 +1,30 @@
+@startuml
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam ArrowColor #456774
+skinparam activityBackgroundColor #EDF7F6
+skinparam activityBorderColor #477C7A
+title 从社区投稿到可用结论
+start
+:找到能解决当前问题的插件;
+:确认版本、DSH 范围、依赖与许可证;
+:装入独立 Profile;
+if (插件能加载？) then (能)
+  :执行一个真正有用的任务;
+  if (结果能在用户界面确认？) then (能)
+    :再测修改、重启或失败路径;
+    :标记为本机可复现;
+  else (不能)
+    :保留后台证据;
+    :标记为闭环未通;
+  endif
+else (不能)
+  :保留首个失败点;
+  :区分环境、依赖与接口问题;
+endif
+stop
+@enduml

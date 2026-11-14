@@ -1,0 +1,12 @@
+{
+  "name": "dsh-book-experiment-workbench",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "exports": {".": "./index.js", "./only": "./only-workbench.js"},
+  "files": ["index.js", "templates.js", "cordis.patch.yml", "only-workbench.js", "only-workbench.patch.yml", "README.md", "LICENSE"],
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "license": "MIT"
+}

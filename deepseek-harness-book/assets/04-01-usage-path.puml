@@ -1,0 +1,28 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName "PingFang SC"
+skinparam defaultFontSize 16
+skinparam ArrowColor #526277
+skinparam rectangle {
+  BackgroundColor #F1F6FA
+  BorderColor #718096
+  RoundCorner 12
+}
+top to bottom direction
+rectangle "模型接入（2.2）\n提供输入、输出与缓存用量" as model
+rectangle "会话记录（2.4）\n保存请求模型与 usage" as session
+rectangle "dsh-usage：Host\n逐条累计，替换同一步的重复用量" as host
+rectangle "wire.view\n把统计结果提供给客户端" as wire
+rectangle "dsh-usage：Client（2.8）\n读取 modelCost，绘制 Usage 页面" as client
+rectangle "价格配置\n供应方、模型、生效时间、单价" as rates
+model --> session : 实际返回值
+session --> host : 已提交事件；历史记录可重算
+rates --> host : 估算费用
+host --> wire : 汇总值
+wire --> client : 会话统计与变化通知
+note bottom of client
+本节修改：输入缓存命中率
+缓存读取 /（未命中输入 + 缓存写入 + 缓存读取）
+end note
+@enduml

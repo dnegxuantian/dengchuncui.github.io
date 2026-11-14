@@ -1,0 +1,7 @@
+- insert:
+    - id: book-review-panel
+      name: dsh-book-review-panel
+      config:
+        provider: spawn
+        maxTokens: 1600
+        timeoutMs: 90000

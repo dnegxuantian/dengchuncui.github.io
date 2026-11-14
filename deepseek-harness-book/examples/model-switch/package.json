@@ -1,0 +1,13 @@
+{
+  "name": "dsh-book-model-switch",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "exports": {".": "./index.js", "./package.json": "./package.json"},
+  "files": ["index.js", "cordis.patch.yml", "README.md", "LICENSE"],
+  "scripts": {"test": "node --test index.test.js"},
+  "engines": {"node": "^22.19.0 || >=24.0.0"},
+  "license": "MIT",
+  "dsh": {"bundle": {"patch": "./cordis.patch.yml"}}
+}

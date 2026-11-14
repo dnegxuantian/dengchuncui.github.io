@@ -1,0 +1,34 @@
+@startuml
+skinparam backgroundColor transparent
+skinparam defaultFontName PingFang SC
+skinparam defaultFontSize 17
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #4B6574
+skinparam rectangleBorderColor #698695
+skinparam rectangleBackgroundColor #F3F8FA
+top to bottom direction
+rectangle "2.1 启动与插件组合" {
+  rectangle "Profile\n选择要加载的 Bundle" as profile
+  rectangle "安全审阅 Bundle\n包声明 + cordis.patch.yml" as bundle
+  rectangle "预设目录服务\n官方预设 + 安全审阅预设" as roster
+  profile --> bundle : 加入配置层
+  bundle --> roster : 停用原目录行，插入扩展行
+}
+rectangle "安全审阅 Preset 的组合" as preset {
+  rectangle "审阅要求\nPersona" as persona
+  rectangle "文件与搜索工具\nread / glob / grep 等" as tools
+  rectangle "执行检查\nguard：拒绝写入、越界访问" as guard
+}
+roster --> preset : 读取 agent.cordis.yml
+rectangle "当前审阅会话" as session
+preset --> session : 加入该预设的作用域
+rectangle "已有模式选择器\n安全审阅 / Read Only" as ui
+roster --> ui : 预设名称与说明
+session --> ui : 当前权限状态
+note bottom of session
+不同会话可以使用不同 Preset。
+修改组合后，新会话使用新配置；
+已运行会话保留原组合。
+end note
+@enduml

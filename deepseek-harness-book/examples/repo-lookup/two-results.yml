@@ -1,0 +1,3 @@
+- id: book-repo-lookup
+  config:
+    maxPerGroup: 2

@@ -1,0 +1,8 @@
+{
+  "name": "dsh-book-review-panel",
+  "version": "0.1.4",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "files": ["index.js", "schema.js"]
+}

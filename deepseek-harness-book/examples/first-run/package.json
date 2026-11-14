@@ -1,0 +1,11 @@
+{
+  "name": "markdown-link-checker-exercise",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node check-links.mjs docs/start.md",
+    "test": "node --test check-links.test.mjs"
+  },
+  "engines": { "node": ">=22" }
+}
